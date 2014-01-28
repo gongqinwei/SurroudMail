@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXApi.h"
+#import "VdiskSDK.h"
 
-@interface WeiChatAppDelegate : UIResponder <UIApplicationDelegate>
+
+@interface WeiChatAppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate, VdiskSessionDelegate, VdiskNetworkRequestDelegate, SinaWeiboDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

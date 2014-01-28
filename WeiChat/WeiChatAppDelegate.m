@@ -7,12 +7,28 @@
 //
 
 #import "WeiChatAppDelegate.h"
+#import "Constants.h"
+
 
 @implementation WeiChatAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Weixin
+    if (![WXApi registerApp:@"wx68d5a54fe90b5ac3"]) {
+        Error(@"Failed to register with Weixin");
+    }
+    
+    SinaWeibo *sinaWeibo = [[SinaWeibo alloc] initWithAppKey:kWeiboAppKey appSecret:kWeiboAppSecret appRedirectURI:kWeiboAppRedirectURI andDelegate:self];
+    
+    // Sina Vdisk
+    VdiskSession *session = [[VdiskSession alloc] initWithAppKey:kVdiskSDKDemoAppKey appSecret:kVdiskSDKDemoAppSecret appRoot:@"sandbox" sinaWeibo:sinaWeibo];
+	session.delegate = self;
+    [session setRedirectURI:kVdiskSDKDemoAppRedirectURI];
+    //session.udid = [[UIDevice currentDevice] uniqueIdentifier];
+	[VdiskSession setSharedSession:session];
+	[VdiskComplexRequest setNetworkRequestDelegate:self];
+    
     return YES;
 }
 							
@@ -35,12 +51,125 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[VdiskSession sharedSession] refreshLink];
+    [[VdiskSession sharedSession].sinaWeibo applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    Debug(@"----->>>>>>> %@", url);
+    return [[VdiskSession sharedSession].sinaWeibo handleOpenURL:url];
+//    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[VdiskSession sharedSession].sinaWeibo handleOpenURL:url];
+//    return [WXApi handleOpenURL:url delegate:self];
+}
+
+
+#pragma mark - Weixin delegate
+
+- (void) onReq:(BaseReq*)req {
+
+}
+
+- (void) onResp:(BaseResp*)resp {
+    if([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        NSString *strMsg = [NSString stringWithFormat:@"Result:%d", resp.errCode];
+        Debug(@"Response from Weixin was: %@",strMsg);
+    }
+}
+
+#pragma mark - VdiskNetworkRequestDelegate methods
+
+static int outstandingRequests;
+
+- (void)networkRequestStarted {
+	outstandingRequests++;
+	
+    if (outstandingRequests >= 1) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	}
+}
+
+- (void)networkRequestStopped {
+    outstandingRequests--;
+	
+    if (outstandingRequests <= 0) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	}
+}
+
+#pragma mark - SinaWeibo Delegate
+
+- (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo {
+    
+    Debug(@"sinaweiboDidLogIn userID = %@ accesstoken = %@ expirationDate = %@ refresh_token = %@", sinaweibo.userID, sinaweibo.accessToken, sinaweibo.expirationDate,sinaweibo.refreshToken);
+}
+
+- (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo {
+    
+    Debug(@"sinaweiboDidLogOut");
+    
+}
+
+- (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo {
+    
+    Debug(@"sinaweiboLogInDidCancel");
+}
+
+- (void)sinaweibo:(SinaWeibo *)sinaweibo logInDidFailWithError:(NSError *)error {
+    
+    Error(@"sinaweibo logInDidFailWithError %@", error);
+}
+
+- (void)sinaweibo:(SinaWeibo *)sinaweibo accessTokenInvalidOrExpired:(NSError *)error {
+    
+    Error(@"sinaweiboAccessTokenInvalidOrExpired %@", error);
+    
+}
+
+
+//#pragma mark VdiskSessionDelegate methods
+//
+//- (void)sessionAlreadyLinked:(VdiskSession *)session {
+//    Debug(@"sessionAlreadyLinked");
+//}
+//
+//// Login succeeded
+//- (void)sessionLinkedSuccess:(VdiskSession *)session {
+//    /*
+//     VdiskRestClient *restClient = [[VdiskRestClient alloc] initWithSession:[VdiskSession sharedSession]];
+//     [restClient loadAccountInfo];
+//     */
+//    
+//    Debug(@"sessionLinkedSuccess");
+//}
+//
+//// Login failed
+//- (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
+//    Error(@"didFailToLinkWithError:%@", error);
+//}
+//
+//// Log out successfully
+//- (void)sessionUnlinkedSuccess:(VdiskSession *)session {
+//    Debug(@"sessionUnlinkedSuccess");
+//}
+//
+//- (void)sessionNotLink:(VdiskSession *)session {
+//    Debug(@"sessionNotLink");
+//}
+
+- (void)sessionExpired:(VdiskSession *)session {
+    Debug(@"Vdisk Session Expired. Renewing...");
+    
+    [session refreshLink];
+}
+
 
 @end

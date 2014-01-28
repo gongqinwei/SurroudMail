@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
+		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
+		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
+		7E02301F185E805A00BC0B37 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301E185E805A00BC0B37 /* MediaPlayer.framework */; };
+		7E023021185E806800BC0B37 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023020185E806800BC0B37 /* MobileCoreServices.framework */; };
+		7E023023185E807400BC0B37 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023022185E807400BC0B37 /* QuartzCore.framework */; };
+		7E023029185EAB4900BC0B37 /* VideoRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */; };
 		7E1DF1B31859964B0009F0C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B21859964B0009F0C3 /* Foundation.framework */; };
 		7E1DF1B51859964B0009F0C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B41859964B0009F0C3 /* CoreGraphics.framework */; };
 		7E1DF1B71859964B0009F0C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B61859964B0009F0C3 /* UIKit.framework */; };
@@ -15,13 +22,38 @@
 		7E1DF1C31859964B0009F0C3 /* WeiChatAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF1C21859964B0009F0C3 /* WeiChatAppDelegate.m */; };
 		7E1DF1C61859964B0009F0C3 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1C41859964B0009F0C3 /* Main_iPhone.storyboard */; };
 		7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1C71859964B0009F0C3 /* Main_iPad.storyboard */; };
-		7E1DF1CC1859964B0009F0C3 /* WeiChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF1CB1859964B0009F0C3 /* WeiChatViewController.m */; };
 		7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1CD1859964B0009F0C3 /* Images.xcassets */; };
 		7E1DF1D51859964B0009F0C3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1D41859964B0009F0C3 /* XCTest.framework */; };
 		7E1DF1D61859964B0009F0C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B21859964B0009F0C3 /* Foundation.framework */; };
 		7E1DF1D71859964B0009F0C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B61859964B0009F0C3 /* UIKit.framework */; };
 		7E1DF1DF1859964B0009F0C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1DD1859964B0009F0C3 /* InfoPlist.strings */; };
 		7E1DF1E11859964B0009F0C3 /* WeiChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF1E01859964B0009F0C3 /* WeiChatTests.m */; };
+		7E1DF1EF1859978F0009F0C3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1EC1859978F0009F0C3 /* libWeChatSDK.a */; };
+		7E7E67D91863A5C80039FBB8 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E67D81863A5C80039FBB8 /* iAd.framework */; };
+		7E7E67DC1863A7700039FBB8 /* iAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E67DB1863A7700039FBB8 /* iAdViewController.m */; };
+		7E7E69771872BA1A0039FBB8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E69761872BA1A0039FBB8 /* libWeiboSDK.a */; };
+		7E7E698A18737C4C0039FBB8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */; };
+		7E7E698C18737CE20039FBB8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E698B18737CE20039FBB8 /* libz.dylib */; };
+		7EA9B6ED185ED0AD00438EA6 /* Camcorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */; };
+		7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B6EE185ED38900438EA6 /* Mic.png */; };
+		7EA9B6F2185ED4BA00438EA6 /* AudioRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9B6F1185ED4BA00438EA6 /* AudioRecordViewController.m */; };
+		7EA9B6FA185EDF2000438EA6 /* MicBarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B6F9185EDF2000438EA6 /* MicBarButton.png */; };
+		7EA9B706185FB5F100438EA6 /* PhotoLibrary.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B705185FB5F100438EA6 /* PhotoLibrary.png */; };
+		7EA9B715185FD02700438EA6 /* Record.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B713185FD02700438EA6 /* Record.png */; };
+		7EBFF177187F301C0031504B /* WeixinMoments.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF176187F301C0031504B /* WeixinMoments.png */; };
+		7EBFF17D187F33E70031504B /* SinaWeibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF17C187F33E70031504B /* SinaWeibo.png */; };
+		7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF17E187F33EF0031504B /* WeixinFriends.png */; };
+		7EBFF181187F368C0031504B /* PhotoAlbum.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF180187F368C0031504B /* PhotoAlbum.png */; };
+		7EDD3CB118602E34006ABAA9 /* SwitchCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */; };
+		7EDD3CB418613077006ABAA9 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDD3CB318613077006ABAA9 /* Util.m */; };
+		7EDD3CB8186130CB006ABAA9 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDD3CB7186130CB006ABAA9 /* UIHelper.m */; };
+		7EDD3CC518616791006ABAA9 /* GeoOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDD3CC318616791006ABAA9 /* GeoOn.png */; };
+		7EDD3CD4186280EE006ABAA9 /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDD3CD3186280EE006ABAA9 /* Play.png */; };
+		7EDD3CD61862C42B006ABAA9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDD3CD51862C42B006ABAA9 /* CoreLocation.framework */; };
+		7EDD3CDC1862D2D5006ABAA9 /* GeoOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDD3CDB1862D2D5006ABAA9 /* GeoOff.png */; };
+		7EF1F5F4187924380052FBA4 /* libVdiskSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF1F5F3187924380052FBA4 /* libVdiskSDK-iOS.a */; };
+		7EF1F5F8187DCC990052FBA4 /* FlashOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1F5F7187DCC990052FBA4 /* FlashOff.png */; };
+		7EF1F5FA187DCCC40052FBA4 /* FlashOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1F5F9187DCCC40052FBA4 /* FlashOn.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +67,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		7E02301E185E805A00BC0B37 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		7E023020185E806800BC0B37 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		7E023022185E807400BC0B37 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7E023027185EAB4900BC0B37 /* VideoRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoRecordViewController.h; path = ../VideoRecordViewController.h; sourceTree = "<group>"; };
+		7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoRecordViewController.m; path = ../VideoRecordViewController.m; sourceTree = "<group>"; };
 		7E1DF1AF1859964B0009F0C3 /* WeiChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeiChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1DF1B21859964B0009F0C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7E1DF1B41859964B0009F0C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -47,14 +87,104 @@
 		7E1DF1C21859964B0009F0C3 /* WeiChatAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeiChatAppDelegate.m; sourceTree = "<group>"; };
 		7E1DF1C51859964B0009F0C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		7E1DF1C81859964B0009F0C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		7E1DF1CA1859964B0009F0C3 /* WeiChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeiChatViewController.h; sourceTree = "<group>"; };
-		7E1DF1CB1859964B0009F0C3 /* WeiChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeiChatViewController.m; sourceTree = "<group>"; };
 		7E1DF1CD1859964B0009F0C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7E1DF1D31859964B0009F0C3 /* WeiChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeiChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1DF1D41859964B0009F0C3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7E1DF1DC1859964B0009F0C3 /* WeiChatTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WeiChatTests-Info.plist"; sourceTree = "<group>"; };
 		7E1DF1DE1859964B0009F0C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E1DF1E01859964B0009F0C3 /* WeiChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeiChatTests.m; sourceTree = "<group>"; };
+		7E1DF1EC1859978F0009F0C3 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		7E1DF1ED1859978F0009F0C3 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		7E1DF1EE1859978F0009F0C3 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		7E7E67D81863A5C80039FBB8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		7E7E67DA1863A7700039FBB8 /* iAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAdViewController.h; sourceTree = "<group>"; };
+		7E7E67DB1863A7700039FBB8 /* iAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iAdViewController.m; sourceTree = "<group>"; };
+		7E7E693C1872B82A0039FBB8 /* VdiskSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskSDK.h; sourceTree = "<group>"; };
+		7E7E693D1872B83D0039FBB8 /* VdiskAccountInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskAccountInfo.h; sourceTree = "<group>"; };
+		7E7E693E1872B8680039FBB8 /* VdiskAuthorize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskAuthorize.h; sourceTree = "<group>"; };
+		7E7E693F1872B8680039FBB8 /* VdiskAuthorizeWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskAuthorizeWebView.h; sourceTree = "<group>"; };
+		7E7E69401872B8680039FBB8 /* VdiskComplexRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskComplexRequest.h; sourceTree = "<group>"; };
+		7E7E69411872B8680039FBB8 /* VdiskComplexUpload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskComplexUpload.h; sourceTree = "<group>"; };
+		7E7E69421872B8680039FBB8 /* VdiskDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskDefines.h; sourceTree = "<group>"; };
+		7E7E69431872B8680039FBB8 /* VdiskDeltaEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskDeltaEntry.h; sourceTree = "<group>"; };
+		7E7E69441872B8680039FBB8 /* VdiskError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskError.h; sourceTree = "<group>"; };
+		7E7E69451872B8680039FBB8 /* VdiskKeychain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskKeychain.h; sourceTree = "<group>"; };
+		7E7E69461872B8680039FBB8 /* VdiskLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskLog.h; sourceTree = "<group>"; };
+		7E7E69471872B8680039FBB8 /* VdiskMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskMetadata.h; sourceTree = "<group>"; };
+		7E7E69481872B8680039FBB8 /* VdiskQuota.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskQuota.h; sourceTree = "<group>"; };
+		7E7E69491872B8680039FBB8 /* VdiskRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskRequest.h; sourceTree = "<group>"; };
+		7E7E694A1872B8680039FBB8 /* VdiskRestClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskRestClient.h; sourceTree = "<group>"; };
+		7E7E694B1872B8680039FBB8 /* VdiskSDKGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskSDKGlobal.h; sourceTree = "<group>"; };
+		7E7E694C1872B8680039FBB8 /* VdiskSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskSession.h; sourceTree = "<group>"; };
+		7E7E694D1872B8680039FBB8 /* VdiskSharesCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskSharesCategory.h; sourceTree = "<group>"; };
+		7E7E694E1872B8680039FBB8 /* VdiskSharesMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskSharesMetadata.h; sourceTree = "<group>"; };
+		7E7E694F1872B8680039FBB8 /* VdiskUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskUtil.h; sourceTree = "<group>"; };
+		7E7E69501872B89B0039FBB8 /* NSObject+VdiskJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+VdiskJSON.h"; sourceTree = "<group>"; };
+		7E7E69511872B89B0039FBB8 /* NSString+VdiskJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+VdiskJSON.h"; sourceTree = "<group>"; };
+		7E7E69521872B89B0039FBB8 /* VdiskJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskJSON.h; sourceTree = "<group>"; };
+		7E7E69531872B89B0039FBB8 /* VdiskJsonBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskJsonBase.h; sourceTree = "<group>"; };
+		7E7E69541872B89B0039FBB8 /* VdiskJsonParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskJsonParser.h; sourceTree = "<group>"; };
+		7E7E69551872B89B0039FBB8 /* VdiskJsonWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskJsonWriter.h; sourceTree = "<group>"; };
+		7E7E69561872B8D30039FBB8 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		7E7E69571872B8D30039FBB8 /* ASICacheDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		7E7E69581872B8D30039FBB8 /* ASIDataCompressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		7E7E69591872B8D30039FBB8 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		7E7E695A1872B8D30039FBB8 /* ASIDownloadCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		7E7E695B1872B8D30039FBB8 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		7E7E695C1872B8D30039FBB8 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		7E7E695D1872B8D30039FBB8 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		7E7E695E1872B8D30039FBB8 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		7E7E695F1872B8D30039FBB8 /* ASIInputStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		7E7E69601872B8D30039FBB8 /* ASINetworkQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		7E7E69611872B8D30039FBB8 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		7E7E69631872B8F00039FBB8 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		7E7E69641872B8F00039FBB8 /* DDASLLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		7E7E69651872B8F00039FBB8 /* DDFileLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		7E7E69661872B8F00039FBB8 /* DDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		7E7E69671872B8F00039FBB8 /* DDTTYLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		7E7E69681872B90E0039FBB8 /* CLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLog.h; sourceTree = "<group>"; };
+		7E7E69691872B90E0039FBB8 /* CLogReport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLogReport.h; sourceTree = "<group>"; };
+		7E7E696A1872B90E0039FBB8 /* CompressingLogFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompressingLogFileManager.h; sourceTree = "<group>"; };
+		7E7E696B1872B90E0039FBB8 /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		7E7E696C1872B90E0039FBB8 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		7E7E696D1872B90E0039FBB8 /* VdiskLogDebugFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskLogDebugFormatter.h; sourceTree = "<group>"; };
+		7E7E696E1872B90E0039FBB8 /* VdiskLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskLogFormatter.h; sourceTree = "<group>"; };
+		7E7E696F1872B9330039FBB8 /* VdiskBase64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
+		7E7E69701872B9330039FBB8 /* VdiskBase64Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
+		7E7E69711872B9410039FBB8 /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		7E7E69721872B9520039FBB8 /* SinaWeibo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
+		7E7E69731872B9520039FBB8 /* SinaWeiboAuthorizeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinaWeiboAuthorizeView.h; sourceTree = "<group>"; };
+		7E7E69741872B9520039FBB8 /* SinaWeiboConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
+		7E7E69751872B9520039FBB8 /* SinaWeiboRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
+		7E7E69761872BA1A0039FBB8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		7E7E69781872BA230039FBB8 /* WeiboSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		7E7E69791872BAED0039FBB8 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7E7E698B18737CE20039FBB8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camcorder.png; sourceTree = "<group>"; };
+		7EA9B6EE185ED38900438EA6 /* Mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic.png; sourceTree = "<group>"; };
+		7EA9B6F0185ED4BA00438EA6 /* AudioRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioRecordViewController.h; path = ../AudioRecordViewController.h; sourceTree = "<group>"; };
+		7EA9B6F1185ED4BA00438EA6 /* AudioRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioRecordViewController.m; path = ../AudioRecordViewController.m; sourceTree = "<group>"; };
+		7EA9B6F9185EDF2000438EA6 /* MicBarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MicBarButton.png; sourceTree = "<group>"; };
+		7EA9B701185F894C00438EA6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		7EA9B705185FB5F100438EA6 /* PhotoLibrary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoLibrary.png; sourceTree = "<group>"; };
+		7EA9B713185FD02700438EA6 /* Record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Record.png; sourceTree = "<group>"; };
+		7EBFF176187F301C0031504B /* WeixinMoments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeixinMoments.png; sourceTree = "<group>"; };
+		7EBFF17C187F33E70031504B /* SinaWeibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SinaWeibo.png; sourceTree = "<group>"; };
+		7EBFF17E187F33EF0031504B /* WeixinFriends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeixinFriends.png; sourceTree = "<group>"; };
+		7EBFF180187F368C0031504B /* PhotoAlbum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoAlbum.png; sourceTree = "<group>"; };
+		7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchCamera.png; sourceTree = "<group>"; };
+		7EDD3CB218613077006ABAA9 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		7EDD3CB318613077006ABAA9 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		7EDD3CB6186130CB006ABAA9 /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
+		7EDD3CB7186130CB006ABAA9 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
+		7EDD3CC318616791006ABAA9 /* GeoOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoOn.png; sourceTree = "<group>"; };
+		7EDD3CD3186280EE006ABAA9 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
+		7EDD3CD51862C42B006ABAA9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7EDD3CDB1862D2D5006ABAA9 /* GeoOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoOff.png; sourceTree = "<group>"; };
+		7EF1F5F3187924380052FBA4 /* libVdiskSDK-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libVdiskSDK-iOS.a"; sourceTree = "<group>"; };
+		7EF1F5F7187DCC990052FBA4 /* FlashOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FlashOff.png; sourceTree = "<group>"; };
+		7EF1F5F9187DCCC40052FBA4 /* FlashOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FlashOn.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +192,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E7E698C18737CE20039FBB8 /* libz.dylib in Frameworks */,
+				7E7E698A18737C4C0039FBB8 /* SystemConfiguration.framework in Frameworks */,
+				7EF1F5F4187924380052FBA4 /* libVdiskSDK-iOS.a in Frameworks */,
+				7E7E67D91863A5C80039FBB8 /* iAd.framework in Frameworks */,
+				7EDD3CD61862C42B006ABAA9 /* CoreLocation.framework in Frameworks */,
+				7E023023185E807400BC0B37 /* QuartzCore.framework in Frameworks */,
+				7E7E69771872BA1A0039FBB8 /* libWeiboSDK.a in Frameworks */,
+				7E023021185E806800BC0B37 /* MobileCoreServices.framework in Frameworks */,
+				7E02301F185E805A00BC0B37 /* MediaPlayer.framework in Frameworks */,
+				7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */,
+				7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */,
+				7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */,
 				7E1DF1B51859964B0009F0C3 /* CoreGraphics.framework in Frameworks */,
 				7E1DF1B71859964B0009F0C3 /* UIKit.framework in Frameworks */,
+				7E1DF1EF1859978F0009F0C3 /* libWeChatSDK.a in Frameworks */,
 				7E1DF1B31859964B0009F0C3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,6 +246,16 @@
 		7E1DF1B11859964B0009F0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E7E698B18737CE20039FBB8 /* libz.dylib */,
+				7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */,
+				7E7E67D81863A5C80039FBB8 /* iAd.framework */,
+				7EDD3CD51862C42B006ABAA9 /* CoreLocation.framework */,
+				7E023022185E807400BC0B37 /* QuartzCore.framework */,
+				7E023020185E806800BC0B37 /* MobileCoreServices.framework */,
+				7E02301E185E805A00BC0B37 /* MediaPlayer.framework */,
+				7E02301C185E804700BC0B37 /* CoreMedia.framework */,
+				7E02301A185E803800BC0B37 /* AVFoundation.framework */,
+				7E023018185E802600BC0B37 /* AssetsLibrary.framework */,
 				7E1DF1B21859964B0009F0C3 /* Foundation.framework */,
 				7E1DF1B41859964B0009F0C3 /* CoreGraphics.framework */,
 				7E1DF1B61859964B0009F0C3 /* UIKit.framework */,
@@ -114,13 +267,10 @@
 		7E1DF1B81859964B0009F0C3 /* WeiChat */ = {
 			isa = PBXGroup;
 			children = (
-				7E1DF1C11859964B0009F0C3 /* WeiChatAppDelegate.h */,
-				7E1DF1C21859964B0009F0C3 /* WeiChatAppDelegate.m */,
-				7E1DF1C41859964B0009F0C3 /* Main_iPhone.storyboard */,
-				7E1DF1C71859964B0009F0C3 /* Main_iPad.storyboard */,
-				7E1DF1CA1859964B0009F0C3 /* WeiChatViewController.h */,
-				7E1DF1CB1859964B0009F0C3 /* WeiChatViewController.m */,
-				7E1DF1CD1859964B0009F0C3 /* Images.xcassets */,
+				7E1DF1EA185997140009F0C3 /* Views */,
+				7E1DF1EB1859973B0009F0C3 /* Controllers */,
+				7EDD3CB518613081006ABAA9 /* Utility */,
+				7EA9B6EA185ECF2800438EA6 /* Resources */,
 				7E1DF1B91859964B0009F0C3 /* Supporting Files */,
 			);
 			path = WeiChat;
@@ -129,10 +279,14 @@
 		7E1DF1B91859964B0009F0C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7E7E693B1872B31F0039FBB8 /* VDiskSDK */,
 				7E1DF1BA1859964B0009F0C3 /* WeiChat-Info.plist */,
 				7E1DF1BB1859964B0009F0C3 /* InfoPlist.strings */,
 				7E1DF1BE1859964B0009F0C3 /* main.m */,
+				7E1DF1C11859964B0009F0C3 /* WeiChatAppDelegate.h */,
+				7E1DF1C21859964B0009F0C3 /* WeiChatAppDelegate.m */,
 				7E1DF1C01859964B0009F0C3 /* WeiChat-Prefix.pch */,
+				7E1DF1F4185AE4DA0009F0C3 /* WeChatSDKExport */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -153,6 +307,157 @@
 				7E1DF1DD1859964B0009F0C3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7E1DF1EA185997140009F0C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E1DF1C41859964B0009F0C3 /* Main_iPhone.storyboard */,
+				7E1DF1C71859964B0009F0C3 /* Main_iPad.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7E1DF1EB1859973B0009F0C3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7E7E67DA1863A7700039FBB8 /* iAdViewController.h */,
+				7E7E67DB1863A7700039FBB8 /* iAdViewController.m */,
+				7EA9B6F0185ED4BA00438EA6 /* AudioRecordViewController.h */,
+				7EA9B6F1185ED4BA00438EA6 /* AudioRecordViewController.m */,
+				7E023027185EAB4900BC0B37 /* VideoRecordViewController.h */,
+				7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7E1DF1F4185AE4DA0009F0C3 /* WeChatSDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				7E1DF1EC1859978F0009F0C3 /* libWeChatSDK.a */,
+				7E1DF1ED1859978F0009F0C3 /* WXApi.h */,
+				7E1DF1EE1859978F0009F0C3 /* WXApiObject.h */,
+			);
+			name = WeChatSDKExport;
+			sourceTree = "<group>";
+		};
+		7E7E693B1872B31F0039FBB8 /* VDiskSDK */ = {
+			isa = PBXGroup;
+			children = (
+				7E7E69781872BA230039FBB8 /* WeiboSDK.h */,
+				7E7E69761872BA1A0039FBB8 /* libWeiboSDK.a */,
+				7E7E69721872B9520039FBB8 /* SinaWeibo.h */,
+				7E7E69731872B9520039FBB8 /* SinaWeiboAuthorizeView.h */,
+				7E7E69741872B9520039FBB8 /* SinaWeiboConstants.h */,
+				7E7E69751872B9520039FBB8 /* SinaWeiboRequest.h */,
+				7E7E69711872B9410039FBB8 /* JSONKit.h */,
+				7E7E696F1872B9330039FBB8 /* VdiskBase64.h */,
+				7E7E69701872B9330039FBB8 /* VdiskBase64Defines.h */,
+				7E7E69681872B90E0039FBB8 /* CLog.h */,
+				7E7E69691872B90E0039FBB8 /* CLogReport.h */,
+				7E7E696A1872B90E0039FBB8 /* CompressingLogFileManager.h */,
+				7E7E696B1872B90E0039FBB8 /* ContextFilterLogFormatter.h */,
+				7E7E696C1872B90E0039FBB8 /* DispatchQueueLogFormatter.h */,
+				7E7E696D1872B90E0039FBB8 /* VdiskLogDebugFormatter.h */,
+				7E7E696E1872B90E0039FBB8 /* VdiskLogFormatter.h */,
+				7E7E69631872B8F00039FBB8 /* DDAbstractDatabaseLogger.h */,
+				7E7E69641872B8F00039FBB8 /* DDASLLogger.h */,
+				7E7E69651872B8F00039FBB8 /* DDFileLogger.h */,
+				7E7E69661872B8F00039FBB8 /* DDLog.h */,
+				7E7E69671872B8F00039FBB8 /* DDTTYLogger.h */,
+				7E7E69561872B8D30039FBB8 /* ASIAuthenticationDialog.h */,
+				7E7E69571872B8D30039FBB8 /* ASICacheDelegate.h */,
+				7E7E69581872B8D30039FBB8 /* ASIDataCompressor.h */,
+				7E7E69591872B8D30039FBB8 /* ASIDataDecompressor.h */,
+				7E7E695A1872B8D30039FBB8 /* ASIDownloadCache.h */,
+				7E7E695B1872B8D30039FBB8 /* ASIFormDataRequest.h */,
+				7E7E695C1872B8D30039FBB8 /* ASIHTTPRequest.h */,
+				7E7E695D1872B8D30039FBB8 /* ASIHTTPRequestConfig.h */,
+				7E7E695E1872B8D30039FBB8 /* ASIHTTPRequestDelegate.h */,
+				7E7E695F1872B8D30039FBB8 /* ASIInputStream.h */,
+				7E7E69601872B8D30039FBB8 /* ASINetworkQueue.h */,
+				7E7E69611872B8D30039FBB8 /* ASIProgressDelegate.h */,
+				7E7E69791872BAED0039FBB8 /* Reachability.h */,
+				7E7E69501872B89B0039FBB8 /* NSObject+VdiskJSON.h */,
+				7E7E69511872B89B0039FBB8 /* NSString+VdiskJSON.h */,
+				7E7E69521872B89B0039FBB8 /* VdiskJSON.h */,
+				7E7E69531872B89B0039FBB8 /* VdiskJsonBase.h */,
+				7E7E69541872B89B0039FBB8 /* VdiskJsonParser.h */,
+				7E7E69551872B89B0039FBB8 /* VdiskJsonWriter.h */,
+				7E7E693C1872B82A0039FBB8 /* VdiskSDK.h */,
+				7E7E693D1872B83D0039FBB8 /* VdiskAccountInfo.h */,
+				7E7E693E1872B8680039FBB8 /* VdiskAuthorize.h */,
+				7E7E693F1872B8680039FBB8 /* VdiskAuthorizeWebView.h */,
+				7E7E69401872B8680039FBB8 /* VdiskComplexRequest.h */,
+				7E7E69411872B8680039FBB8 /* VdiskComplexUpload.h */,
+				7E7E69421872B8680039FBB8 /* VdiskDefines.h */,
+				7E7E69431872B8680039FBB8 /* VdiskDeltaEntry.h */,
+				7E7E69441872B8680039FBB8 /* VdiskError.h */,
+				7E7E69451872B8680039FBB8 /* VdiskKeychain.h */,
+				7E7E69461872B8680039FBB8 /* VdiskLog.h */,
+				7E7E69471872B8680039FBB8 /* VdiskMetadata.h */,
+				7E7E69481872B8680039FBB8 /* VdiskQuota.h */,
+				7E7E69491872B8680039FBB8 /* VdiskRequest.h */,
+				7E7E694A1872B8680039FBB8 /* VdiskRestClient.h */,
+				7E7E694B1872B8680039FBB8 /* VdiskSDKGlobal.h */,
+				7E7E694C1872B8680039FBB8 /* VdiskSession.h */,
+				7E7E694D1872B8680039FBB8 /* VdiskSharesCategory.h */,
+				7E7E694E1872B8680039FBB8 /* VdiskSharesMetadata.h */,
+				7E7E694F1872B8680039FBB8 /* VdiskUtil.h */,
+				7EF1F5F3187924380052FBA4 /* libVdiskSDK-iOS.a */,
+			);
+			name = VDiskSDK;
+			sourceTree = "<group>";
+		};
+		7EA9B6EA185ECF2800438EA6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E1DF1CD1859964B0009F0C3 /* Images.xcassets */,
+				7EA9B702185F897700438EA6 /* Constants */,
+				7EA9B6EB185ECF3600438EA6 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7EA9B6EB185ECF3600438EA6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */,
+				7EF1F5F7187DCC990052FBA4 /* FlashOff.png */,
+				7EF1F5F9187DCCC40052FBA4 /* FlashOn.png */,
+				7EDD3CDB1862D2D5006ABAA9 /* GeoOff.png */,
+				7EDD3CC318616791006ABAA9 /* GeoOn.png */,
+				7EA9B6EE185ED38900438EA6 /* Mic.png */,
+				7EA9B6F9185EDF2000438EA6 /* MicBarButton.png */,
+				7EA9B705185FB5F100438EA6 /* PhotoLibrary.png */,
+				7EDD3CD3186280EE006ABAA9 /* Play.png */,
+				7EBFF180187F368C0031504B /* PhotoAlbum.png */,
+				7EA9B713185FD02700438EA6 /* Record.png */,
+				7EBFF17C187F33E70031504B /* SinaWeibo.png */,
+				7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */,
+				7EBFF17E187F33EF0031504B /* WeixinFriends.png */,
+				7EBFF176187F301C0031504B /* WeixinMoments.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		7EA9B702185F897700438EA6 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7EA9B701185F894C00438EA6 /* Constants.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		7EDD3CB518613081006ABAA9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7EDD3CB218613077006ABAA9 /* Util.h */,
+				7EDD3CB318613077006ABAA9 /* Util.m */,
+				7EDD3CB6186130CB006ABAA9 /* UIHelper.h */,
+				7EDD3CB7186130CB006ABAA9 /* UIHelper.m */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +508,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = WeiChat;
 				TargetAttributes = {
+					7E1DF1AE1859964B0009F0C3 = {
+						DevelopmentTeam = DQ29659ZU2;
+					};
 					7E1DF1D21859964B0009F0C3 = {
 						TestTargetID = 7E1DF1AE1859964B0009F0C3;
 					};
@@ -232,9 +540,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EA9B6ED185ED0AD00438EA6 /* Camcorder.png in Resources */,
+				7EDD3CC518616791006ABAA9 /* GeoOn.png in Resources */,
+				7EF1F5FA187DCCC40052FBA4 /* FlashOn.png in Resources */,
+				7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */,
+				7EBFF17D187F33E70031504B /* SinaWeibo.png in Resources */,
 				7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */,
 				7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */,
+				7EF1F5F8187DCC990052FBA4 /* FlashOff.png in Resources */,
+				7EDD3CDC1862D2D5006ABAA9 /* GeoOff.png in Resources */,
+				7EBFF181187F368C0031504B /* PhotoAlbum.png in Resources */,
+				7EA9B715185FD02700438EA6 /* Record.png in Resources */,
+				7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */,
+				7EA9B6FA185EDF2000438EA6 /* MicBarButton.png in Resources */,
+				7EBFF177187F301C0031504B /* WeixinMoments.png in Resources */,
 				7E1DF1C61859964B0009F0C3 /* Main_iPhone.storyboard in Resources */,
+				7EA9B706185FB5F100438EA6 /* PhotoLibrary.png in Resources */,
+				7EDD3CD4186280EE006ABAA9 /* Play.png in Resources */,
+				7EDD3CB118602E34006ABAA9 /* SwitchCamera.png in Resources */,
 				7E1DF1BD1859964B0009F0C3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,9 +577,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EDD3CB418613077006ABAA9 /* Util.m in Sources */,
+				7EA9B6F2185ED4BA00438EA6 /* AudioRecordViewController.m in Sources */,
 				7E1DF1C31859964B0009F0C3 /* WeiChatAppDelegate.m in Sources */,
-				7E1DF1CC1859964B0009F0C3 /* WeiChatViewController.m in Sources */,
 				7E1DF1BF1859964B0009F0C3 /* main.m in Sources */,
+				7E023029185EAB4900BC0B37 /* VideoRecordViewController.m in Sources */,
+				7E7E67DC1863A7700039FBB8 /* iAdViewController.m in Sources */,
+				7EDD3CB8186130CB006ABAA9 /* UIHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,11 +718,27 @@
 		7E1DF1E51859964B0009F0C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qinwei Gong (K58J8M72MU)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/qgong/Documents/iOS/WeiChat,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiChat/WeiChat-Prefix.pch";
 				INFOPLIST_FILE = "WeiChat/WeiChat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/qgong/Documents/iOS/WeiChat/WeiChat,
+					/Users/qgong/Documents/iOS/WeiChat,
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -404,11 +747,27 @@
 		7E1DF1E61859964B0009F0C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qinwei Gong (K58J8M72MU)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/qgong/Documents/iOS/WeiChat,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiChat/WeiChat-Prefix.pch";
 				INFOPLIST_FILE = "WeiChat/WeiChat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/qgong/Documents/iOS/WeiChat/WeiChat,
+					/Users/qgong/Documents/iOS/WeiChat,
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -475,6 +834,7 @@
 				7E1DF1E61859964B0009F0C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7E1DF1E71859964B0009F0C3 /* Build configuration list for PBXNativeTarget "WeiChatTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +843,7 @@
 				7E1DF1E91859964B0009F0C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
