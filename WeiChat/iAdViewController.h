@@ -25,6 +25,8 @@
 #define RECORDING_TIMER_INTERVAL            0.01
 #define RECORDING_TIMER_INTERVAL_INVERSE    1 / RECORDING_TIMER_INTERVAL
 
+#define LABEL_ADD_DESCRIPTION               NSLocalizedString(@"Say something...", nil)
+
 typedef enum {
     kWeixinMoments, kWeixinFriends, kSinaWeibo, kSaveToDevice, kUnlinkVdisk, kCancelShare
 } ShareActionEnum;

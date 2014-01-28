@@ -11,7 +11,6 @@
 
 
 #define iAd_ANIMATION_DURATION                          0.25
-#define LABEL_ADD_DESCRIPTION                           NSLocalizedString(@"Say something...", nil)
 #define WEICHAT_COPYRIGHT                               @"© 2014 WeiChat, Inc."
 
 #define ACTION_SHEET_TITLE                              NSLocalizedString(@"Share to", nil)

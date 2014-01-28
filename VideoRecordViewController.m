@@ -93,7 +93,6 @@
     
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = NSLocalizedString(@"Video from WeiChat", nil);
-    message.description = self.contentDescription.text;
     [message setThumbImage:self.thumbnail];
     
     WXVideoObject *ext = [WXVideoObject object];
@@ -102,7 +101,8 @@
 //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropboxusercontent.com/s/83blvpg0zxmic47/IMG_0330.MOV"];
     ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
     
-    if (self.contentDescription.text.length > 0) {
+    if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
+        message.description = self.contentDescription.text;
         ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&comment=%@", self.contentDescription.text];
     }
     
