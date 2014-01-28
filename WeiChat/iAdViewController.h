@@ -31,7 +31,7 @@ typedef enum {
 
 typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError *error);
 
-#define SHARE_ACTIONS     [NSArray arrayWithObjects:@"WeChat Moments", @"WeChat Friends", @"Weibo", @"Save in iPhone", @"Unlink Vdisk", @"Cancel", nil]
+#define SHARE_ACTIONS     [NSArray arrayWithObjects:NSLocalizedString(@"WeChat Moments", nil), NSLocalizedString(@"WeChat Friends", nil), NSLocalizedString(@"Sina Weibo", nil), NSLocalizedString(@"Save in iPhone", nil), @"Unlink Vdisk", NSLocalizedString(@"Cancel", nil), nil]
 
 
 

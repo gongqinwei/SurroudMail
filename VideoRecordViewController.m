@@ -19,8 +19,8 @@
 
 
 #define VDISK_VIDEO_URL_PREFIX      @"http://vdisk.weibo.com/wap/fp/"
-#define LABEL_FAIL_TO_SAVE_VIDEO    @"Failed to save video!"
-#define SAVE_VIDEO_PROMPT           @"Save current video to Camera Roll?"
+#define LABEL_FAIL_TO_SAVE_VIDEO    NSLocalizedString(@"Failed to save video!", nil)
+#define SAVE_VIDEO_PROMPT           NSLocalizedString(@"Save current video to Camera Roll?", nil)
 
 
 #define VIDEO_THUMBNAIL_SIZE        55
@@ -85,14 +85,14 @@
 - (void)publishContentToWeixin {
     //if the Weixin app is not installed, show an error
     if (![WXApi isWXAppInstalled]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"The Weixin (Wechat) app is not installed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"The Wechat app is not installed", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         alert.tag = WEIXIN_ALERT_TAG;
         [alert show];
         return;
     }
     
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"Video from WeiChat";
+    message.title = NSLocalizedString(@"Video from WeiChat", nil);
     message.description = self.contentDescription.text;
     [message setThumbImage:self.thumbnail];
     
@@ -134,7 +134,7 @@
     
     //try to send the request
     if (![WXApi sendReq:req]) {
-        [UIHelper showInfo:@"Failed to share video to WeChat" withStatus:kFailure];
+        [UIHelper showInfo:NSLocalizedString(@"Failed to share video to WeChat", nil) withStatus:kFailure];
     }
 }
 
@@ -159,8 +159,8 @@
                               initWithTitle: nil
                               message:SAVE_VIDEO_PROMPT
                               delegate: self
-                              cancelButtonTitle:@"Cancel"
-                              otherButtonTitles:@"Yes", @"No", nil];
+                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                              otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil];
         alert.tag = RETAKE_VIDEO_ALERT_TAG;
         [alert show];
     } else {
@@ -817,14 +817,14 @@
                           initWithTitle: nil
                           message: SAVE_VIDEO_PROMPT
                           delegate: self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Yes", @"No", nil];
+                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                          otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil];
     alert.tag = ABANDON_VIDEO_ALERT_TAG;
     [alert show];
 }
 
 - (void)videoEditorController:(UIVideoEditorController *)editor didFailWithError:(NSError *)error {
-    [UIHelper showInfo:@"Failed to save video!" withStatus:kFailure];
+    [UIHelper showInfo:NSLocalizedString(@"Failed to save video!", nil) withStatus:kFailure];
 }
 
 

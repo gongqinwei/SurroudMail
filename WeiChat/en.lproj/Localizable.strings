@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  WeiChat
+
+  Created by Qinwei Gong on 1/27/14.
+  Copyright (c) 2014 WeiChat. All rights reserved.
+*/
+
+"WeiChat" = "WeiChat!";
+
+"WeChat Moments" = "WeChat Moments";
+"WeChat Friends" = "WeChat Friends";
+"Sina Weibo" = "Sina Weibo";
+"Save in iPhone" = "Save in iPhone";
+
+"Next" = "Next";
+"Cancel" = "Cancel";
+"Yes" = "Yes";
+"No" = "No";
+
+"Uploading..." = "Uploading...";
+"Share to" = "Share to";
+"Say something..." = "Say something...";
+
+"Save current video to Camera Roll?" = "Save current video to Camera Roll?";
+"Failed to save video!" = "Failed to save video!";
+
+"The Wechat app is not installed" = "The Wechat app is not installed";
+"Failed to share video to WeChat" = "Failed to share video to WeChat";
+
+"Video from WeiChat" = "Video from WeiChat";

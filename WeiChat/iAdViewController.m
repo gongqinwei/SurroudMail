@@ -11,10 +11,10 @@
 
 
 #define iAd_ANIMATION_DURATION                          0.25
-#define LABEL_ADD_DESCRIPTION                           @"Say something..."
+#define LABEL_ADD_DESCRIPTION                           NSLocalizedString(@"Say something...", nil)
 #define WEICHAT_COPYRIGHT                               @"© 2014 WeiChat, Inc."
 
-#define ACTION_SHEET_TITLE                              @"Share to"
+#define ACTION_SHEET_TITLE                              NSLocalizedString(@"Share to", nil)
 
 #define UPLOAD_PROGRESS_OVERLAY_WIDTH                   200
 #define UPLOAD_PROGRESS_OVERLAY_HEIGHT                  100
@@ -33,7 +33,7 @@
 
 #define UPLOAD_PROGRESS_TITLE_RECT                      CGRectMake(UPLOAD_PROGRESS_OVERLAY_WIDTH/2 - 50, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 36, 100, UPLOAD_PROGRESS_LABEL_HEIGHT)
 #define UPLOAD_PROGRESS_TITLE_SHRINK_RECT               CGRectMake(UPLOAD_PROGRESS_OVERLAY_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 18, 1, 1)
-#define UPLOAD_PROGRESS_TITLE                           @"Uploading..."
+#define UPLOAD_PROGRESS_TITLE                           NSLocalizedString(@"Uploading...", nil)
 
 #define UPLOAD_PROGRESS_OVERLAY_ANIMATION_DURATION      0.3
 

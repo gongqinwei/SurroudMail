@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E86969518975B11009E4E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E86969718975B11009E4E72 /* Localizable.strings */; };
 		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
 		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
 		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
@@ -67,6 +68,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E86969118974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		0E86969218974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
+		0E86969318974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0E86969418974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0E86969918975B84009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0E86969A18975E1D009E4E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -267,6 +274,7 @@
 		7E1DF1B81859964B0009F0C3 /* WeiChat */ = {
 			isa = PBXGroup;
 			children = (
+				0E86969718975B11009E4E72 /* Localizable.strings */,
 				7E1DF1EA185997140009F0C3 /* Views */,
 				7E1DF1EB1859973B0009F0C3 /* Controllers */,
 				7EDD3CB518613081006ABAA9 /* Utility */,
@@ -523,6 +531,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 7E1DF1A61859964B0009F0C3;
 			productRefGroup = 7E1DF1B01859964B0009F0C3 /* Products */;
@@ -545,6 +554,7 @@
 				7EF1F5FA187DCCC40052FBA4 /* FlashOn.png in Resources */,
 				7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */,
 				7EBFF17D187F33E70031504B /* SinaWeibo.png in Resources */,
+				0E86969518975B11009E4E72 /* Localizable.strings in Resources */,
 				7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */,
 				7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */,
 				7EF1F5F8187DCC990052FBA4 /* FlashOff.png in Resources */,
@@ -606,10 +616,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0E86969718975B11009E4E72 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E86969918975B84009E4E72 /* zh-Hans */,
+				0E86969A18975E1D009E4E72 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7E1DF1BB1859964B0009F0C3 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7E1DF1BC1859964B0009F0C3 /* en */,
+				0E86969318974C26009E4E72 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -618,6 +638,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7E1DF1C51859964B0009F0C3 /* Base */,
+				0E86969118974C26009E4E72 /* zh-Hans */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -626,6 +647,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7E1DF1C81859964B0009F0C3 /* Base */,
+				0E86969218974C26009E4E72 /* zh-Hans */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -634,6 +656,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7E1DF1DE1859964B0009F0C3 /* en */,
+				0E86969418974C26009E4E72 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
