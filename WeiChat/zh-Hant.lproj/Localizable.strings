@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  WeiChat
+
+  Created by Qinwei Gong on 1/27/14.
+  Copyright (c) 2014 WeiChat. All rights reserved.
+*/
+
+"WeiChat" = "圍信";
+
+"WeChat Moments" = "微信朋友圈";
+"WeChat Friends" = "微信好友";
+"Sina Weibo" = "新浪微博";
+"Save in iPhone" = "電話相簿";
+
+"Next" = "繼續";
+"Cancel" = "取消";
+"Yes" = "是";
+"No" = "否";
+
+"Uploading..." = "上載中...";
+"Share to" = "分享至";
+"Say something..." = "\"信\"口開河吧...";
+
+"Save current video to Camera Roll?" = "儲存本視訊至相簿？";
+"Failed to save video!" = "儲存視訊失敗！";
+
+"The Wechat app is not installed" = "微信app未安裝";
+"Failed to share video to WeChat" = "上載至微信失敗";
+
+"Video from WeiChat" = "圍信視訊";

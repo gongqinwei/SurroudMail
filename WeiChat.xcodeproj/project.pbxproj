@@ -74,6 +74,11 @@
 		0E86969418974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E86969918975B84009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E86969A18975E1D009E4E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E86969D18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		0E86969E18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
+		0E86969F18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0E8696A018978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0E8696A118978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -532,6 +537,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 7E1DF1A61859964B0009F0C3;
 			productRefGroup = 7E1DF1B01859964B0009F0C3 /* Products */;
@@ -621,6 +627,7 @@
 			children = (
 				0E86969918975B84009E4E72 /* zh-Hans */,
 				0E86969A18975E1D009E4E72 /* en */,
+				0E86969F18978833009E4E72 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -630,6 +637,7 @@
 			children = (
 				7E1DF1BC1859964B0009F0C3 /* en */,
 				0E86969318974C26009E4E72 /* zh-Hans */,
+				0E8696A018978833009E4E72 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -639,6 +647,7 @@
 			children = (
 				7E1DF1C51859964B0009F0C3 /* Base */,
 				0E86969118974C26009E4E72 /* zh-Hans */,
+				0E86969D18978833009E4E72 /* zh-Hant */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -648,6 +657,7 @@
 			children = (
 				7E1DF1C81859964B0009F0C3 /* Base */,
 				0E86969218974C26009E4E72 /* zh-Hans */,
+				0E86969E18978833009E4E72 /* zh-Hant */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -657,6 +667,7 @@
 			children = (
 				7E1DF1DE1859964B0009F0C3 /* en */,
 				0E86969418974C26009E4E72 /* zh-Hans */,
+				0E8696A118978833009E4E72 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
