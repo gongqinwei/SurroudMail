@@ -41,11 +41,50 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <segue destination="eRG-55-j1d" kind="push" identifier="SwitchToAudio" id="fhf-WG-rBd"/>
+                        <segue destination="iFo-F7-GQp" kind="push" identifier="PresentPOI" id="YJ2-al-rZp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tx4-8X-V9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1130" y="-356"/>
+        </scene>
+        <!--Table View Controller - POI-->
+        <scene sceneID="eRu-gD-j7R">
+            <objects>
+                <tableViewController id="iFo-F7-GQp" customClass="POITableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6rf-xH-knv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="POICell" textLabel="IKU-Zf-71O" style="IBUITableViewCellStyleDefault" id="YhH-PC-kvv">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YhH-PC-kvv" id="O7p-sW-2dS">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IKU-Zf-71O">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iFo-F7-GQp" id="WiZ-W7-ENp"/>
+                            <outlet property="delegate" destination="iFo-F7-GQp" id="p2i-xV-VCR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="POI" id="qYv-Ct-Snq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="crk-hm-bR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1130" y="362"/>
         </scene>
         <!--Audio Record View Controller - Audio-->
         <scene sceneID="BZQ-pk-EWf">

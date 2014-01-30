@@ -24,7 +24,7 @@
 #define ENGLISH             @"en"
 #define CHINESE             @"zh"
 
-#define KEYCHAIN_ID         @"WeiChat"
+#define PRODUCT_NAME        @"WeiChat"
 
 // Version
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)

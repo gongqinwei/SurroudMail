@@ -223,7 +223,7 @@
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == YES) {
         self.isRecording = NO;
     
-        self.title = NSLocalizedString(@"WeiChat", nil);
+        self.title = NSLocalizedString(PRODUCT_NAME, nil);
         
         // Switch to Audio bar button
         UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];

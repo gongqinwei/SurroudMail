@@ -8,6 +8,7 @@
 
 #import "iAdViewController.h"
 #import "Constants.h"
+#import "POITableViewController.h"
 
 
 #define iAd_ANIMATION_DURATION                          0.25
@@ -42,8 +43,12 @@
 #define GEO_LABEL_RECT                                  CGRectMake(60, 195, 249, 21)
 #define DESCRIPTION_TEXT_AREA_RECT                      CGRectMake(80, 10, 230, 170)
 
+#define PRESENT_POI_SEGUE                               @"PresentPOI"
 
-@interface iAdViewController ()
+
+@interface iAdViewController () <POIDelegate>
+
+@property (nonatomic, strong) NSArray *POIs;
 
 @end
 
@@ -465,18 +470,39 @@
             if (error == nil && [placemarks count] > 0) {
                 [self.geoButton setImage:[UIImage imageNamed:@"GeoOn.png"] forState:UIControlStateNormal];
                 
-                self.placemark = [placemarks lastObject];
-                //                NSArray *POIs = self.placemark.areasOfInterest;
-                //                Debug(@"POI: %d %@", POIs.count, POIs[0]);
+                self.placemark = placemarks[0];
                 
-                self.geoLabel.text = [NSString stringWithFormat:@"%@, %@, %@, %@",
-                                      //                                      self.placemark.subThoroughfare,
-                                      self.placemark.thoroughfare,
-                                      self.placemark.locality,
-                                      self.placemark.administrativeArea,
-                                      self.placemark.country];
+                if ([PRODUCT_NAME isEqualToString:NSLocalizedString(PRODUCT_NAME, nil)]) {    //English Locale
+                    self.geoLabel.text = [NSString stringWithFormat:@"%@, %@, %@, %@",
+                                          //                                      self.placemark.subThoroughfare,
+                                          self.placemark.thoroughfare,
+                                          self.placemark.locality,
+                                          self.placemark.administrativeArea,
+                                          self.placemark.country];
+                } else {
+                    self.geoLabel.text = [NSString stringWithFormat:@"%@, %@, %@, %@",
+                                          self.placemark.country,
+                                          self.placemark.administrativeArea,
+                                          self.placemark.locality,
+                                          self.placemark.thoroughfare];
+                }
+                
+                self.POIs = self.placemark.areasOfInterest;
+//                self.POIs = [NSArray arrayWithObject:@"dummy POI"];
+                Error(@"POI: %d %@", self.POIs.count, self.POIs[0]);
+                if (self.POIs.count > 0) {
+                    [self performSegueWithIdentifier:PRESENT_POI_SEGUE sender:self];
+                }
             }
         } ];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:PRESENT_POI_SEGUE]) {
+        [segue.destinationViewController setPoiDelegate:self];
+        [(POITableViewController *)segue.destinationViewController setCurrentLocation:self.placemark];
+        [segue.destinationViewController setPOIs:self.POIs];
     }
 }
 
@@ -639,6 +665,11 @@
         default:
             break;
     }
+}
+
+#pragma mark - POI delegate
+- (void)selectedPOI:(NSString *)poi {
+    self.geoLabel.text = poi;
 }
 
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E86969518975B11009E4E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E86969718975B11009E4E72 /* Localizable.strings */; };
+		0E8EADA61898E6C4004FA2DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8EADA51898E6C4004FA2DF /* MapKit.framework */; };
+		0E8EADA9189A27C9004FA2DF /* POITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8EADA8189A27C9004FA2DF /* POITableViewController.m */; };
 		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
 		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
 		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
@@ -72,13 +74,16 @@
 		0E86969218974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
 		0E86969318974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E86969418974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		0E86969918975B84009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		0E86969A18975E1D009E4E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E86969918975B84009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0E86969A18975E1D009E4E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E86969D18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
 		0E86969E18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
-		0E86969F18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0E86969F18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E8696A018978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E8696A118978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0E8EADA51898E6C4004FA2DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0E8EADA7189A27C9004FA2DF /* POITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POITableViewController.h; sourceTree = "<group>"; };
+		0E8EADA8189A27C9004FA2DF /* POITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POITableViewController.m; sourceTree = "<group>"; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -204,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E8EADA61898E6C4004FA2DF /* MapKit.framework in Frameworks */,
 				7E7E698C18737CE20039FBB8 /* libz.dylib in Frameworks */,
 				7E7E698A18737C4C0039FBB8 /* SystemConfiguration.framework in Frameworks */,
 				7EF1F5F4187924380052FBA4 /* libVdiskSDK-iOS.a in Frameworks */,
@@ -258,6 +264,7 @@
 		7E1DF1B11859964B0009F0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E8EADA51898E6C4004FA2DF /* MapKit.framework */,
 				7E7E698B18737CE20039FBB8 /* libz.dylib */,
 				7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */,
 				7E7E67D81863A5C80039FBB8 /* iAd.framework */,
@@ -340,6 +347,8 @@
 				7EA9B6F1185ED4BA00438EA6 /* AudioRecordViewController.m */,
 				7E023027185EAB4900BC0B37 /* VideoRecordViewController.h */,
 				7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */,
+				0E8EADA7189A27C9004FA2DF /* POITableViewController.h */,
+				0E8EADA8189A27C9004FA2DF /* POITableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -595,6 +604,7 @@
 			files = (
 				7EDD3CB418613077006ABAA9 /* Util.m in Sources */,
 				7EA9B6F2185ED4BA00438EA6 /* AudioRecordViewController.m in Sources */,
+				0E8EADA9189A27C9004FA2DF /* POITableViewController.m in Sources */,
 				7E1DF1C31859964B0009F0C3 /* WeiChatAppDelegate.m in Sources */,
 				7E1DF1BF1859964B0009F0C3 /* main.m in Sources */,
 				7E023029185EAB4900BC0B37 /* VideoRecordViewController.m in Sources */,
