@@ -10,6 +10,9 @@
 		0E86969518975B11009E4E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E86969718975B11009E4E72 /* Localizable.strings */; };
 		0E8EADA61898E6C4004FA2DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8EADA51898E6C4004FA2DF /* MapKit.framework */; };
 		0E8EADA9189A27C9004FA2DF /* POITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8EADA8189A27C9004FA2DF /* POITableViewController.m */; };
+		0E8EADB4189E05B5004FA2DF /* VideoSoundTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8EADB3189E05B5004FA2DF /* VideoSoundTrackViewController.m */; };
+		0E8EADB8189E1F59004FA2DF /* CancelSoundGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADB7189E1F59004FA2DF /* CancelSoundGrey.png */; };
+		0E8EADBA189EEBDD004FA2DF /* SelectSound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADB9189EEBDD004FA2DF /* SelectSound.png */; };
 		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
 		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
 		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
@@ -84,6 +87,10 @@
 		0E8EADA51898E6C4004FA2DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0E8EADA7189A27C9004FA2DF /* POITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POITableViewController.h; sourceTree = "<group>"; };
 		0E8EADA8189A27C9004FA2DF /* POITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POITableViewController.m; sourceTree = "<group>"; };
+		0E8EADB2189E05B5004FA2DF /* VideoSoundTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSoundTrackViewController.h; sourceTree = "<group>"; };
+		0E8EADB3189E05B5004FA2DF /* VideoSoundTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoSoundTrackViewController.m; sourceTree = "<group>"; };
+		0E8EADB7189E1F59004FA2DF /* CancelSoundGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CancelSoundGrey.png; sourceTree = "<group>"; };
+		0E8EADB9189EEBDD004FA2DF /* SelectSound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectSound.png; sourceTree = "<group>"; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -347,6 +354,8 @@
 				7EA9B6F1185ED4BA00438EA6 /* AudioRecordViewController.m */,
 				7E023027185EAB4900BC0B37 /* VideoRecordViewController.h */,
 				7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */,
+				0E8EADB2189E05B5004FA2DF /* VideoSoundTrackViewController.h */,
+				0E8EADB3189E05B5004FA2DF /* VideoSoundTrackViewController.m */,
 				0E8EADA7189A27C9004FA2DF /* POITableViewController.h */,
 				0E8EADA8189A27C9004FA2DF /* POITableViewController.m */,
 			);
@@ -445,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */,
+				0E8EADB7189E1F59004FA2DF /* CancelSoundGrey.png */,
 				7EF1F5F7187DCC990052FBA4 /* FlashOff.png */,
 				7EF1F5F9187DCCC40052FBA4 /* FlashOn.png */,
 				7EDD3CDB1862D2D5006ABAA9 /* GeoOff.png */,
@@ -455,6 +465,7 @@
 				7EDD3CD3186280EE006ABAA9 /* Play.png */,
 				7EBFF180187F368C0031504B /* PhotoAlbum.png */,
 				7EA9B713185FD02700438EA6 /* Record.png */,
+				0E8EADB9189EEBDD004FA2DF /* SelectSound.png */,
 				7EBFF17C187F33E70031504B /* SinaWeibo.png */,
 				7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */,
 				7EBFF17E187F33EF0031504B /* WeixinFriends.png */,
@@ -572,8 +583,10 @@
 				0E86969518975B11009E4E72 /* Localizable.strings in Resources */,
 				7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */,
 				7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */,
+				0E8EADB8189E1F59004FA2DF /* CancelSoundGrey.png in Resources */,
 				7EF1F5F8187DCC990052FBA4 /* FlashOff.png in Resources */,
 				7EDD3CDC1862D2D5006ABAA9 /* GeoOff.png in Resources */,
+				0E8EADBA189EEBDD004FA2DF /* SelectSound.png in Resources */,
 				7EBFF181187F368C0031504B /* PhotoAlbum.png in Resources */,
 				7EA9B715185FD02700438EA6 /* Record.png in Resources */,
 				7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */,
@@ -603,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EDD3CB418613077006ABAA9 /* Util.m in Sources */,
+				0E8EADB4189E05B5004FA2DF /* VideoSoundTrackViewController.m in Sources */,
 				7EA9B6F2185ED4BA00438EA6 /* AudioRecordViewController.m in Sources */,
 				0E8EADA9189A27C9004FA2DF /* POITableViewController.m in Sources */,
 				7E1DF1C31859964B0009F0C3 /* WeiChatAppDelegate.m in Sources */,

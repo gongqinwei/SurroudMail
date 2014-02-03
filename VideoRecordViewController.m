@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "UIHelper.h"
 #import "WXApi.h"
+#import "VideoSoundTrackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -42,6 +43,7 @@
 #define ANIMATE_TO_POST_DURATION    0.75
 #define ANIMATE_TO_REC_DURATION     0.4
 #define SWITCH_TO_AUDIO_SEGUE       @"SwitchToAudio"
+#define SET_VIDEO_SOUND_SEGUE       @"SetVideoSoundTrack"
 
 #define RECORD_BUTTON_SIZE          120
 
@@ -50,7 +52,7 @@
 #define RETAKE_VIDEO_ALERT_TAG      2
 
 
-@interface VideoRecordViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate, UIAlertViewDelegate>
+@interface VideoRecordViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate, UIAlertViewDelegate, VideoSoundTrackDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *recorder;
 @property (nonatomic, strong) UIImagePickerController *picker;
@@ -66,12 +68,14 @@
 @property (nonatomic, strong) UIBarButtonItem *cancelButton;
 
 @property (nonatomic, strong) NSMutableArray *videoAssets;
-@property (nonatomic, strong) AVAsset *audioAsset;
 @property (nonatomic, strong) NSString *compositionPath;
 
 @property (nonatomic, strong) UIButton *flashButton;
 @property (nonatomic, strong) UIButton *recordButton;
 @property (nonatomic, assign) BOOL isRecording;
+
+@property (nonatomic, strong) AVMutableComposition *composition;
+@property (nonatomic, strong) AVMutableCompositionTrack *compositionAudioTrack;
 
 @end
 
@@ -142,14 +146,25 @@
     [self.contentDescription resignFirstResponder];
     
     if (self.mediaURL) {
-        self.player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.mediaURL];
-        [self presentMoviePlayerViewControllerAnimated:self.player];
+        [self performSegueWithIdentifier:SET_VIDEO_SOUND_SEGUE sender:self];
         
-        // Register for the playback finished notification
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:)
-                                                     name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+//        self.player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.mediaURL];
+//        [self presentMoviePlayerViewControllerAnimated:self.player];
+//        
+//        // Register for the playback finished notification
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:)
+//                                                     name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
     } else {
         [self presentVideoPicker];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:SET_VIDEO_SOUND_SEGUE]) {
+        [segue.destinationViewController setOrigMediaURL:self.mediaURL];
+        [segue.destinationViewController setComposition:self.composition];
+        [segue.destinationViewController setCompositionAudioTrack:self.compositionAudioTrack];
+        [segue.destinationViewController setDelegate:self];
     }
 }
 
@@ -426,10 +441,15 @@
 }
 
 - (void)mergeVideoAssets {
-    AVMutableComposition *composition = [AVMutableComposition composition];
+    if (self.compositionPath) {
+        [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
+    }
+    self.composition = nil;
+    self.compositionAudioTrack = nil;
+    self.composition = [AVMutableComposition composition];
     
     // Video
-    AVMutableCompositionTrack *compositionVideoTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *compositionVideoTrack = [self.composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     
     videoComposition.frameDuration = CMTimeMake(1,30);
@@ -439,8 +459,7 @@
     AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
     
     // Audio
-    AVMutableCompositionTrack *compositionAudioTrack = [composition addMutableTrackWithMediaType:AVMediaTypeAudio
-                                                                     preferredTrackID:kCMPersistentTrackID_Invalid];
+    self.compositionAudioTrack = [self.composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     
     float time = 0;
     for (AVAsset *sourceAsset in self.videoAssets) {
@@ -472,9 +491,9 @@
 //            [layerInstruction setTransform:newer atTime:CMTimeMakeWithSeconds(time, 30)];
 //        }
         
-        CMTime startTime = [composition duration];
+        CMTime startTime = [self.composition duration];
         ok = [compositionVideoTrack insertTimeRange:sourceVideoTrack.timeRange ofTrack:sourceVideoTrack atTime:startTime error:&error];
-        ok = [compositionAudioTrack insertTimeRange:sourceAudioTrack.timeRange ofTrack:sourceAudioTrack atTime:startTime error:&error];
+        ok = [self.compositionAudioTrack insertTimeRange:sourceAudioTrack.timeRange ofTrack:sourceAudioTrack atTime:startTime error:&error];
 
         if (!ok) {
             Error(@"*** Failed to insert video track ***");
@@ -494,8 +513,8 @@
     self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];  //TODO: [[NSFileManager defaultManager] removeItemAtPath:compositionPath error:nil];
     
     self.mediaURL = [NSURL fileURLWithPath:self.compositionPath];
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:composition
-                                                                      presetName:AVAssetExportPresetHighestQuality];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.composition
+                                                                      presetName:AVAssetExportPresetMediumQuality];
     exporter.outputURL = self.mediaURL;
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
     exporter.shouldOptimizeForNetworkUse = YES;
@@ -1088,6 +1107,7 @@
     self.recordingProgressLabel.text = @"00:00";
     self.recordingTimer = nil;
     [self genGalleryThumbnail];
+    self.navItem.rightBarButtonItem = nil;
 }
 
 - (void)genGalleryThumbnail {
@@ -1108,6 +1128,45 @@
         Error(@"Photo album empty!");
     }];
     
+}
+
+#pragma mark - Video SoundTrack delegate
+- (void)didSetSoundTrack:(AVAsset *)audioAsset {
+    if (self.compositionPath) {
+        [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
+    }
+    
+    Debug(@"1. # %d, %@", self.composition.tracks.count, self.compositionAudioTrack);
+    [self.composition removeTrack:self.compositionAudioTrack];
+        Debug(@"2. # %d", self.composition.tracks.count);
+    self.compositionAudioTrack = [self.composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    NSError *error = nil;
+    
+    AVAssetTrack *sourceAudioTrack = [[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+    [self.compositionAudioTrack removeTimeRange:CMTimeRangeMake(kCMTimeZero, [self.composition duration])];
+    BOOL ok = [self.compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [self.composition duration]) ofTrack:sourceAudioTrack atTime:kCMTimeZero error:&error];
+    
+    if (!ok) {
+        Error(@"*** Failed to set audio track *** %@", error);
+    }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];
+    
+    self.mediaURL = [NSURL fileURLWithPath:self.compositionPath];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.composition
+                                                                      presetName:AVAssetExportPresetHighestQuality];
+    exporter.outputURL = self.mediaURL;
+    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+    exporter.shouldOptimizeForNetworkUse = YES;
+    
+    [exporter exportAsynchronouslyWithCompletionHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self exportDidFinish:exporter];
+        });
+    }];
 }
 
 

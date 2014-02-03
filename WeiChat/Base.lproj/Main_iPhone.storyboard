@@ -16,13 +16,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="dWx-TJ-hdj">
+                        <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="UhE-QU-7Ej" kind="relationship" relationship="rootViewController" id="SbP-60-Qja"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Izh-IS-RTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="657" y="-356"/>
+            <point key="canvasLocation" x="197" y="-322"/>
         </scene>
         <!--Video Record View Controller - Video-->
         <scene sceneID="kcR-7d-Yfp">
@@ -42,11 +46,12 @@
                     <connections>
                         <segue destination="eRG-55-j1d" kind="push" identifier="SwitchToAudio" id="fhf-WG-rBd"/>
                         <segue destination="iFo-F7-GQp" kind="push" identifier="PresentPOI" id="YJ2-al-rZp"/>
+                        <segue destination="LRw-wR-KgV" kind="push" identifier="SetVideoSoundTrack" id="vg1-4n-ylS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tx4-8X-V9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1130" y="-356"/>
+            <point key="canvasLocation" x="670" y="-322"/>
         </scene>
         <!--Table View Controller - POI-->
         <scene sceneID="eRu-gD-j7R">
@@ -84,7 +89,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crk-hm-bR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1130" y="362"/>
+            <point key="canvasLocation" x="670" y="396"/>
         </scene>
         <!--Audio Record View Controller - Audio-->
         <scene sceneID="BZQ-pk-EWf">
@@ -121,7 +126,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plr-e3-yOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1595" y="-356"/>
+            <point key="canvasLocation" x="1135" y="-322"/>
+        </scene>
+        <!--Video Sound Track View Controller - Sound Track-->
+        <scene sceneID="gox-oi-zT5">
+            <objects>
+                <viewController id="LRw-wR-KgV" customClass="VideoSoundTrackViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w6X-W9-cGg"/>
+                        <viewControllerLayoutGuide type="bottom" id="knZ-rp-wqT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EdR-4Y-do5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Sound Track" id="0Vx-jf-XQi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGU-3p-UT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="670" y="-1092"/>
         </scene>
     </scenes>
     <resources>
