@@ -11,7 +11,9 @@
 
 @protocol VideoSoundTrackDelegate <NSObject>
 
-- (void)didSetSoundTrack:(AVAsset *)audioAsset;
+//- (void)didSetSoundTrack:(AVAsset *)audioAsset;
+- (void)didSetSoundTrack:(NSURL *)mediaUrl;
+- (void)presentPost;
 
 @end
 

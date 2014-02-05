@@ -146,14 +146,14 @@
     [self.contentDescription resignFirstResponder];
     
     if (self.mediaURL) {
-        [self performSegueWithIdentifier:SET_VIDEO_SOUND_SEGUE sender:self];
+//        [self performSegueWithIdentifier:SET_VIDEO_SOUND_SEGUE sender:self];
         
-//        self.player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.mediaURL];
-//        [self presentMoviePlayerViewControllerAnimated:self.player];
-//        
-//        // Register for the playback finished notification
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:)
-//                                                     name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+        self.player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.mediaURL];
+        [self presentMoviePlayerViewControllerAnimated:self.player];
+        
+        // Register for the playback finished notification
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:)
+                                                     name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
     } else {
         [self presentVideoPicker];
     }
@@ -364,7 +364,7 @@
         self.picker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
         self.picker.delegate = self;
         self.picker.videoMaximumDuration = VIDEO_MAX_DURATION;
-        self.picker.allowsEditing = YES;
+//        self.picker.allowsEditing = YES;
         
         // Record Video thumbnail button
         self.videoButtonPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onVideoButtonPressed:)];
@@ -524,6 +524,8 @@
             [self exportDidFinish:exporter];
         });
     }];
+    
+//    [self genThumbnail];
 }
 
 - (void)exportDidFinish:(AVAssetExportSession *)session {
@@ -538,7 +540,8 @@
             self.editor.videoPath = [[self.mediaURL absoluteURL] path];
             
             [self dismissViewControllerAnimated:YES completion:^{
-                [self presentViewController:self.editor animated:YES completion:nil];
+//                [self presentViewController:self.editor animated:YES completion:nil];
+                [self performSegueWithIdentifier:SET_VIDEO_SOUND_SEGUE sender:self];
             }];
         }
         
@@ -587,9 +590,6 @@
             }
         } else {
             if ([UIVideoEditorController canEditVideoAtPath:[[self.mediaURL absoluteURL] path]]) {
-//                self.editor.videoPath = [[self.mediaURL absoluteURL] path];
-//                [self presentViewController:self.editor animated:YES completion:nil];
-                
                 self.referenceURL = [info valueForKey:UIImagePickerControllerReferenceURL];
                 
                 [self genThumbnail];
@@ -1131,42 +1131,57 @@
 }
 
 #pragma mark - Video SoundTrack delegate
-- (void)didSetSoundTrack:(AVAsset *)audioAsset {
-    if (self.compositionPath) {
-        [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
-    }
+- (void)didSetSoundTrack:(NSURL *)mediaUrl {
+    self.mediaURL = mediaUrl;
+}
+
+//- (void)didSetSoundTrack:(AVAsset *)audioAsset {
+//    if (self.compositionPath) {
+//        [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
+//    }
+//    
+//    [self.composition removeTrack:self.compositionAudioTrack];
+//    self.compositionAudioTrack = [self.composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+//    
+//    NSError *error = nil;
+//    
+//    AVAssetTrack *sourceAudioTrack = [[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+//    [self.compositionAudioTrack removeTimeRange:CMTimeRangeMake(kCMTimeZero, [self.composition duration])];
+//    BOOL ok = [self.compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [self.composition duration]) ofTrack:sourceAudioTrack atTime:kCMTimeZero error:&error];
+//    
+//    if (!ok) {
+//        Error(@"*** Failed to set audio track *** %@", error);
+//    }
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];
+//    
+//    self.mediaURL = [NSURL fileURLWithPath:self.compositionPath];
+//    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.composition
+//                                                                      presetName:AVAssetExportPresetHighestQuality];
+//    exporter.outputURL = self.mediaURL;
+//    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+//    exporter.shouldOptimizeForNetworkUse = YES;
+//    
+//    [exporter exportAsynchronouslyWithCompletionHandler:^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+////            [self exportDidFinish:exporter];
+//        });
+//    }];
+//}
+
+- (void)presentPost {
+    self.needSave = YES;
     
-    Debug(@"1. # %d, %@", self.composition.tracks.count, self.compositionAudioTrack);
-    [self.composition removeTrack:self.compositionAudioTrack];
-        Debug(@"2. # %d", self.composition.tracks.count);
-    self.compositionAudioTrack = [self.composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    // clean up
+    self.referenceURL = nil;
+    self.mediaLink = nil;
     
-    NSError *error = nil;
+    [self genThumbnail];
+    [self doneTakingVideo];
     
-    AVAssetTrack *sourceAudioTrack = [[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
-    [self.compositionAudioTrack removeTimeRange:CMTimeRangeMake(kCMTimeZero, [self.composition duration])];
-    BOOL ok = [self.compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [self.composition duration]) ofTrack:sourceAudioTrack atTime:kCMTimeZero error:&error];
-    
-    if (!ok) {
-        Error(@"*** Failed to set audio track *** %@", error);
-    }
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];
-    
-    self.mediaURL = [NSURL fileURLWithPath:self.compositionPath];
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.composition
-                                                                      presetName:AVAssetExportPresetHighestQuality];
-    exporter.outputURL = self.mediaURL;
-    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-    exporter.shouldOptimizeForNetworkUse = YES;
-    
-    [exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self exportDidFinish:exporter];
-        });
-    }];
+    self.currentImagePicker = self.recorder;
 }
 
 

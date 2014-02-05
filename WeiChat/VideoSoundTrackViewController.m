@@ -48,18 +48,23 @@
 
 - (void)onDoneButtonTapped {
     [self.videoPlayer stop];
-    [self.delegate didSetSoundTrack:self.audioAsset];
+//    [self.delegate didSetSoundTrack:self.audioAsset];
+    [self.delegate didSetSoundTrack:self.mediaURL];
     [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate presentPost];
 }
 
 - (void)onCancelButtonTapped {
     [self.videoPlayer stop];
     [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate presentPost];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.mediaURL = self.origMediaURL;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButtonTapped)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onDoneButtonTapped)];
@@ -103,14 +108,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
     }
     
-    if (self.composition.tracks.count > 1) {
-        for (int i = 1; i < self.composition.tracks.count; i++) {
-            AVCompositionTrack *track = self.composition.tracks[i];
-            [self.composition removeTrack:track];
-        }
-    }
-    
-//    [self.composition removeTrack:self.compositionAudioTrack];
+    [self.composition removeTrack:self.compositionAudioTrack];
     self.compositionAudioTrack = [self.composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     
     NSError *error = nil;
@@ -155,7 +153,7 @@
     }
 }
 
-#pragma mark - MPMediaPicker delegate
+#pragma mark - MPMediaPicker (audio) delegate
 
 -(void) mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
     NSArray *selectedSong = [mediaItemCollection items];
