@@ -21,6 +21,7 @@
 #define HEAD_VIEW_HEIGHT                    225
 #define HEAD_VIEW_RECT                      CGRectMake(3, 3, SCREEN_WIDTH - 6, HEAD_VIEW_HEIGHT)
 #define HEAD_VIEW_HIDDEN_RECT               CGRectMake(3, -HEAD_VIEW_HEIGHT - 10, SCREEN_WIDTH - 6, HEAD_VIEW_HEIGHT)
+#define SEMI_COVER_VIEW_RECT                CGRectMake(3, HEAD_VIEW_HEIGHT, SCREEN_WIDTH - 6, SCREEN_HEIGHT - HEAD_VIEW_HEIGHT)
 
 #define RECORDING_TIMER_INTERVAL            0.01
 #define RECORDING_TIMER_INTERVAL_INVERSE    1 / RECORDING_TIMER_INTERVAL
@@ -40,7 +41,9 @@ typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError
 @interface iAdViewController : UIViewController <UIActionSheetDelegate, ADBannerViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, VdiskSessionDelegate, VdiskComplexUploadDelegate, VdiskRestClientDelegate>
 
 @property (nonatomic, strong) UIView *headView;
-@property (nonatomic, strong) UIView *lineView;
+//@property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) UIView *semiCoverView;
+
 @property (nonatomic, strong) UIBarButtonItem *shareButton;
 @property (strong, nonatomic) UITextView *contentDescription;
 @property (strong, nonatomic) UIButton *geoButton;

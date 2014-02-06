@@ -399,6 +399,11 @@
 //            
 //            [self.view addSubview:self.galleryButton];
 //        }
+        
+//        self.semiCoverView = [[UIView alloc]initWithFrame:SEMI_COVER_VIEW_RECT];
+//        self.semiCoverView.backgroundColor = [UIColor whiteColor];
+//        self.semiCoverView.alpha = 0.0;
+//        [self.view addSubview:self.semiCoverView];
      
         self.videoAssets = [NSMutableArray array];
         
@@ -1040,8 +1045,10 @@
 //}
 
 - (void)animateToRecording {
+    [self.videoButton setImage:[UIImage imageNamed:@"Camcorder.png"] forState:UIControlStateNormal];
+    
     [UIView animateWithDuration:ANIMATE_TO_REC_DURATION
-                          delay: 0.3f
+                          delay: 0.5f
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.videoButton.frame = VIDEO_THUMBNAIL_INIT_RECT;
@@ -1079,10 +1086,11 @@
                          //                             self.lineView.alpha = 0.1f;
                          
                          self.headView.alpha = 1.0;
-                         
+//                         self.semiCoverView.alpha = 0.5;
                      }
                      completion:^ (BOOL finished) {
                          if (finished) {
+                             [self.videoButton setImage:[UIImage imageNamed:@"CamcorderClosed.png"] forState:UIControlStateNormal];
                              self.contentDescription.hidden = NO;
                              self.geoButton.hidden = NO;
                              
@@ -1100,6 +1108,7 @@
 - (void)resetImagePicker {
     [self.videoAssets removeAllObjects];
     self.navItem.rightBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
     self.galleryButton.hidden = NO;
     self.hasTimedUp = NO;
     self.recordingProgress.hidden = YES;
@@ -1107,7 +1116,6 @@
     self.recordingProgressLabel.text = @"00:00";
     self.recordingTimer = nil;
     [self genGalleryThumbnail];
-    self.navItem.rightBarButtonItem = nil;
 }
 
 - (void)genGalleryThumbnail {
