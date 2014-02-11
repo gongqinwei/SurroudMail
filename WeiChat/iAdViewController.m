@@ -43,6 +43,9 @@
 #define GEO_LABEL_RECT                                  CGRectMake(60, 195, 249, 21)
 #define DESCRIPTION_TEXT_AREA_RECT                      CGRectMake(80, 10, 230, 170)
 
+#define POST_BG_COLOR                                   0xF7FEB6
+#define VIEW_BG_COLOR                                   0xD4F2FF
+
 #define PRESENT_POI_SEGUE                               @"PresentPOI"
 
 
@@ -234,13 +237,15 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:RGBCOLOR(0xe1, 0xe0, 0xde)];
+//    self.view.backgroundColor = UIColorFromRGB(VIEW_BG_COLOR);
+//self.view.backgroundColor = UIColorFromRGB(0xE5E4E2);
     
     self.headView = [[UIView alloc]initWithFrame:HEAD_VIEW_RECT];
     self.headView.layer.shadowOffset = CGSizeMake(0, 3);
     self.headView.layer.shadowRadius = 5.0;
     self.headView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.headView.layer.shadowOpacity = 0.8;
-    self.headView.backgroundColor = [UIColor whiteColor];
+    self.headView.backgroundColor = UIColorFromRGB(POST_BG_COLOR);
     self.headView.alpha = 0.0;
 
     
@@ -278,16 +283,19 @@
     self.contentDescription.text = LABEL_ADD_DESCRIPTION;
     self.contentDescription.font = [UIFont fontWithName:APP_FONT size:15];
     self.contentDescription.textColor = [UIColor lightGrayColor];
+    self.contentDescription.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:self.contentDescription];
     
     self.geoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.geoButton setImage:[UIImage imageNamed:@"GeoOff.png"] forState:UIControlStateNormal];
+    self.geoButton.backgroundColor = [UIColor clearColor];
     [self.geoButton addTarget:self action:@selector(onGeoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.geoButton setFrame:GEO_BUTTON_RECT];
     self.geoButton.hidden = YES;
     [self.headView addSubview:self.geoButton];
     
     self.geoLabel = [[UILabel alloc] initWithFrame:GEO_LABEL_RECT];
+    self.geoLabel.backgroundColor = [UIColor clearColor];
     self.geoLabel.font = [UIFont fontWithName:APP_FONT size:11];
     self.geoLabel.hidden = YES;
     [self.headView addSubview:self.geoLabel];

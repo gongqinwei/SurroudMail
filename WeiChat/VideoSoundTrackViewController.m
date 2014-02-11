@@ -67,7 +67,7 @@
     self.mediaURL = self.origMediaURL;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButtonTapped)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onDoneButtonTapped)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onDoneButtonTapped)];
     
     self.videoPlayer = [[MPMoviePlayerController alloc] initWithContentURL:self.origMediaURL];
     self.videoPlayer.scalingMode = MPMovieScalingModeAspectFill;

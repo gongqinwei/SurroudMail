@@ -24,8 +24,10 @@
 #define SAVE_VIDEO_PROMPT           NSLocalizedString(@"Save current video to Camera Roll?", nil)
 
 
+#define CAMCORDER_IMG_NAME          @"CamcorderAperture.png"
+
 #define VIDEO_THUMBNAIL_SIZE        55
-#define VIDEO_THUMBNAIL_INIT_SCALE  1.6
+#define VIDEO_THUMBNAIL_INIT_SCALE  1.75
 #define PLAY_THUMBNAIL_RECT         CGRectMake(20, 20, VIDEO_THUMBNAIL_SIZE, VIDEO_THUMBNAIL_SIZE)
 #define VIDEO_THUMBNAIL_INIT_RECT   CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE * VIDEO_THUMBNAIL_INIT_SCALE) / 2, 160, VIDEO_THUMBNAIL_SIZE * VIDEO_THUMBNAIL_INIT_SCALE, VIDEO_THUMBNAIL_SIZE * VIDEO_THUMBNAIL_INIT_SCALE)
 #define VIDEO_THUMBNAIL_AFTER_RECT  CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE) / 2, HEAD_VIEW_HEIGHT + 70, 70, 70)
@@ -39,7 +41,7 @@
 #define VIDEO_RECORDING_PROGRESS_BAR_RECT       CGRectMake(0, NAV_BAR_HEIGHT, SCREEN_WIDTH, 10)
 #define VIDEO_RECORDING_PROGRESS_LABEL_RECT     CGRectMake((SCREEN_WIDTH - 60) / 2, 12, 60, 20)
 
-#define VIDEO_MAX_DURATION          20  //seconds
+#define VIDEO_MAX_DURATION          5  //seconds
 #define ANIMATE_TO_POST_DURATION    0.75
 #define ANIMATE_TO_REC_DURATION     0.4
 #define SWITCH_TO_AUDIO_SEGUE       @"SwitchToAudio"
@@ -61,7 +63,7 @@
 @property (nonatomic, strong) UIVideoEditorController *editor;
 @property (nonatomic, strong) AVAssetImageGenerator *generator;
 
-@property (nonatomic, strong) UIView *overlay;
+@property (nonatomic, strong) UIControl *overlay;
 @property (nonatomic, strong) UIButton *galleryButton;
 @property (nonatomic, strong) UINavigationItem *navItem;
 @property (nonatomic, strong) UIBarButtonItem *nextButton;
@@ -248,7 +250,9 @@
 //        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         
         // UIImagePicker Overlay
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        self.overlay = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.overlay addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
+        [self.overlay addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
         self.overlay.opaque = NO;
         self.overlay.backgroundColor = [UIColor clearColor];
         
@@ -315,7 +319,9 @@
 
         self.recordButton = [[UIButton alloc] initWithFrame:recordImgFrame];
         [self.recordButton setBackgroundImage:recordImage forState:UIControlStateNormal];
-        [self.recordButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
+        [self.recordButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
+        [self.recordButton addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
+//        [self.recordButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
         [self.recordButton setShowsTouchWhenHighlighted:YES];
         self.isRecording = NO;
         [self.overlay addSubview:self.recordButton];
@@ -332,13 +338,16 @@
         
         self.navItem = [[UINavigationItem alloc] init];
         self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelRecording)];
+        self.cancelButton.tintColor = APP_SYSTEM_BLUE_COLOR;
         self.navItem.leftBarButtonItem = self.cancelButton;
         self.nextButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Next", nil) style:UIBarButtonItemStylePlain target:self action:@selector(proceedToEdit)];
+        self.nextButton.tintColor = APP_SYSTEM_BLUE_COLOR;
         navBar.items = @[ self.navItem ];
         [self.overlay addSubview:navBar];
         
         // Recording timer and progress
         self.recordingProgress.frame = VIDEO_RECORDING_PROGRESS_BAR_RECT;
+        self.recordingProgress.progressImage = [UIImage imageNamed:@"Progress.png"];
         [self.overlay addSubview:self.recordingProgress];
         
         self.recordingProgressLabel.frame = VIDEO_RECORDING_PROGRESS_LABEL_RECT;
@@ -383,7 +392,7 @@
         [self.playButton setFrame:VIDEO_THUMBNAIL_INIT_RECT];
         [self.headView addSubview:self.playButton];
         
-        UIImage *camcorderImg = [UIImage imageNamed:@"Camcorder.png"];
+        UIImage *camcorderImg = [UIImage imageNamed:CAMCORDER_IMG_NAME];
         self.videoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.videoButton setImage:camcorderImg forState:UIControlStateNormal];
         [self.videoButton addTarget:self action:@selector(onVideoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -589,7 +598,6 @@
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
             AVAsset *asset = [AVAsset assetWithURL:self.mediaURL];
             [self.videoAssets addObject:asset];
-            
             if (self.hasTimedUp) {
                 [self proceedToEdit];
             }
@@ -922,36 +930,45 @@
     self.isRecording = NO;
 }
 
+- (void)startRecording {
+    if (!self.recordingTimer) {
+        self.recordingTimer = [NSTimer scheduledTimerWithTimeInterval:RECORDING_TIMER_INTERVAL target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+        self.recordingStartTime = nil;
+        self.recordingStartTime = [NSDate dateWithTimeIntervalSinceNow:0];
+    } else {
+        [self resumeTimer];
+    }
+    
+    self.recordingProgress.hidden = NO;
+    [self.recorder startVideoCapture];
+    [self startSpin];
+    self.navItem.leftBarButtonItem = nil;
+    self.navItem.rightBarButtonItem = nil;
+    
+    self.galleryButton.hidden = YES;
+}
+
+- (void)stopRecording {
+    [self.recorder stopVideoCapture];
+    [self pauseTimer];
+    [self stopSpin];
+    self.navItem.leftBarButtonItem = self.cancelButton;
+    self.navItem.rightBarButtonItem = self.nextButton;
+}
+
 - (void)toggleRecording {
     if (self.isRecording) {
-        [self.recorder stopVideoCapture];
-        [self pauseTimer];
-        [self stopSpin];
-        self.navItem.leftBarButtonItem = self.cancelButton;
-        self.navItem.rightBarButtonItem = self.nextButton;
+        [self stopRecording];
     } else {
-        if (!self.recordingTimer) {
-            self.recordingTimer = [NSTimer scheduledTimerWithTimeInterval:RECORDING_TIMER_INTERVAL target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-            self.recordingStartTime = nil;
-            self.recordingStartTime = [NSDate dateWithTimeIntervalSinceNow:0];
-        } else {
-            [self resumeTimer];
-        }
-        
-        self.recordingProgress.hidden = NO;
-        [self.recorder startVideoCapture];
-        [self startSpin];
-        self.navItem.leftBarButtonItem = nil;
-        self.navItem.rightBarButtonItem = nil;
-        
-        self.galleryButton.hidden = YES;
+        [self startRecording];
     }
 }
 
 - (void)recordingTimesUp {
     self.hasTimedUp = YES;
     
-    [self toggleRecording];
+    [self stopRecording];
+//    [self toggleRecording];
 }
 
 
@@ -1045,7 +1062,7 @@
 //}
 
 - (void)animateToRecording {
-    [self.videoButton setImage:[UIImage imageNamed:@"Camcorder.png"] forState:UIControlStateNormal];
+    [self.videoButton setImage:[UIImage imageNamed:CAMCORDER_IMG_NAME] forState:UIControlStateNormal];
     
     [UIView animateWithDuration:ANIMATE_TO_REC_DURATION
                           delay: 0.5f
