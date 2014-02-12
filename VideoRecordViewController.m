@@ -24,13 +24,15 @@
 #define SAVE_VIDEO_PROMPT           NSLocalizedString(@"Save current video to Camera Roll?", nil)
 
 
-#define CAMCORDER_IMG_NAME          @"Aperture.png"
+#define CAMCORDER_IMG_NAME          @"Aperture93.png"
+//#define CAMCORDER_CLOSED_IMG_NAME   @"Aperture55.png"
 
-#define VIDEO_THUMBNAIL_SIZE        55
-#define VIDEO_THUMBNAIL_INIT_SCALE  1.75
-#define PLAY_THUMBNAIL_RECT         CGRectMake(20, 20, VIDEO_THUMBNAIL_SIZE, VIDEO_THUMBNAIL_SIZE)
-#define VIDEO_THUMBNAIL_INIT_RECT   CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE * VIDEO_THUMBNAIL_INIT_SCALE) / 2, 160, VIDEO_THUMBNAIL_SIZE * VIDEO_THUMBNAIL_INIT_SCALE, VIDEO_THUMBNAIL_SIZE * VIDEO_THUMBNAIL_INIT_SCALE)
-#define VIDEO_THUMBNAIL_AFTER_RECT  CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE) / 2, HEAD_VIEW_HEIGHT + 70, 70, 70)
+#define PLAY_THUMBNAIL_SIZE         55
+#define VIDEO_THUMBNAIL_SIZE_SMALL  67
+#define VIDEO_THUMBNAIL_SIZE_BIG    93
+#define PLAY_THUMBNAIL_RECT         CGRectMake(20, 20, PLAY_THUMBNAIL_SIZE, PLAY_THUMBNAIL_SIZE)
+#define VIDEO_THUMBNAIL_INIT_RECT   CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_BIG) / 2, 160, VIDEO_THUMBNAIL_SIZE_BIG, VIDEO_THUMBNAIL_SIZE_BIG)
+#define VIDEO_THUMBNAIL_AFTER_RECT  CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_SMALL) / 2, HEAD_VIEW_HEIGHT + 70, VIDEO_THUMBNAIL_SIZE_SMALL, VIDEO_THUMBNAIL_SIZE_SMALL)
 #define GALLERY_BUTTON_INIT_RECT    CGRectMake(SCREEN_WIDTH - 70, SCREEN_HEIGHT - 70, 48, 48)
 #define GALLERY_BUTTON_AFTER_RECT   CGRectMake(SCREEN_WIDTH - 65, SCREEN_HEIGHT - 220, 55, 55)
 
@@ -439,7 +441,7 @@
     
     AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
         if (result == AVAssetImageGeneratorSucceeded) {
-            CGRect thumbnailFrame = CGRectMake(0, 0, VIDEO_THUMBNAIL_SIZE, VIDEO_THUMBNAIL_SIZE);
+            CGRect thumbnailFrame = CGRectMake(0, 0, PLAY_THUMBNAIL_SIZE, PLAY_THUMBNAIL_SIZE);
             CGImageRef imageRef = CGImageCreateWithImageInRect(im, thumbnailFrame);
             self.thumbnail = [UIImage imageWithCGImage:imageRef];
             CGImageRelease(imageRef);
@@ -1071,6 +1073,8 @@
                          self.videoButton.frame = VIDEO_THUMBNAIL_INIT_RECT;
                          self.headView.alpha = 1.0;
                          self.headView.frame = HEAD_VIEW_HIDDEN_RECT;
+                         
+                         self.videoButton.transform = CGAffineTransformRotate(self.videoButton.transform, M_PI);
                      }
                      completion:^ (BOOL finished) {
                          if (finished) {
@@ -1104,17 +1108,19 @@
                          
                          self.headView.alpha = 1.0;
 //                         self.semiCoverView.alpha = 0.5;
+                         
+                         self.videoButton.transform = CGAffineTransformRotate(self.videoButton.transform, - M_PI);
                      }
                      completion:^ (BOOL finished) {
                          if (finished) {
-                             [self.videoButton setImage:[UIImage imageNamed:@"CamcorderClosed.png"] forState:UIControlStateNormal];
+//                             [self.videoButton setImage:[UIImage imageNamed:CAMCORDER_CLOSED_IMG_NAME] forState:UIControlStateNormal];
                              self.contentDescription.hidden = NO;
                              self.geoButton.hidden = NO;
                              
                              UIImage *playImg = [UIImage imageNamed:@"Play.png"];
                              CALayer *sublayer = [CALayer layer];
                              sublayer.contents = (id) playImg.CGImage;
-                             sublayer.frame = CGRectMake((VIDEO_THUMBNAIL_SIZE - playImg.size.width) / 2, (VIDEO_THUMBNAIL_SIZE - playImg.size.height) / 2, playImg.size.width, playImg.size.height);
+                             sublayer.frame = CGRectMake((PLAY_THUMBNAIL_SIZE - playImg.size.width) / 2, (PLAY_THUMBNAIL_SIZE - playImg.size.height) / 2, playImg.size.width, playImg.size.height);
                              [self.playButton.layer addSublayer:sublayer];
                              [self.contentDescription becomeFirstResponder];
                          }

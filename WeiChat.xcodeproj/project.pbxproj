@@ -14,7 +14,8 @@
 		0E8EADB8189E1F59004FA2DF /* CancelSoundGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADB7189E1F59004FA2DF /* CancelSoundGrey.png */; };
 		0E8EADBA189EEBDD004FA2DF /* SelectSound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADB9189EEBDD004FA2DF /* SelectSound.png */; };
 		0E8EADC018A377A7004FA2DF /* CamcorderClosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */; };
-		0EF61A2418AB0E090033FE59 /* Aperture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2318AB0E090033FE59 /* Aperture.png */; };
+		0EF61A2A18AB390C0033FE59 /* ApertureDark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2918AB390C0033FE59 /* ApertureDark.png */; };
+		0EF61A2C18AB3C3F0033FE59 /* Aperture93.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */; };
 		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
 		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
 		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
@@ -94,7 +95,8 @@
 		0E8EADB7189E1F59004FA2DF /* CancelSoundGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CancelSoundGrey.png; sourceTree = "<group>"; };
 		0E8EADB9189EEBDD004FA2DF /* SelectSound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectSound.png; sourceTree = "<group>"; };
 		0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CamcorderClosed.png; sourceTree = "<group>"; };
-		0EF61A2318AB0E090033FE59 /* Aperture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aperture.png; sourceTree = "<group>"; };
+		0EF61A2918AB390C0033FE59 /* ApertureDark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ApertureDark.png; sourceTree = "<group>"; };
+		0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aperture93.png; sourceTree = "<group>"; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -457,7 +459,8 @@
 		7EA9B6EB185ECF3600438EA6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				0EF61A2318AB0E090033FE59 /* Aperture.png */,
+				0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */,
+				0EF61A2918AB390C0033FE59 /* ApertureDark.png */,
 				7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */,
 				0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */,
 				0E8EADB7189E1F59004FA2DF /* CancelSoundGrey.png */,
@@ -582,6 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EA9B6ED185ED0AD00438EA6 /* Camcorder.png in Resources */,
+				0EF61A2C18AB3C3F0033FE59 /* Aperture93.png in Resources */,
 				7EDD3CC518616791006ABAA9 /* GeoOn.png in Resources */,
 				7EF1F5FA187DCCC40052FBA4 /* FlashOn.png in Resources */,
 				7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */,
@@ -596,7 +600,6 @@
 				7EBFF181187F368C0031504B /* PhotoAlbum.png in Resources */,
 				7EA9B715185FD02700438EA6 /* Record.png in Resources */,
 				7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */,
-				0EF61A2418AB0E090033FE59 /* Aperture.png in Resources */,
 				7EA9B6FA185EDF2000438EA6 /* MicBarButton.png in Resources */,
 				0E8EADC018A377A7004FA2DF /* CamcorderClosed.png in Resources */,
 				7EBFF177187F301C0031504B /* WeixinMoments.png in Resources */,
@@ -605,6 +608,7 @@
 				7EDD3CD4186280EE006ABAA9 /* Play.png in Resources */,
 				7EDD3CB118602E34006ABAA9 /* SwitchCamera.png in Resources */,
 				7E1DF1BD1859964B0009F0C3 /* InfoPlist.strings in Resources */,
+				0EF61A2A18AB390C0033FE59 /* ApertureDark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
