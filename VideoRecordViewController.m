@@ -24,7 +24,7 @@
 #define SAVE_VIDEO_PROMPT           NSLocalizedString(@"Save current video to Camera Roll?", nil)
 
 
-#define CAMCORDER_IMG_NAME          @"CamcorderAperture.png"
+#define CAMCORDER_IMG_NAME          @"Aperture.png"
 
 #define VIDEO_THUMBNAIL_SIZE        55
 #define VIDEO_THUMBNAIL_INIT_SCALE  1.75
