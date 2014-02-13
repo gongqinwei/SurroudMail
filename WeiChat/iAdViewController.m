@@ -245,7 +245,8 @@
     self.headView.layer.shadowRadius = 5.0;
     self.headView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.headView.layer.shadowOpacity = 0.8;
-    self.headView.backgroundColor = UIColorFromRGB(POST_BG_COLOR);
+//    self.headView.backgroundColor = UIColorFromRGB(POST_BG_COLOR);
+    self.headView.backgroundColor = [UIColor whiteColor];
     self.headView.alpha = 0.0;
 
     

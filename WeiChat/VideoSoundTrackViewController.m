@@ -19,10 +19,12 @@
 @property (nonatomic, strong) MPMediaPickerController *soundTrackPicker;
 
 @property (strong, nonatomic) UIBarButtonItem *selectSoundButton;
-@property (strong, nonatomic) UIBarButtonItem *cancelSoundButton;
+@property (nonatomic, strong) UILabel *soundStartTimeLabel;
 @property (strong, nonatomic) UISlider *setSoundBeginningSlider;
 
+@property (nonatomic, strong) AVAsset *origAudioAsset;
 @property (nonatomic, strong) AVAsset *audioAsset;
+@property (nonatomic, strong) NSURL *audioURL;
 @property (nonatomic, strong) NSURL *mediaURL;
 @property (nonatomic, strong) NSString *compositionPath;
 
@@ -42,8 +44,82 @@
     [self presentViewController:self.soundTrackPicker animated:YES completion:nil];
 }
 
-- (void)onCancelSoundButtonTapped {
+- (void)onSetSoundBeginSliderValueChanged:(UISlider *)sender {
+    int min = sender.value / 60;
+    int sec = (int)sender.value % 60;
+    self.soundStartTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d", min, sec];
+}
+
+- (void)onSetSoundBeginSliderTouchUp:(UISlider *)sender {
+    [self exportAsset:sender.value];
+}
+
+- (BOOL)exportAsset:(int)start {
+    CMTime assetTime = [self.origAudioAsset duration];
+    Float64 duration = CMTimeGetSeconds(assetTime);
     
+    // get the first audio track
+    NSArray *tracks = [self.origAudioAsset tracksWithMediaType:AVMediaTypeAudio];
+    if ([tracks count] == 0) {
+        return NO;
+    }
+    
+    AVAssetTrack *track = [tracks objectAtIndex:0];
+    
+    AVAssetExportSession *exportSession = [AVAssetExportSession
+                                           exportSessionWithAsset:self.origAudioAsset
+                                           presetName:AVAssetExportPresetAppleM4A];
+    if (nil == exportSession) {
+        return NO;
+    }
+    
+    CMTime startTime = CMTimeMake(start, 1);
+    CMTime stopTime = CMTimeMake(duration, 1);
+    CMTimeRange exportTimeRange = CMTimeRangeFromTimeToTime(startTime, stopTime);
+    
+//    // create fade in time range - 10 seconds starting at the beginning of trimmed asset
+//    CMTime startFadeInTime = startTime;
+//    CMTime endFadeInTime = CMTimeMake(40, 1);
+//    CMTimeRange fadeInTimeRange = CMTimeRangeFromTimeToTime(startFadeInTime,
+//                                                            endFadeInTime);
+    
+    // setup audio mix
+    AVMutableAudioMix *exportAudioMix = [AVMutableAudioMix audioMix];
+    AVMutableAudioMixInputParameters *exportAudioMixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:track];
+//
+//    [exportAudioMixInputParameters setVolumeRampFromStartVolume:0.0 toEndVolume:1.0 timeRange:fadeInTimeRange];
+    exportAudioMix.inputParameters = [NSArray arrayWithObject:exportAudioMixInputParameters];
+    
+    // configure export session  output with all our parameters
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"timmedAudio-%d.m4a", arc4random() % 1000]];  //TODO: [[NSFileManager defaultManager] removeItemAtPath:compositionPath error:nil];
+    self.audioURL = [NSURL fileURLWithPath:filePath];
+    
+    exportSession.outputURL = [NSURL fileURLWithPath:filePath]; // output path
+    exportSession.outputFileType = AVFileTypeAppleM4A; // output file type
+    exportSession.timeRange = exportTimeRange; // trim time range
+    exportSession.audioMix = exportAudioMix; // fade in audio mix
+    
+    // perform the export
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        
+        if (AVAssetExportSessionStatusCompleted == exportSession.status) {
+            Debug(@"AVAssetExportSessionStatusCompleted");
+            
+            self.audioAsset = [AVAsset assetWithURL:self.audioURL];
+            [self setSoundTrackAsset];
+        } else if (AVAssetExportSessionStatusFailed == exportSession.status) {
+            // a failure may happen because of an event out of your control
+            // for example, an interruption like a phone call comming in
+            // make sure and handle this case appropriately
+            Error(@"AVAssetExportSessionStatusFailed");
+        } else {
+            Error(@"Export Session Status: %d", exportSession.status);
+        }
+    }];
+    
+    return YES;
 }
 
 - (void)onDoneButtonTapped {
@@ -72,7 +148,7 @@
     self.videoPlayer = [[MPMoviePlayerController alloc] initWithContentURL:self.origMediaURL];
     self.videoPlayer.scalingMode = MPMovieScalingModeAspectFill;
     self.videoPlayer.shouldAutoplay = YES;
-    self.videoPlayer.repeatMode = MPMovieRepeatModeOne;
+//    self.videoPlayer.repeatMode = MPMovieRepeatModeOne;
     self.videoPlayer.allowsAirPlay = NO;
     self.videoPlayer.fullscreen = NO;
     self.videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - TOOLBAR_HEIGHT);
@@ -89,12 +165,23 @@
     [button addTarget:self action:@selector(onSelectSoundButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     self.selectSoundButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    self.cancelSoundButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CancelSoundGrey.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onCancelSoundButtonTapped)];
+//    self.cancelSoundButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CancelSoundGrey.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onCancelSoundButtonTapped)];
+    
+    self.soundStartTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    self.soundStartTimeLabel.backgroundColor = [UIColor clearColor];
+    self.soundStartTimeLabel.textColor = [UIColor whiteColor];
+    self.soundStartTimeLabel.font = [UIFont fontWithName:APP_FONT size:13];
+    self.soundStartTimeLabel.hidden = YES;
+//    self.soundStartTimeLabel.text = @"00:00";
+    UIBarButtonItem *beginTime = [[UIBarButtonItem alloc] initWithCustomView:self.soundStartTimeLabel];
     
     self.setSoundBeginningSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 110, TOOLBAR_HEIGHT)];
+    [self.setSoundBeginningSlider addTarget:self action:@selector(onSetSoundBeginSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.setSoundBeginningSlider addTarget:self action:@selector(onSetSoundBeginSliderTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    self.setSoundBeginningSlider.hidden = YES;
     UIBarButtonItem *slider = [[UIBarButtonItem alloc] initWithCustomView:self.setSoundBeginningSlider];
     
-    toolbar.items = @[self.selectSoundButton, slider, self.cancelSoundButton];
+    toolbar.items = @[self.selectSoundButton, slider, beginTime];
     [self.view addSubview:toolbar];
 }
 
@@ -103,7 +190,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setAudioAsset {
+- (void)setSoundTrackAsset {
     if (self.compositionPath) {
         [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
     }
@@ -160,9 +247,15 @@
     if ([selectedSong count] > 0) {
         MPMediaItem *songItem = [selectedSong objectAtIndex:0];
         NSURL *songURL = [songItem valueForProperty:MPMediaItemPropertyAssetURL];
-        self.audioAsset = [AVAsset assetWithURL:songURL];
-        [self setAudioAsset];
+        self.audioAsset = self.origAudioAsset = [AVAsset assetWithURL:songURL];
+        [self setSoundTrackAsset];
+        
+        self.setSoundBeginningSlider.hidden = NO;
+        self.soundStartTimeLabel.hidden = NO;
+        self.soundStartTimeLabel.text = @"00:00";
+        self.setSoundBeginningSlider.maximumValue = CMTimeGetSeconds(self.audioAsset.duration);
     }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

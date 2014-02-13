@@ -43,7 +43,7 @@
 #define VIDEO_RECORDING_PROGRESS_BAR_RECT       CGRectMake(0, NAV_BAR_HEIGHT, SCREEN_WIDTH, 10)
 #define VIDEO_RECORDING_PROGRESS_LABEL_RECT     CGRectMake((SCREEN_WIDTH - 60) / 2, 12, 60, 20)
 
-#define VIDEO_MAX_DURATION          5  //seconds
+#define VIDEO_MAX_DURATION          30  //seconds
 #define ANIMATE_TO_POST_DURATION    0.75
 #define ANIMATE_TO_REC_DURATION     0.4
 #define SWITCH_TO_AUDIO_SEGUE       @"SwitchToAudio"
