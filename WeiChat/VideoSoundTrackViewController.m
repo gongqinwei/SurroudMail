@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSURL *mediaURL;
 @property (nonatomic, strong) NSString *compositionPath;
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation VideoSoundTrackViewController
@@ -55,6 +57,8 @@
 }
 
 - (BOOL)exportAsset:(int)start {
+    [self toggleUI:NO];
+    
     CMTime assetTime = [self.origAudioAsset duration];
     Float64 duration = CMTimeGetSeconds(assetTime);
     
@@ -109,13 +113,16 @@
             
             self.audioAsset = [AVAsset assetWithURL:self.audioURL];
             [self setSoundTrackAsset];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self toggleUI:NO];
+//            });
         } else if (AVAssetExportSessionStatusFailed == exportSession.status) {
             // a failure may happen because of an event out of your control
             // for example, an interruption like a phone call comming in
             // make sure and handle this case appropriately
             Error(@"AVAssetExportSessionStatusFailed");
         } else {
-            Error(@"Export Session Status: %d", exportSession.status);
+            Error(@"Export Session Status: %ld", (long)exportSession.status);
         }
     }];
     
@@ -183,6 +190,12 @@
     
     toolbar.items = @[self.selectSoundButton, slider, beginTime];
     [self.view addSubview:toolbar];
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityIndicator.frame = CGRectMake((SCREEN_WIDTH - self.activityIndicator.bounds.size.width) / 2, 180, self.activityIndicator.bounds.size.width, self.activityIndicator.bounds.size.height);
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.activityIndicator stopAnimating];
+    [self.view addSubview:self.activityIndicator];
 }
 
 - (void)didReceiveMemoryWarning
@@ -190,7 +203,23 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)toggleUI:(BOOL)enable {
+    if (enable) {
+        [self.activityIndicator stopAnimating];
+        self.view.userInteractionEnabled = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+    } else if (self.view.userInteractionEnabled == YES) {
+        [self.activityIndicator startAnimating];
+        self.view.userInteractionEnabled = NO;
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+    }
+}
+
 - (void)setSoundTrackAsset {
+    [self toggleUI:NO];
+    
     if (self.compositionPath) {
         [[NSFileManager defaultManager] removeItemAtPath:self.compositionPath error:nil];
     }
@@ -236,6 +265,7 @@
             self.videoPlayer.contentURL = self.mediaURL;
             [self.videoPlayer stop];
             [self.videoPlayer play];
+            [self toggleUI:YES];
         }
     }
 }
