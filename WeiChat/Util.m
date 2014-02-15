@@ -8,9 +8,28 @@
 
 #import "Util.h"
 #import "Constants.h"
+#import <Security/Security.h>
+#import "KeychainItemWrapper.h"
 
+
+#define KEYCHAIN_ID             @"WeiChat_YaoShi"
 
 @implementation Util
+
++ (void)incrementAdvancedUsage {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+    NSString *advancedUsage = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
+    int usage = [advancedUsage intValue];
+    usage++;
+    Debug(@"---------------- usage: %d", usage);
+    [keychainItem setObject:[NSString stringWithFormat:@"%d", usage] forKey:(__bridge id)(kSecAttrAccount)];
+}
+
++ (NSString *)getAdvancedUsage {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+    return [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
+}
+
 
 + (BOOL)isSameDay:(NSDate *)date1 otherDay:(NSDate *)date2 {
     NSCalendar *calendar = [NSCalendar currentCalendar];

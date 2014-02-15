@@ -16,6 +16,8 @@
 		0E8EADC018A377A7004FA2DF /* CamcorderClosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */; };
 		0EF61A2A18AB390C0033FE59 /* ApertureDark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2918AB390C0033FE59 /* ApertureDark.png */; };
 		0EF61A2C18AB3C3F0033FE59 /* Aperture93.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */; };
+		0EF61A3518ADF7550033FE59 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF61A3418ADF7550033FE59 /* KeychainItemWrapper.m */; };
+		0EF61A3718ADF7720033FE59 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF61A3618ADF7720033FE59 /* Security.framework */; };
 		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
 		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
 		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
@@ -97,6 +99,9 @@
 		0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CamcorderClosed.png; sourceTree = "<group>"; };
 		0EF61A2918AB390C0033FE59 /* ApertureDark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ApertureDark.png; sourceTree = "<group>"; };
 		0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aperture93.png; sourceTree = "<group>"; };
+		0EF61A3318ADF7550033FE59 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		0EF61A3418ADF7550033FE59 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		0EF61A3618ADF7720033FE59 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -222,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF61A3718ADF7720033FE59 /* Security.framework in Frameworks */,
 				0E8EADA61898E6C4004FA2DF /* MapKit.framework in Frameworks */,
 				7E7E698C18737CE20039FBB8 /* libz.dylib in Frameworks */,
 				7E7E698A18737C4C0039FBB8 /* SystemConfiguration.framework in Frameworks */,
@@ -277,6 +283,7 @@
 		7E1DF1B11859964B0009F0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0EF61A3618ADF7720033FE59 /* Security.framework */,
 				0E8EADA51898E6C4004FA2DF /* MapKit.framework */,
 				7E7E698B18737CE20039FBB8 /* libz.dylib */,
 				7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */,
@@ -498,6 +505,8 @@
 				7EDD3CB318613077006ABAA9 /* Util.m */,
 				7EDD3CB6186130CB006ABAA9 /* UIHelper.h */,
 				7EDD3CB7186130CB006ABAA9 /* UIHelper.m */,
+				0EF61A3318ADF7550033FE59 /* KeychainItemWrapper.h */,
+				0EF61A3418ADF7550033FE59 /* KeychainItemWrapper.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -635,6 +644,7 @@
 				7E1DF1BF1859964B0009F0C3 /* main.m in Sources */,
 				7E023029185EAB4900BC0B37 /* VideoRecordViewController.m in Sources */,
 				7E7E67DC1863A7700039FBB8 /* iAdViewController.m in Sources */,
+				0EF61A3518ADF7550033FE59 /* KeychainItemWrapper.m in Sources */,
 				7EDD3CB8186130CB006ABAA9 /* UIHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

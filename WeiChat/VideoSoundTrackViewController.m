@@ -10,6 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Constants.h"
+#import "Util.h"
 
 #define TOOLBAR_HEIGHT          120
 
@@ -131,10 +132,13 @@
 
 - (void)onDoneButtonTapped {
     [self.videoPlayer stop];
-//    [self.delegate didSetSoundTrack:self.audioAsset];
     [self.delegate didSetSoundTrack:self.mediaURL];
     [self.navigationController popViewControllerAnimated:YES];
     [self.delegate presentPost];
+    
+    if (self.audioAsset) {
+        [Util incrementAdvancedUsage];
+    }
 }
 
 - (void)onCancelButtonTapped {

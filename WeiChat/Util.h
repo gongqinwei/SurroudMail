@@ -10,6 +10,9 @@
 
 @interface Util : NSObject
 
++ (void)incrementAdvancedUsage;
++ (NSNumber *)getAdvancedUsage;
+
 + (BOOL)isSameDay:(NSDate*)date1 otherDay:(NSDate*)date2;
 + (BOOL)isDay:(NSDate*)date1 earlierThanDay:(NSDate*)date2;
 
