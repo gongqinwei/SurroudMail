@@ -128,7 +128,7 @@
             </objects>
             <point key="canvasLocation" x="1135" y="-322"/>
         </scene>
-        <!--Video Sound Track View Controller - Sound Track-->
+        <!--Video Sound Track View Controller - Edit Sound Track-->
         <scene sceneID="gox-oi-zT5">
             <objects>
                 <viewController id="LRw-wR-KgV" customClass="VideoSoundTrackViewController" sceneMemberID="viewController">
@@ -141,7 +141,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sound Track" id="0Vx-jf-XQi"/>
+                    <navigationItem key="navigationItem" title="Edit Sound Track" id="0Vx-jf-XQi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGU-3p-UT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

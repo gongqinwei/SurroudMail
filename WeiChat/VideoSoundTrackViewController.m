@@ -45,7 +45,7 @@
     }
     
     self.soundTrackPicker.delegate = self;
-    self.soundTrackPicker.prompt = @"Select Sound Track";
+    self.soundTrackPicker.prompt = NSLocalizedString(@"Pick sound track for video", nil);
     [self presentViewController:self.soundTrackPicker animated:YES completion:nil];
 }
 
@@ -196,6 +196,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = NSLocalizedString(@"Edit Sound Track", nil);
     
     self.mediaURL = self.origMediaURL;
     

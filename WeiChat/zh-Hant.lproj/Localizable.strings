@@ -36,5 +36,8 @@
 
 "Purchase" = "購買";
 "Redeem" = "恢復之前的購買";
-"IAPPrompt" = "您已用盡%d次試用。\n\n若您想繼續使用，只需一次性付費%@。如果您以前曾購買過，請在此登錄蘋果app store恢復即可。";
+"IAPPrompt" = "您已用盡%d次試用。\n\n若您想繼續使用，只需一次性付費%@。如果您以前曾購買過，請在此登錄蘋果app store恢復即可。\n\n購買後，您的攝像時長將增至30秒哦！";
 "NoPreviousPurchase" = "未找到此用戶以前購買記錄！";
+
+"Edit Sound Track" = "預覽並編輯音頻";
+"Pick sound track for video" = "選首歌替換視頻中的音頻";

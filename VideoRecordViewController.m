@@ -11,6 +11,7 @@
 #import "UIHelper.h"
 #import "WXApi.h"
 #import "VideoSoundTrackViewController.h"
+#import "WeiChatIAPHelper.h"
 #import <CoreMedia/CoreMedia.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -43,6 +44,7 @@
 #define VIDEO_RECORDING_PROGRESS_BAR_RECT       CGRectMake(0, NAV_BAR_HEIGHT, SCREEN_WIDTH, 10)
 #define VIDEO_RECORDING_PROGRESS_LABEL_RECT     CGRectMake((SCREEN_WIDTH - 60) / 2, 12, 60, 20)
 
+#define VIDEO_MAX_DURATION_FREE     10  //seconds
 #define VIDEO_MAX_DURATION          30  //seconds
 #define ANIMATE_TO_POST_DURATION    0.75
 #define ANIMATE_TO_REC_DURATION     0.4
@@ -92,7 +94,11 @@
 @implementation VideoRecordViewController
 
 - (int)getMaxRecordingDuration {
-    return VIDEO_MAX_DURATION;
+    if ([[WeiChatIAPHelper sharedInstance] productPurchased:IAP_PRODUCT_ID]) {
+        return VIDEO_MAX_DURATION;
+    } else {
+        return VIDEO_MAX_DURATION_FREE;
+    }
 }
 
 - (void)publishContentToWeixin {
@@ -189,7 +195,11 @@
         [alert show];
     } else {
         [self resetImagePicker];
-        [self presentVideoPicker];
+        if (self.mediaURL) {
+            [self animateToRecording];
+        } else {
+            [self presentVideoPicker];
+        }
     }
 }
 
@@ -362,7 +372,6 @@
         self.recorder.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.recorder.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
         self.recorder.delegate = self;
-//        self.recorder.videoMaximumDuration = VIDEO_MAX_DURATION;
         self.recorder.allowsEditing = YES;
         self.recorder.showsCameraControls = NO;
         self.recorder.navigationBarHidden = YES;
@@ -375,7 +384,7 @@
         self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         self.picker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
         self.picker.delegate = self;
-        self.picker.videoMaximumDuration = VIDEO_MAX_DURATION;
+        self.picker.videoMaximumDuration = [self getMaxRecordingDuration];
 //        self.picker.allowsEditing = YES;
         
         // Record Video thumbnail button
@@ -386,7 +395,7 @@
         // Video editor
         self.editor = [[UIVideoEditorController alloc] init];
         self.editor.delegate = self;
-        self.editor.videoMaximumDuration = VIDEO_MAX_DURATION;
+        self.editor.videoMaximumDuration = [self getMaxRecordingDuration];
         self.editor.videoQuality = UIImagePickerControllerQualityTypeHigh;
         
         // Movie player
@@ -1001,7 +1010,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
-        case ABANDON_VIDEO_ALERT_TAG:
+        case ABANDON_VIDEO_ALERT_TAG:   // not in use any more!
             if (buttonIndex == 1) {
 //                [self saveRecordingContentWithCompletionSelector:@selector(video:didFinishSavingWithError:abandon:)];
                 [self saveRecordingContentWithCompletionBlock:^(NSURL *assetURL, NSError *error){

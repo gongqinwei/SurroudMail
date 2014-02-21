@@ -36,5 +36,8 @@
 
 "Purchase" = "Purchase";
 "Redeem" = "Redeem";
-"IAPPrompt" = "You've used up %d free trials for this advanced feature.\n\nYou can purchase this feature for %@, or if you've purchased previously, just sign in to app store here to redeem it.";
+"IAPPrompt" = "You've used up %d free trials for this advanced feature.\n\nYou can purchase this feature for %@, or if you've purchased previously, just sign in to app store here to redeem it.\n\nAfter purchase, you can record videos up to 30 seconds!";
 "NoPreviousPurchase" = "Can't find previous purchase of this feature for this account!";
+
+"Edit Sound Track" = "Edit Sound Track";
+"Pick sound track for video" = "Pick a sound track for video";
