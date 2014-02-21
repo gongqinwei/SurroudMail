@@ -76,7 +76,12 @@
 
 @property (nonatomic, strong) UIButton *flashButton;
 @property (nonatomic, strong) UIButton *recordButton;
+@property (weak, nonatomic) IBOutlet UIButton *videoButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *switchToAudioButton;
+@property (nonatomic, strong) UIButton *playButton;
+@property (nonatomic, strong) CALayer *playLayer;
 @property (nonatomic, assign) BOOL isRecording;
+@property (nonatomic, assign) BOOL flashOn;
 
 @property (nonatomic, strong) AVMutableComposition *composition;
 @property (nonatomic, strong) AVMutableCompositionTrack *compositionAudioTrack;
@@ -280,12 +285,8 @@
                 [self.flashButton setBackgroundImage:flashImage forState:UIControlStateNormal];
                 [self.flashButton addTarget:self action:@selector(switchFlash) forControlEvents:UIControlEventTouchUpInside];
                 [self.flashButton setShowsTouchWhenHighlighted:YES];
-
+                self.flashOn = NO;
                 [self.overlay addSubview:self.flashButton];
-
-                [device lockForConfiguration:nil];
-                [device setTorchMode:AVCaptureTorchModeOff];
-                [device setFlashMode:AVCaptureFlashModeOff];
             }
         }
 
@@ -400,6 +401,11 @@
         [self.videoButton addTarget:self action:@selector(onVideoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.videoButton setFrame:VIDEO_THUMBNAIL_INIT_RECT];
         [self.view addSubview:self.videoButton];
+        
+        UIImage *playImg = [UIImage imageNamed:@"Play.png"];
+        self.playLayer = [CALayer layer];
+        self.playLayer.contents = (id) playImg.CGImage;
+        self.playLayer.frame = CGRectMake((PLAY_THUMBNAIL_SIZE - playImg.size.width) / 2, (PLAY_THUMBNAIL_SIZE - playImg.size.height) / 2, playImg.size.width, playImg.size.height);
         
 //        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == YES) {
 //            self.galleryButton = [[UIButton alloc] initWithFrame:GALLERY_BUTTON_INIT_RECT];
@@ -869,8 +875,8 @@
 }
 
 - (void)switchFlash {
-    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
-    if (captureDeviceClass != nil) {
+//    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+//    if (captureDeviceClass != nil) {
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         if ([device hasTorch] && [device hasFlash]){
             [device lockForConfiguration:nil];
@@ -880,16 +886,20 @@
 
                 UIImage *flashImage = [UIImage imageNamed:@"FlashOn.png"];
                 [self.flashButton setBackgroundImage:flashImage forState:UIControlStateNormal];
+                
+                self.flashOn = YES;
             } else {
                 [device setTorchMode:AVCaptureTorchModeOff];
                 [device setFlashMode:AVCaptureFlashModeOff];
 
                 UIImage *noFlashImage = [UIImage imageNamed:@"FlashOff.png"];
                 [self.flashButton setBackgroundImage:noFlashImage forState:UIControlStateNormal];
+                
+                self.flashOn = NO;
             }
             [device unlockForConfiguration];
         }
-    }
+//    }
 }
 
 - (void)switchCamera {
@@ -933,6 +943,19 @@
 }
 
 - (void)startRecording {
+    if (self.flashButton) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        [device lockForConfiguration:nil];
+        if (self.flashOn) {
+            [device setTorchMode:AVCaptureTorchModeOn];
+            [device setFlashMode:AVCaptureFlashModeOn];
+        } else {
+            [device setTorchMode:AVCaptureTorchModeOff];
+            [device setFlashMode:AVCaptureFlashModeOff];
+        }
+        [device unlockForConfiguration];
+    }
+    
     if (!self.recordingTimer) {
         self.recordingTimer = [NSTimer scheduledTimerWithTimeInterval:RECORDING_TIMER_INTERVAL target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
         self.recordingStartTime = nil;
@@ -1081,6 +1104,7 @@
                              self.playButton.frame = VIDEO_THUMBNAIL_INIT_RECT;
                              self.contentDescription.hidden = YES;
                              self.geoButton.hidden = YES;
+                             [self.playLayer removeFromSuperlayer];
                              
                              self.headView.alpha = 0.0;
                              self.headView.frame = HEAD_VIEW_RECT;
@@ -1117,11 +1141,7 @@
                              self.contentDescription.hidden = NO;
                              self.geoButton.hidden = NO;
                              
-                             UIImage *playImg = [UIImage imageNamed:@"Play.png"];
-                             CALayer *sublayer = [CALayer layer];
-                             sublayer.contents = (id) playImg.CGImage;
-                             sublayer.frame = CGRectMake((PLAY_THUMBNAIL_SIZE - playImg.size.width) / 2, (PLAY_THUMBNAIL_SIZE - playImg.size.height) / 2, playImg.size.width, playImg.size.height);
-                             [self.playButton.layer addSublayer:sublayer];
+                             [self.playButton.layer addSublayer:self.playLayer];
                              [self.contentDescription becomeFirstResponder];
                          }
                      }
@@ -1331,7 +1351,7 @@
  // 4 - Get path
  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
  NSString *documentsDirectory = [paths objectAtIndex:0];
- self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];  //TODO: [[NSFileManager defaultManager] removeItemAtPath:compositionPath error:nil];
+ self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];
  
  // 5 - Clean up & accumulate video asset
  newTrack = nil;

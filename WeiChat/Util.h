@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WeiChatIAPHelper.h"
+#import <StoreKit/StoreKit.h>
+
 
 @interface Util : NSObject
 
-+ (void)incrementAdvancedUsage;
++ (BOOL)checkAdvancedUsage:(RequestProductsCompletionHandler)completionHandler;
 + (NSNumber *)getAdvancedUsage;
 
 + (BOOL)isSameDay:(NSDate*)date1 otherDay:(NSDate*)date2;

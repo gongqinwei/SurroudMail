@@ -11,8 +11,4 @@
 
 @interface VideoRecordViewController : iAdViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *videoButton;
-@property (nonatomic, strong) UIButton *playButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *switchToAudioButton;
-
 @end

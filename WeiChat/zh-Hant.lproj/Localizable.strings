@@ -33,3 +33,8 @@
 
 "Current Location" = "當前位置";
 "Select Location" = "我在這裡";
+
+"Purchase" = "購買";
+"Redeem" = "恢復之前的購買";
+"IAPPrompt" = "您已用盡%d次試用。\n\n若您想繼續使用，只需一次性付費%@。如果您以前曾購買過，請在此登錄蘋果app store恢復即可。";
+"NoPreviousPurchase" = "未找到此用戶以前購買記錄！";

@@ -25,6 +25,8 @@
 #define CHINESE             @"zh"
 
 #define PRODUCT_NAME        @"WeiChat"
+#define IAP_PRODUCT_ID      @"com.weichat.WeiChat.SoundTrackEditor"
+#define FREE_TRIAL          3
 
 // Version
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)

@@ -8,12 +8,16 @@
 
 #import "WeiChatAppDelegate.h"
 #import "Constants.h"
+#import "WeiChatIAPHelper.h"
 
 
 @implementation WeiChatAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // In App Purchase
+    [WeiChatIAPHelper sharedInstance];
+    
     // Weixin
     if (![WXApi registerApp:@"wx68d5a54fe90b5ac3"]) {
         Error(@"Failed to register with Weixin");

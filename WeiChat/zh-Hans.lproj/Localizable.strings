@@ -33,3 +33,8 @@
 
 "Current Location" = "当前位置";
 "Select Location" = "我在这里";
+
+"Purchase" = "购买";
+"Redeem" = "恢复之前的购买";
+"IAPPrompt" = "您已用尽%d次适用。\n\n若您想继续使用此功能，只需一次性付费%@。如果您以前已购买过，请在此登录苹果应用商店恢复即可。";
+"NoPreviousPurchase" = "未找到此用户以前购买记录！";

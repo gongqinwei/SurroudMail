@@ -33,3 +33,8 @@
 
 "Current Location" = "Current Location";
 "Select Location" = "Select Location";
+
+"Purchase" = "Purchase";
+"Redeem" = "Redeem";
+"IAPPrompt" = "You've used up %d free trials for this advanced feature.\n\nYou can purchase this feature for %@, or if you've purchased previously, just sign in to app store here to redeem it.";
+"NoPreviousPurchase" = "Can't find previous purchase of this feature for this account!";

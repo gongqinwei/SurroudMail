@@ -16,13 +16,27 @@
 
 @implementation Util
 
-+ (void)incrementAdvancedUsage {
++ (BOOL)checkAdvancedUsage:(RequestProductsCompletionHandler)completionHandler {
+    // Check purchased first...
+    if ([[WeiChatIAPHelper sharedInstance] productPurchased:IAP_PRODUCT_ID]) {
+        return YES;
+    }
+    
+    // Not purchased yet, check usage so far
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
     NSString *advancedUsage = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
     int usage = [advancedUsage intValue];
-    usage++;
-    Debug(@"---------------- usage: %d", usage);
-    [keychainItem setObject:[NSString stringWithFormat:@"%d", usage] forKey:(__bridge id)(kSecAttrAccount)];
+    if (usage < FREE_TRIAL) {
+        usage++;
+        Debug(@"---------------- usage: %d", usage);
+        [keychainItem setObject:[NSString stringWithFormat:@"%d", usage] forKey:(__bridge id)(kSecAttrAccount)];
+        
+        return YES;
+    } else {
+        [[WeiChatIAPHelper sharedInstance] requestProductsWithCompletionHandler:completionHandler];
+        
+        return NO;
+    }
 }
 
 + (NSString *)getAdvancedUsage {

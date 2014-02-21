@@ -31,6 +31,8 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
+@property (nonatomic, strong) SKProduct *product;
+
 @end
 
 @implementation VideoSoundTrackViewController
@@ -130,21 +132,65 @@
     return YES;
 }
 
-- (void)onDoneButtonTapped {
+- (void)navigateBack {
     [self.videoPlayer stop];
-    [self.delegate didSetSoundTrack:self.mediaURL];
     [self.navigationController popViewControllerAnimated:YES];
     [self.delegate presentPost];
+}
+
+- (void)onDoneButtonTapped {
+//    [self.videoPlayer stop];
+//    [self.delegate didSetSoundTrack:self.mediaURL];
+//    [self.navigationController popViewControllerAnimated:YES];
+//    [self.delegate presentPost];
     
     if (self.audioAsset) {
-        [Util incrementAdvancedUsage];
+        BOOL canUseAdvancedFeature = [Util checkAdvancedUsage:^(BOOL success, NSArray *products) {
+            if (success) {
+                Debug(@"=============== Success ===============");
+                
+                self.product = products[0];
+                
+                NSNumberFormatter * _priceFormatter;
+                _priceFormatter = [[NSNumberFormatter alloc] init];
+                [_priceFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+                [_priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                [_priceFormatter setLocale:self.product.priceLocale];
+                NSString *price = [_priceFormatter stringFromNumber:self.product.price];
+                
+                UIAlertView *promptToBuy = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:NSLocalizedString(@"IAPPrompt", nil), FREE_TRIAL, price] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Purchase", nil), NSLocalizedString(@"Redeem", nil), nil];
+                [promptToBuy show];
+            }
+        }];
+        
+        if (canUseAdvancedFeature) {
+            [self.delegate didSetSoundTrack:self.mediaURL];
+            [self navigateBack];
+        }
+    } else {
+        [self navigateBack];
     }
 }
 
 - (void)onCancelButtonTapped {
-    [self.videoPlayer stop];
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate presentPost];
+    [self navigateBack];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)productPurchased:(NSNotification *)notification {
+    
+    NSString * productIdentifier = notification.object;
+    Debug(@"************ Purchased %@!", productIdentifier);
+    
+    [self.delegate didSetSoundTrack:self.mediaURL];
+    [self navigateBack];
 }
 
 - (void)viewDidLoad
@@ -153,12 +199,15 @@
     
     self.mediaURL = self.origMediaURL;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButtonTapped)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onDoneButtonTapped)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onCancelButtonTapped)];
+    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButtonTapped)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onDoneButtonTapped)];
     
     self.videoPlayer = [[MPMoviePlayerController alloc] initWithContentURL:self.origMediaURL];
     self.videoPlayer.scalingMode = MPMovieScalingModeAspectFill;
     self.videoPlayer.shouldAutoplay = YES;
+    self.videoPlayer.controlStyle = MPMovieControlStyleNone;
 //    self.videoPlayer.repeatMode = MPMovieRepeatModeOne;
     self.videoPlayer.allowsAirPlay = NO;
     self.videoPlayer.fullscreen = NO;
@@ -167,6 +216,7 @@
     [self.videoPlayer play];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - TOOLBAR_HEIGHT, SCREEN_WIDTH, 60)];
+    toolbar.barStyle = UIBarStyleBlackTranslucent;
     toolbar.translucent = YES;
 
     UIImage *image = [UIImage imageNamed:@"SelectSound.png"];
@@ -213,6 +263,9 @@
         self.view.userInteractionEnabled = YES;
         self.navigationItem.rightBarButtonItem.enabled = YES;
         self.navigationItem.leftBarButtonItem.enabled = YES;
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButtonTapped)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onDoneButtonTapped)];
     } else if (self.view.userInteractionEnabled == YES) {
         [self.activityIndicator startAnimating];
         self.view.userInteractionEnabled = NO;
@@ -296,5 +349,20 @@
 -(void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Alert view delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        Debug(@"Buying %@...", self.product.productIdentifier);
+        [[WeiChatIAPHelper sharedInstance] buyProduct:self.product];
+    } else if (buttonIndex == 2) {
+        Debug(@"Restoring purchased IAP...");
+        [[WeiChatIAPHelper sharedInstance] restoreCompletedTransactions];
+    } else {
+//        [self navigateBack];
+    }
+}
+
 
 @end
