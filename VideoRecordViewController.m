@@ -12,6 +12,7 @@
 #import "WXApi.h"
 #import "VideoSoundTrackViewController.h"
 #import "WeiChatIAPHelper.h"
+#import "WeiImagePickerController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -32,8 +33,8 @@
 #define VIDEO_THUMBNAIL_SIZE_SMALL  67
 #define VIDEO_THUMBNAIL_SIZE_BIG    93
 #define PLAY_THUMBNAIL_RECT         CGRectMake(20, 20, PLAY_THUMBNAIL_SIZE, PLAY_THUMBNAIL_SIZE)
-#define VIDEO_THUMBNAIL_INIT_RECT   CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_BIG) / 2, 160, VIDEO_THUMBNAIL_SIZE_BIG, VIDEO_THUMBNAIL_SIZE_BIG)
-#define VIDEO_THUMBNAIL_AFTER_RECT  CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_SMALL) / 2, HEAD_VIEW_HEIGHT + 70, VIDEO_THUMBNAIL_SIZE_SMALL, VIDEO_THUMBNAIL_SIZE_SMALL)
+#define VIDEO_THUMBNAIL_INIT_RECT   CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_BIG) / 2, (IS_IOS7_AND_UP ? 220 : 160), VIDEO_THUMBNAIL_SIZE_BIG, VIDEO_THUMBNAIL_SIZE_BIG)
+#define VIDEO_THUMBNAIL_AFTER_RECT  CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_SMALL) / 2, HEAD_VIEW_HEIGHT + 70 + (IS_IOS7_AND_UP ? 60 : 0), VIDEO_THUMBNAIL_SIZE_SMALL, VIDEO_THUMBNAIL_SIZE_SMALL)
 #define GALLERY_BUTTON_INIT_RECT    CGRectMake(SCREEN_WIDTH - 70, SCREEN_HEIGHT - 70, 48, 48)
 #define GALLERY_BUTTON_AFTER_RECT   CGRectMake(SCREEN_WIDTH - 65, SCREEN_HEIGHT - 220, 55, 55)
 
@@ -46,7 +47,7 @@
 
 #define VIDEO_MAX_DURATION_FREE     10  //seconds
 #define VIDEO_MAX_DURATION          30  //seconds
-#define ANIMATE_TO_POST_DURATION    0.75
+#define ANIMATE_TO_POST_DURATION    0.6
 #define ANIMATE_TO_REC_DURATION     0.4
 #define SWITCH_TO_AUDIO_SEGUE       @"SwitchToAudio"
 #define SET_VIDEO_SOUND_SEGUE       @"SetVideoSoundTrack"
@@ -343,10 +344,12 @@
         UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, NAV_BAR_HEIGHT)];
         navBar.tintColor = [UIColor clearColor];
         navBar.translucent = YES;
-        const float colorMask[6] = {222, 255, 222, 255, 222, 255};
-        UIImage *img = [[UIImage alloc] init];
-        UIImage *maskedImage = [UIImage imageWithCGImage: CGImageCreateWithMaskingColors(img.CGImage, colorMask)];
-        [navBar setBackgroundImage:maskedImage forBarMetrics:UIBarMetricsDefault];
+        
+        [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//        const float colorMask[6] = {222, 255, 222, 255, 222, 255};
+//        UIImage *img = [[UIImage alloc] init];
+//        UIImage *maskedImage = [UIImage imageWithCGImage: CGImageCreateWithMaskingColors(img.CGImage, colorMask)];
+//        [navBar setBackgroundImage:maskedImage forBarMetrics:UIBarMetricsDefault];
         [navBar setShadowImage: [[UIImage alloc] init]];
         
         self.navItem = [[UINavigationItem alloc] init];
@@ -368,7 +371,7 @@
         
         
         // Video recorder
-        self.recorder = [[UIImagePickerController alloc] init];
+        self.recorder = [[WeiImagePickerController alloc] init];
         self.recorder.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.recorder.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
         self.recorder.delegate = self;
@@ -376,8 +379,16 @@
         self.recorder.showsCameraControls = NO;
         self.recorder.navigationBarHidden = YES;
         self.recorder.toolbarHidden = YES;
-        self.recorder.wantsFullScreenLayout = NO;
+        self.recorder.wantsFullScreenLayout = YES;
         self.recorder.cameraOverlayView = self.overlay;
+        
+        if (IS_IOS7_AND_UP) {
+            CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+            float cameraAspectRatio = 4.0 / 3.0;
+            float imageWidth = floorf(screenSize.width * cameraAspectRatio);
+            float scale = ceilf((screenSize.height / imageWidth) * 10.0) / 10.0;
+            self.recorder.cameraViewTransform = CGAffineTransformMakeScale(scale, scale);
+        }
         
         // Video picker from photo gallery
         self.picker = [[UIImagePickerController alloc] init];
@@ -1126,7 +1137,7 @@
 
 - (void)animateToPost {
     [UIView animateWithDuration:ANIMATE_TO_POST_DURATION
-                          delay: 0.5f
+                          delay: 0.3f
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.playButton.frame = PLAY_THUMBNAIL_RECT;
@@ -1139,20 +1150,20 @@
                          //                             self.headView.backgroundColor = [UIColor whiteColor];
                          //                             self.lineView.alpha = 0.1f;
                          
-                         self.headView.alpha = 1.0;
+                         self.headView.alpha = 1.0f;
 //                         self.semiCoverView.alpha = 0.5;
                          
                          self.videoButton.transform = CGAffineTransformRotate(self.videoButton.transform, - M_PI);
                      }
                      completion:^ (BOOL finished) {
-                         if (finished) {
+//                         if (finished) {
 //                             [self.videoButton setImage:[UIImage imageNamed:CAMCORDER_CLOSED_IMG_NAME] forState:UIControlStateNormal];
                              self.contentDescription.hidden = NO;
                              self.geoButton.hidden = NO;
                              
                              [self.playButton.layer addSublayer:self.playLayer];
                              [self.contentDescription becomeFirstResponder];
-                         }
+//                         }
                      }
      ];
 }

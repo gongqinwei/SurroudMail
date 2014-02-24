@@ -18,8 +18,8 @@
 #define LANGUAGE_OFFSET                     37
 #define AD_BANNER_ADJUST_THRESHOLD          400
 
-#define HEAD_VIEW_HEIGHT                    225
-#define HEAD_VIEW_RECT                      CGRectMake(3, 3, SCREEN_WIDTH - 6, HEAD_VIEW_HEIGHT)
+#define HEAD_VIEW_HEIGHT                    (IS_IPHONE_5 ? 225 : 140)
+#define HEAD_VIEW_RECT                      CGRectMake(3, 3 + (IS_IOS7_AND_UP ? STATUS_NAV_BAR_HEIGHT : 0), SCREEN_WIDTH - 6, HEAD_VIEW_HEIGHT)
 #define HEAD_VIEW_HIDDEN_RECT               CGRectMake(3, -HEAD_VIEW_HEIGHT - 10, SCREEN_WIDTH - 6, HEAD_VIEW_HEIGHT)
 #define SEMI_COVER_VIEW_RECT                CGRectMake(3, HEAD_VIEW_HEIGHT, SCREEN_WIDTH - 6, SCREEN_HEIGHT - HEAD_VIEW_HEIGHT)
 

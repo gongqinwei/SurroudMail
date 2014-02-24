@@ -12,7 +12,10 @@
 #import "Constants.h"
 #import "Util.h"
 
-#define TOOLBAR_HEIGHT          120
+#define TOOLBAR_ADJUST              120
+#define VIDEO_PLAYER_RECT           CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (IS_IOS7_AND_UP ? 0 : TOOLBAR_HEIGHT))
+#define TOOLBAR_RECT                CGRectMake(0, SCREEN_HEIGHT - (IS_IOS7_AND_UP ? TOOLBAR_HEIGHT+10 : TOOLBAR_ADJUST), SCREEN_WIDTH, 60)
+#define ACTIVITY_INDICATOR_RECT     180
 
 @interface VideoSoundTrackViewController () <MPMediaPickerControllerDelegate>
 
@@ -213,13 +216,18 @@
 //    self.videoPlayer.repeatMode = MPMovieRepeatModeOne;
     self.videoPlayer.allowsAirPlay = NO;
     self.videoPlayer.fullscreen = NO;
-    self.videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - TOOLBAR_HEIGHT);
+    self.videoPlayer.view.frame = VIDEO_PLAYER_RECT;
     [self.view addSubview:self.videoPlayer.view];
     [self.videoPlayer play];
     
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - TOOLBAR_HEIGHT, SCREEN_WIDTH, 60)];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:TOOLBAR_RECT];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
     toolbar.translucent = YES;
+    
+//    if (IS_IOS7_AND_UP) {
+        [toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        [toolbar setShadowImage:[UIImage new] forToolbarPosition:UIToolbarPositionAny];
+//    }
 
     UIImage *image = [UIImage imageNamed:@"SelectSound.png"];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -248,7 +256,7 @@
     [self.view addSubview:toolbar];
     
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.activityIndicator.frame = CGRectMake((SCREEN_WIDTH - self.activityIndicator.bounds.size.width) / 2, 180, self.activityIndicator.bounds.size.width, self.activityIndicator.bounds.size.height);
+    self.activityIndicator.frame = CGRectMake((SCREEN_WIDTH - self.activityIndicator.bounds.size.width) / 2, ACTIVITY_INDICATOR_RECT, self.activityIndicator.bounds.size.width, self.activityIndicator.bounds.size.height);
     self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator stopAnimating];
     [self.view addSubview:self.activityIndicator];

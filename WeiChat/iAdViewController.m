@@ -18,7 +18,7 @@
 
 #define UPLOAD_PROGRESS_OVERLAY_WIDTH                   200
 #define UPLOAD_PROGRESS_OVERLAY_HEIGHT                  100
-#define UPLOAD_PROGRESS_OVERLAY_Y                       85
+#define UPLOAD_PROGRESS_OVERLAY_Y                       (IS_IOS7_AND_UP ? 85 + 54 : 85)
 #define UPLOAD_PROGRESS_OVERLAY_SHRINK_RECT             CGRectMake(SCREEN_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 0.5, 1, 1)
 #define UPLOAD_PROGRESS_OVERLAY_RECT                    CGRectMake(SCREEN_WIDTH/2 - UPLOAD_PROGRESS_OVERLAY_WIDTH/2, UPLOAD_PROGRESS_OVERLAY_Y, UPLOAD_PROGRESS_OVERLAY_WIDTH, UPLOAD_PROGRESS_OVERLAY_HEIGHT)
 
@@ -37,11 +37,11 @@
 
 #define UPLOAD_PROGRESS_OVERLAY_ANIMATION_DURATION      0.3
 
-#define COPYRIGHT_RECT                                  CGRectMake(0, SCREEN_HEIGHT - 90, SCREEN_WIDTH, 15)
+#define COPYRIGHT_RECT                                  CGRectMake(0, SCREEN_HEIGHT - (IS_IOS7_AND_UP ? 30 : 90), SCREEN_WIDTH, 15)
 
-#define GEO_BUTTON_RECT                                 CGRectMake(32, 182, 23, 32)
-#define GEO_LABEL_RECT                                  CGRectMake(60, 195, 249, 21)
-#define DESCRIPTION_TEXT_AREA_RECT                      CGRectMake(80, 10, 230, 170)
+#define GEO_BUTTON_RECT                                 CGRectMake(22, (IS_IPHONE_5 ? 182 : 107), 23, 32)
+#define GEO_LABEL_RECT                                  CGRectMake(50, (IS_IPHONE_5 ? 195 : 120), 260, 21)
+#define DESCRIPTION_TEXT_AREA_RECT                      CGRectMake(80, 10, 230, (IS_IPHONE_5 ? 170 : 105))
 
 #define POST_BG_COLOR                                   0xF7FEB6
 #define VIEW_BG_COLOR                                   0xD4F2FF
@@ -186,19 +186,19 @@
 }
 
 - (void)raiseADBanner {
-    if ([[[NSLocale currentLocale] localeIdentifier] hasPrefix:CHINESE]) {
-        [self offsetADBannerBy:-AD_BANNER_ANIMATION_DISTANCE_CN];
-    } else {
+//    if ([[[NSLocale currentLocale] localeIdentifier] hasPrefix:CHINESE]) {
+//        [self offsetADBannerBy:-AD_BANNER_ANIMATION_DISTANCE_CN];
+//    } else {
         [self offsetADBannerBy:-AD_BANNER_ANIMATION_DISTANCE_EN];
-    }
+//    }
 }
 
 - (void)lowerADBanner {
-    if ([[[NSLocale currentLocale] localeIdentifier] hasPrefix:CHINESE]) {
-        [self offsetADBannerBy:AD_BANNER_ANIMATION_DISTANCE_CN];
-    } else {
+//    if ([[[NSLocale currentLocale] localeIdentifier] hasPrefix:CHINESE]) {
+//        [self offsetADBannerBy:AD_BANNER_ANIMATION_DISTANCE_CN];
+//    } else {
         [self offsetADBannerBy:AD_BANNER_ANIMATION_DISTANCE_EN];
-    }
+//    }
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner {
@@ -378,7 +378,12 @@
     
     // iAd
     self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-    self.adBanner.frame = CGRectOffset(self.adBanner.frame, 0, SCREEN_HEIGHT - self.adBanner.frame.size.height - self.navigationController.navigationBar.frame.size.height - AD_BANNER_ADJUST_HEIGHT);
+    if (IS_IOS7_AND_UP) {
+        self.adBanner.frame = CGRectOffset(self.adBanner.frame, 0, SCREEN_HEIGHT - self.adBanner.frame.size.height);
+    } else {
+        self.adBanner.frame = CGRectOffset(self.adBanner.frame, 0, SCREEN_HEIGHT - self.adBanner.frame.size.height - self.navigationController.navigationBar.frame.size.height - AD_BANNER_ADJUST_HEIGHT);
+    }
+
     [self.adBanner setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.view addSubview:self.adBanner];
     self.adBanner.delegate = self;

@@ -28,12 +28,15 @@
 #define IAP_PRODUCT_ID      @"com.weichat.WeiChat.SoundTrackEditor"
 #define FREE_TRIAL          3
 
+#define IOS7_Y_ADJUSTMENT   20
+
 // Version
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+#define IS_IOS7_AND_UP                              SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
 
 // Color
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -43,8 +46,13 @@
 #define APP_BUTTON_BLUE_COLOR  [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
 
 // Dimensions
+#define IPHONE4_SCREEN_HEIGHT   480
+#define IPHONE5_SCREEN_HEIGHT   568
 #define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT           [UIScreen mainScreen].bounds.size.height
+#define IS_IPHONE_5             (SCREEN_HEIGHT == IPHONE5_SCREEN_HEIGHT)
+#define STATUS_NAV_BAR_HEIGHT   64
+#define TOOLBAR_HEIGHT          49
 
 // Fonts
 #define APP_BOLD_FONT          @"HelveticaNeue-BoldMT" //@"Arial-BoldMT"
