@@ -18,21 +18,21 @@
 
 #define UPLOAD_PROGRESS_OVERLAY_WIDTH                   200
 #define UPLOAD_PROGRESS_OVERLAY_HEIGHT                  100
+#define UPLOAD_PROGRESS_OVERLAY_X                       SCREEN_WIDTH/2 - UPLOAD_PROGRESS_OVERLAY_WIDTH/2
 #define UPLOAD_PROGRESS_OVERLAY_Y                       (IS_IOS7_AND_UP ? 85 + 54 : 85)
 #define UPLOAD_PROGRESS_OVERLAY_SHRINK_RECT             CGRectMake(SCREEN_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 0.5, 1, 1)
-#define UPLOAD_PROGRESS_OVERLAY_RECT                    CGRectMake(SCREEN_WIDTH/2 - UPLOAD_PROGRESS_OVERLAY_WIDTH/2, UPLOAD_PROGRESS_OVERLAY_Y, UPLOAD_PROGRESS_OVERLAY_WIDTH, UPLOAD_PROGRESS_OVERLAY_HEIGHT)
+#define UPLOAD_PROGRESS_OVERLAY_RECT                    CGRectMake(UPLOAD_PROGRESS_OVERLAY_X, UPLOAD_PROGRESS_OVERLAY_Y, UPLOAD_PROGRESS_OVERLAY_WIDTH, UPLOAD_PROGRESS_OVERLAY_HEIGHT)
 
 #define UPLOAD_PROGRESS_BAR_MARGIN_SIDE                 20
-#define UPLOAD_PROGRESS_BAR_RECT                        CGRectMake(UPLOAD_PROGRESS_BAR_MARGIN_SIDE, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 3, UPLOAD_PROGRESS_OVERLAY_WIDTH - UPLOAD_PROGRESS_BAR_MARGIN_SIDE*2, 1)
-//#define UPLOAD_PROGRESS_BAR_SHRINK_RECT                 CGRectMake(SCREEN_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 3, 1, 1)
+#define UPLOAD_PROGRESS_BAR_RECT                        CGRectMake(UPLOAD_PROGRESS_OVERLAY_X + UPLOAD_PROGRESS_BAR_MARGIN_SIDE, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 3, UPLOAD_PROGRESS_OVERLAY_WIDTH - UPLOAD_PROGRESS_BAR_MARGIN_SIDE*2, 1)
 
 #define UPLOAD_PROGRESS_LABEL_WIDTH                     60
 #define UPLOAD_PROGRESS_LABEL_HEIGHT                    20
-#define UPLOAD_PROGRESS_LABEL_RECT                      CGRectMake(UPLOAD_PROGRESS_OVERLAY_WIDTH/2 - UPLOAD_PROGRESS_LABEL_WIDTH/2, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 + 14, UPLOAD_PROGRESS_LABEL_WIDTH, UPLOAD_PROGRESS_LABEL_HEIGHT)
-#define UPLOAD_PROGRESS_LABEL_SHRINK_RECT               CGRectMake(SCREEN_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 + 7, 1, 1)
+#define UPLOAD_PROGRESS_LABEL_RECT                      CGRectMake(SCREEN_WIDTH/2 - UPLOAD_PROGRESS_LABEL_WIDTH/2, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 + 14, UPLOAD_PROGRESS_LABEL_WIDTH, UPLOAD_PROGRESS_LABEL_HEIGHT)
+#define UPLOAD_PROGRESS_LABEL_SHRINK_RECT               CGRectMake(SCREEN_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 + 7, 1, 1)
 
-#define UPLOAD_PROGRESS_TITLE_RECT                      CGRectMake(UPLOAD_PROGRESS_OVERLAY_WIDTH/2 - 50, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 36, 100, UPLOAD_PROGRESS_LABEL_HEIGHT)
-#define UPLOAD_PROGRESS_TITLE_SHRINK_RECT               CGRectMake(UPLOAD_PROGRESS_OVERLAY_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 18, 1, 1)
+#define UPLOAD_PROGRESS_TITLE_RECT                      CGRectMake(SCREEN_WIDTH/2 - 50, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 36, 100, UPLOAD_PROGRESS_LABEL_HEIGHT)
+#define UPLOAD_PROGRESS_TITLE_SHRINK_RECT               CGRectMake(UPLOAD_PROGRESS_OVERLAY_WIDTH/2 - 0.5, UPLOAD_PROGRESS_OVERLAY_Y + UPLOAD_PROGRESS_OVERLAY_HEIGHT/2 - 18, 1, 1)
 #define UPLOAD_PROGRESS_TITLE                           NSLocalizedString(@"Uploading...", nil)
 
 #define UPLOAD_PROGRESS_OVERLAY_ANIMATION_DURATION      0.3
@@ -308,29 +308,28 @@
     self.uploadProgressOverlay.layer.cornerRadius = 3;
     self.uploadProgressOverlay.layer.masksToBounds = YES;
     self.uploadProgressOverlay.hidden = YES;
+    [self.view addSubview:self.uploadProgressOverlay];
     
     self.uploadProgressTitle = [[UILabel alloc] initWithFrame:UPLOAD_PROGRESS_TITLE_SHRINK_RECT];
     self.uploadProgressTitle.text = UPLOAD_PROGRESS_TITLE;
-    self.uploadProgressTitle.font = [UIFont fontWithName:APP_BOLD_FONT size:13];
+    self.uploadProgressTitle.font = [UIFont fontWithName:APP_BOLD_FONT size:14];
     self.uploadProgressTitle.backgroundColor = [UIColor clearColor];
     self.uploadProgressTitle.textColor = [UIColor whiteColor];
     self.uploadProgressTitle.textAlignment = NSTextAlignmentCenter;
-    [self.uploadProgressOverlay addSubview:self.uploadProgressTitle];
+    [self.view addSubview:self.uploadProgressTitle];
     
     self.uploadProgress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     self.uploadProgress.frame = UPLOAD_PROGRESS_BAR_RECT;
     self.uploadProgress.hidden = YES;
     self.uploadProgress.progress = 0.0f;
-    [self.uploadProgressOverlay addSubview:self.uploadProgress];
+    [self.view addSubview:self.uploadProgress];
     
     self.uploadProgressLabel = [[UILabel alloc] initWithFrame:UPLOAD_PROGRESS_LABEL_SHRINK_RECT];
-    self.uploadProgressLabel.font = [UIFont fontWithName:APP_FONT size:13];
+    self.uploadProgressLabel.font = [UIFont fontWithName:APP_BOLD_FONT size:14];
     self.uploadProgressLabel.backgroundColor = [UIColor clearColor];
     self.uploadProgressLabel.textColor = [UIColor whiteColor];
     self.uploadProgressLabel.textAlignment = NSTextAlignmentCenter;
-    [self.uploadProgressOverlay addSubview:self.uploadProgressLabel];
-    
-    [self.view addSubview:self.uploadProgressOverlay];
+    [self.view addSubview:self.uploadProgressLabel];
     
     // Recording progress
     self.recordingProgress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
