@@ -38,7 +38,7 @@
     [WeiChatIAPHelper sharedInstance];
     
     // Weixin
-    if (![WXApi registerApp:@"wx68d5a54fe90b5ac3"]) {
+    if (![WXApi registerApp:kWeixinAppId]) {
         Error(@"Failed to register with Weixin");
     }
     

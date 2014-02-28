@@ -54,6 +54,7 @@ typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError
 @property (nonatomic, strong) NSURL *mediaURL;
 @property (nonatomic, strong) NSURL *referenceURL;
 @property (nonatomic, strong) NSString *mediaLink;      // video/audio link for share
+@property (nonatomic, strong) NSURL *streamableURL;     // stream url
 @property (nonatomic, strong) UILongPressGestureRecognizer *videoButtonPress;
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, strong) CLLocationManager *locationManager;

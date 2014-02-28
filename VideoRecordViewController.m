@@ -119,7 +119,8 @@
     Debug(@"------- media link: %@", self.mediaLink);
     
 //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropboxusercontent.com/s/83blvpg0zxmic47/IMG_0330.MOV"];
-    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
+//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
+    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
     
     if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
         message.description = self.contentDescription.text;
@@ -363,7 +364,9 @@
         
         // Recording timer and progress
         self.recordingProgress.frame = VIDEO_RECORDING_PROGRESS_BAR_RECT;
-        self.recordingProgress.progressImage = [UIImage imageNamed:@"Progress.png"];
+        if (!IS_IOS7_AND_UP) {
+            self.recordingProgress.progressImage = [UIImage imageNamed:@"ProgressColor.png"];
+        }
         [self.overlay addSubview:self.recordingProgress];
         
         self.recordingProgressLabel.frame = VIDEO_RECORDING_PROGRESS_LABEL_RECT;

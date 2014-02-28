@@ -296,6 +296,7 @@
     [self.headView addSubview:self.geoButton];
     
     self.geoLabel = [[UILabel alloc] initWithFrame:GEO_LABEL_RECT];
+    self.geoLabel.textColor = [UIColor darkGrayColor];
     self.geoLabel.backgroundColor = [UIColor clearColor];
     self.geoLabel.font = [UIFont fontWithName:APP_FONT size:11];
     self.geoLabel.hidden = YES;
@@ -433,6 +434,18 @@
 
 #pragma mark - Text View Delegate
 
+//- (BOOL)textView:(UITextView *)aTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    // "Length of existing text" - "Length of replaced text" + "Length of replacement text"
+//    NSInteger newTextLength = [aTextView.text length] - range.length + [text length];
+//    
+//    if (newTextLength > 160) {
+//        // don't allow change
+//        return NO;
+//    }
+//    countLabel.text = [NSString stringWithFormat:@"%i", newTextLength];
+//    return YES;
+//}
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     if (self.contentDescription.textColor == [UIColor lightGrayColor]) {
         self.contentDescription.text = @"";
@@ -452,6 +465,11 @@
     } else {
         [self addPlaceHolderText];
     }
+    
+    NSUInteger length;
+    length = [textView.text length];
+    
+    Debug(@"======== %@", [NSString stringWithFormat:@"%lu", (unsigned long)length]);
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -533,7 +551,7 @@
      [restClient loadAccountInfo];
      */
     
-    Debug(@"Vdisk Session Linked Success");
+    Debug(@"Vdisk Session Linked Success with access token: %@, and refresh token: %@", session.accessToken, session.refreshToken);
     
     [self validateVdiskSessionOrUpload];
 }
@@ -541,6 +559,7 @@
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
+    [session refreshLink];
 }
 
 // Log out successfully
@@ -550,6 +569,8 @@
 
 - (void)sessionNotLink:(VdiskSession *)session {
     Debug(@"Vdisk Session Not Link");
+    
+    [session refreshLink];
 }
 
 - (void)sessionExpired:(VdiskSession *)session {
@@ -630,8 +651,11 @@
 - (void)restClient:(VdiskRestClient *)restClient loadedSharableLink:(NSString *)link forFile:(NSString *)path {
     self.mediaLink = link;
     
+    NSString *videoRef = [self.mediaLink lastPathComponent];
+    
     if (self.shareAction == kWeixinMoments || self.shareAction == kWeixinFriends) {
-        [self publishContentToWeixin];
+        // get stream url
+        [self.vdiskRestClient loadStreamableURLFromRef:videoRef];
     } else if (self.shareAction == kSinaWeibo) {
         [self publishContentToSinaWeibo];
     }
@@ -641,6 +665,20 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     
     [alertView show];
+}
+
+- (void)restClient:(VdiskRestClient *)client loadStreamableURLFromRefFailedWithError:(NSError *)error {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%d\n%@\%@\n----------------", error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    
+    [alertView show];
+}
+
+- (void)restClient:(VdiskRestClient *)client loadedStreamableURL:(NSURL *)url fromRef:(NSString *)copyRef {
+    Debug(@"==-=-=-=-=-=-=-====== Streamable URL: %@", url);
+    
+    self.streamableURL = url;
+    
+    [self publishContentToWeixin];
 }
 
 

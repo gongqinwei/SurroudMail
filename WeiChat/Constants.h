@@ -42,28 +42,33 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 
-#define APP_SYSTEM_BLUE_COLOR  [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0]
-#define APP_BUTTON_BLUE_COLOR  [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
+#define APP_SYSTEM_BLUE_COLOR           [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0]
+#define APP_BUTTON_BLUE_COLOR           [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
 
 // Dimensions
-#define IPHONE4_SCREEN_HEIGHT   480
-#define IPHONE5_SCREEN_HEIGHT   568
-#define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT           [UIScreen mainScreen].bounds.size.height
-#define IS_IPHONE_5             (SCREEN_HEIGHT == IPHONE5_SCREEN_HEIGHT)
-#define STATUS_NAV_BAR_HEIGHT   64
-#define TOOLBAR_HEIGHT          49
+#define IPHONE4_SCREEN_HEIGHT           480
+#define IPHONE5_SCREEN_HEIGHT           568
+#define SCREEN_WIDTH                    [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT                   [UIScreen mainScreen].bounds.size.height
+#define IS_IPHONE_5                     (SCREEN_HEIGHT == IPHONE5_SCREEN_HEIGHT)
+#define STATUS_NAV_BAR_HEIGHT           64
+#define TOOLBAR_HEIGHT                  49
 
 // Fonts
-#define APP_BOLD_FONT          @"HelveticaNeue-BoldMT" //@"Arial-BoldMT"
-#define APP_FONT               @"HelveticaNeue" //@"Arial"
-#define APP_LABEL_BLUE_COLOR   [UIColor colorWithRed:81.0/255.0 green:102.0/255.0 blue:145.0/255.0 alpha:1.0]
-#define APP_SYSTEM_BLUE_COLOR  [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0]
-#define APP_BUTTON_BLUE_COLOR  [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
+#define APP_BOLD_FONT                   @"HelveticaNeue-BoldMT" //@"Arial-BoldMT"
+#define APP_FONT                        @"HelveticaNeue" //@"Arial"
+#define APP_LABEL_BLUE_COLOR            [UIColor colorWithRed:81.0/255.0 green:102.0/255.0 blue:145.0/255.0 alpha:1.0]
+#define APP_SYSTEM_BLUE_COLOR           [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0]
+#define APP_BUTTON_BLUE_COLOR           [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
+
+// Weixin
+#ifndef kWeixinAppId
+#define kWeixinAppId                    @"wx68d5a54fe90b5ac3"
+#endif
 
 // Vdisk
 #ifndef kVdiskSDKDemoAppKey
-#define kVdiskSDKDemoAppKey    @"4282666910"
+#define kVdiskSDKDemoAppKey             @"4282666910"
 #endif
 
 #ifndef kVdiskSDKDemoAppRedirectURI
@@ -71,27 +76,27 @@
 #endif
 
 #ifndef kVdiskSDKDemoAppSecret
-#define kVdiskSDKDemoAppSecret     @"153c771e60768808141df52727218293"
+#define kVdiskSDKDemoAppSecret          @"153c771e60768808141df52727218293"
 #endif
 
 #ifndef kWeiboAppKey
-#define kWeiboAppKey    @"1695043515"
+#define kWeiboAppKey                    @"1695043515"
 #endif
 
 #ifndef kWeiboAppSecret
-#define kWeiboAppSecret     @"f682e337fe88b4bd77b6944451ac87d4"
+#define kWeiboAppSecret                 @"f682e337fe88b4bd77b6944451ac87d4"
 #endif
 
 #ifndef kWeiboAppRedirectURI
-#define kWeiboAppRedirectURI     @"https://api.weibo.com/oauth2/default.html"
+#define kWeiboAppRedirectURI            @"https://api.weibo.com/oauth2/default.html"
 #endif
 
 // Size
-#define NAV_BAR_HEIGHT          44
+#define NAV_BAR_HEIGHT                  44
 
 
 // APIs
-#define VDISK_GET_FILE          @"https://api.weipan.cn/2/files/"
+#define VDISK_GET_FILE                  @"https://api.weipan.cn/2/files/"
 
 
 // API Handler typedef

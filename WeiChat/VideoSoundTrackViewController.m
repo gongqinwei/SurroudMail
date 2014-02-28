@@ -16,11 +16,14 @@
 #define VIDEO_PLAYER_RECT           CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (IS_IOS7_AND_UP ? 0 : TOOLBAR_HEIGHT))
 #define TOOLBAR_RECT                CGRectMake(0, SCREEN_HEIGHT - (IS_IOS7_AND_UP ? TOOLBAR_HEIGHT+10 : TOOLBAR_ADJUST), SCREEN_WIDTH, 60)
 #define ACTIVITY_INDICATOR_RECT     180
+#define PAUSE_IMAGE_SIZE            64
+#define PAUSE_IMAGE_RECT            CGRectMake((SCREEN_WIDTH - PAUSE_IMAGE_SIZE) / 2, (IS_IOS7_AND_UP ? 240 : 180), PAUSE_IMAGE_SIZE, PAUSE_IMAGE_SIZE)
 
 @interface VideoSoundTrackViewController () <MPMediaPickerControllerDelegate>
 
 @property (nonatomic, strong) MPMoviePlayerController *videoPlayer;
 @property (nonatomic, strong) MPMediaPickerController *soundTrackPicker;
+@property (nonatomic, strong) UITapGestureRecognizer *videoPlayerTap;
 
 @property (strong, nonatomic) UIBarButtonItem *selectSoundButton;
 @property (nonatomic, strong) UILabel *soundStartTimeLabel;
@@ -33,12 +36,23 @@
 @property (nonatomic, strong) NSString *compositionPath;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIImageView *pauseImageView;
 
 @property (nonatomic, strong) SKProduct *product;
 
 @end
 
 @implementation VideoSoundTrackViewController
+
+- (void)onVideoPlayerTapped {
+    if (self.videoPlayer.playbackState != MPMoviePlaybackStatePlaying) {
+        [self.videoPlayer play];
+        self.pauseImageView.hidden = YES;
+    } else {
+        [self.videoPlayer pause];
+        self.pauseImageView.hidden = NO;
+    }
+}
 
 - (void)onSelectSoundButtonTapped {
     [self.videoPlayer pause];
@@ -213,12 +227,15 @@
     self.videoPlayer.scalingMode = MPMovieScalingModeAspectFill;
     self.videoPlayer.shouldAutoplay = YES;
     self.videoPlayer.controlStyle = MPMovieControlStyleNone;
-//    self.videoPlayer.repeatMode = MPMovieRepeatModeOne;
+    self.videoPlayer.repeatMode = MPMovieRepeatModeOne;
     self.videoPlayer.allowsAirPlay = NO;
     self.videoPlayer.fullscreen = NO;
     self.videoPlayer.view.frame = VIDEO_PLAYER_RECT;
     [self.view addSubview:self.videoPlayer.view];
     [self.videoPlayer play];
+    
+    self.videoPlayerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onVideoPlayerTapped)];
+    [self.videoPlayer.view.subviews[0] addGestureRecognizer:self.videoPlayerTap];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:TOOLBAR_RECT];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
@@ -260,6 +277,11 @@
     self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator stopAnimating];
     [self.view addSubview:self.activityIndicator];
+    
+    self.pauseImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pause.png"]];
+    self.pauseImageView.frame = PAUSE_IMAGE_RECT;
+    self.pauseImageView.hidden = YES;
+    [self.view addSubview:self.pauseImageView];
 }
 
 - (void)didReceiveMemoryWarning

@@ -25,7 +25,8 @@
 		0EF61A4318B735B80033FE59 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A4218B735B80033FE59 /* success.png */; };
 		0EF61A4618B8801A0033FE59 /* WeiImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF61A4518B8801A0033FE59 /* WeiImagePickerController.m */; };
 		0EF61A4818B9E0C40033FE59 /* iOS7NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A4718B9E0C40033FE59 /* iOS7NavBarBackground.png */; };
-		0EF61A4A18BB286A0033FE59 /* Progress.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A4918BB286A0033FE59 /* Progress.png */; };
+		0EF61A5218BC73D10033FE59 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A5118BC73D10033FE59 /* Pause.png */; };
+		0EF61A5618BC781D0033FE59 /* ProgressColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A5518BC781D0033FE59 /* ProgressColor.png */; };
 		7E023019185E802600BC0B37 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023018185E802600BC0B37 /* AssetsLibrary.framework */; };
 		7E02301B185E803800BC0B37 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301A185E803800BC0B37 /* AVFoundation.framework */; };
 		7E02301D185E804700BC0B37 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E02301C185E804700BC0B37 /* CoreMedia.framework */; };
@@ -120,7 +121,8 @@
 		0EF61A4418B8801A0033FE59 /* WeiImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiImagePickerController.h; sourceTree = "<group>"; };
 		0EF61A4518B8801A0033FE59 /* WeiImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiImagePickerController.m; sourceTree = "<group>"; };
 		0EF61A4718B9E0C40033FE59 /* iOS7NavBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iOS7NavBarBackground.png; sourceTree = "<group>"; };
-		0EF61A4918BB286A0033FE59 /* Progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Progress.png; sourceTree = "<group>"; };
+		0EF61A5118BC73D10033FE59 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
+		0EF61A5518BC781D0033FE59 /* ProgressColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProgressColor.png; sourceTree = "<group>"; };
 		7E023018185E802600BC0B37 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7E02301A185E803800BC0B37 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E02301C185E804700BC0B37 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -501,10 +503,11 @@
 				0EF61A4718B9E0C40033FE59 /* iOS7NavBarBackground.png */,
 				7EA9B6EE185ED38900438EA6 /* Mic.png */,
 				7EA9B6F9185EDF2000438EA6 /* MicBarButton.png */,
+				0EF61A5118BC73D10033FE59 /* Pause.png */,
 				7EA9B705185FB5F100438EA6 /* PhotoLibrary.png */,
 				7EDD3CD3186280EE006ABAA9 /* Play.png */,
 				7EBFF180187F368C0031504B /* PhotoAlbum.png */,
-				0EF61A4918BB286A0033FE59 /* Progress.png */,
+				0EF61A5518BC781D0033FE59 /* ProgressColor.png */,
 				7EA9B713185FD02700438EA6 /* Record.png */,
 				0E8EADB9189EEBDD004FA2DF /* SelectSound.png */,
 				7EBFF17C187F33E70031504B /* SinaWeibo.png */,
@@ -634,6 +637,7 @@
 				7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */,
 				7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */,
 				0E8EADB8189E1F59004FA2DF /* CancelSoundGrey.png in Resources */,
+				0EF61A5218BC73D10033FE59 /* Pause.png in Resources */,
 				0EF61A4318B735B80033FE59 /* success.png in Resources */,
 				7EF1F5F8187DCC990052FBA4 /* FlashOff.png in Resources */,
 				7EDD3CDC1862D2D5006ABAA9 /* GeoOff.png in Resources */,
@@ -642,7 +646,7 @@
 				7EA9B715185FD02700438EA6 /* Record.png in Resources */,
 				7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */,
 				7EA9B6FA185EDF2000438EA6 /* MicBarButton.png in Resources */,
-				0EF61A4A18BB286A0033FE59 /* Progress.png in Resources */,
+				0EF61A5618BC781D0033FE59 /* ProgressColor.png in Resources */,
 				0E8EADC018A377A7004FA2DF /* CamcorderClosed.png in Resources */,
 				7EBFF177187F301C0031504B /* WeixinMoments.png in Resources */,
 				7E1DF1C61859964B0009F0C3 /* Main_iPhone.storyboard in Resources */,
