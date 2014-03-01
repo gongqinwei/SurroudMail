@@ -58,6 +58,11 @@
 #define ABANDON_VIDEO_ALERT_TAG     1
 #define RETAKE_VIDEO_ALERT_TAG      2
 
+#define VIDEO_RECORDER_TUTORIAL     @"VideoRecorderTutorial"
+#define RECORDING_TUTORIAL_RECT     CGRectMake((SCREEN_WIDTH - 195) / 2, 150, 195, 100)
+#define PICKING_TUTORIAL_RECT       CGRectMake(SCREEN_WIDTH - 220, SCREEN_HEIGHT - 210, 140, 65)
+#define PICKING_ARROW_RECT          CGRectMake(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 150, 80, 80)
+
 
 @interface VideoRecordViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate, UIAlertViewDelegate, VideoSoundTrackDelegate>
 
@@ -67,6 +72,11 @@
 @property (nonatomic, strong) MPMoviePlayerViewController *player;
 @property (nonatomic, strong) UIVideoEditorController *editor;
 @property (nonatomic, strong) AVAssetImageGenerator *generator;
+
+@property (nonatomic, strong) UIControl *tutorialOverlay;
+@property (nonatomic, strong) UILabel *tutorialRecording;
+@property (nonatomic, strong) UILabel *tutorialPicking;
+@property (nonatomic, strong) UIImageView *tutorialPickingArrow;
 
 @property (nonatomic, strong) UIControl *overlay;
 @property (nonatomic, strong) UIButton *galleryButton;
@@ -447,7 +457,34 @@
      
         self.videoAssets = [NSMutableArray array];
         
+        // one time tutorial
+        BOOL tutorialValue = [[NSUserDefaults standardUserDefaults] boolForKey:VIDEO_RECORDER_TUTORIAL];
+        if (!tutorialValue) {
+            self.tutorialOverlay = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            [self.tutorialOverlay addTarget:self action:@selector(dismissTutorial) forControlEvents:UIControlEventTouchUpInside];
+            self.tutorialOverlay.opaque = NO;
+            self.tutorialOverlay.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+            [self.overlay addSubview:self.tutorialOverlay];
+            
+            self.tutorialRecording = [[UILabel alloc] initWithFrame:RECORDING_TUTORIAL_RECT];
+            [UIHelper initializeTutorialLabel:self.tutorialRecording text:@"Recording tutorial"];
+            [self.tutorialOverlay addSubview:self.tutorialRecording];
+        
+            self.tutorialPicking = [[UILabel alloc] initWithFrame:PICKING_TUTORIAL_RECT];
+            [UIHelper initializeTutorialLabel:self.tutorialPicking text:@"Picking tutorial"];
+            [self.tutorialOverlay addSubview:self.tutorialPicking];
+        
+            self.tutorialPickingArrow = [[UIImageView alloc] initWithFrame:PICKING_ARROW_RECT];
+            self.tutorialPickingArrow.image = [UIImage imageNamed:@"arrow_lower_right.png"];
+            [self.tutorialOverlay addSubview:self.tutorialPickingArrow];
+        
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:VIDEO_RECORDER_TUTORIAL];
+        }
     }
+}
+
+- (void)dismissTutorial {
+    [self.tutorialOverlay removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning

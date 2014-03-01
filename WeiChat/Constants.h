@@ -60,6 +60,7 @@
 #define APP_LABEL_BLUE_COLOR            [UIColor colorWithRed:81.0/255.0 green:102.0/255.0 blue:145.0/255.0 alpha:1.0]
 #define APP_SYSTEM_BLUE_COLOR           [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0]
 #define APP_BUTTON_BLUE_COLOR           [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
+#define TUTORIAL_FONT                   
 
 // Weixin
 #ifndef kWeixinAppId

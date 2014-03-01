@@ -41,3 +41,7 @@
 
 "Edit Sound Track" = "預覽並編輯音頻";
 "Pick sound track for video" = "選首歌替換視頻中的音頻";
+
+// Tutorials
+"Recording tutorial" = "按住屏幕任何位置拍攝；\n鬆開後可再按下繼續拍攝喔！";
+"Picking tutorial" = "從相簿選視頻";

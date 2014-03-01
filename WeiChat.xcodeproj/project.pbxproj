@@ -34,6 +34,14 @@
 		7E023021185E806800BC0B37 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023020185E806800BC0B37 /* MobileCoreServices.framework */; };
 		7E023023185E807400BC0B37 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E023022185E807400BC0B37 /* QuartzCore.framework */; };
 		7E023029185EAB4900BC0B37 /* VideoRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */; };
+		7E0BCD1818C1282C00FED4B3 /* TutorialVideoRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0BCD1718C1282C00FED4B3 /* TutorialVideoRecorderViewController.m */; };
+		7E0BCD1B18C1576B00FED4B3 /* arrow_lower_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0BCD1A18C1576B00FED4B3 /* arrow_lower_right.png */; };
+		7E0BCD1E18C1579200FED4B3 /* arrow_lower_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0BCD1D18C1579200FED4B3 /* arrow_lower_left.png */; };
+		7E0BCD2018C157A700FED4B3 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0BCD1F18C157A700FED4B3 /* arrow_down.png */; };
+		7E0BCD2318C157B500FED4B3 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0BCD2118C157B500FED4B3 /* arrow_right.png */; };
+		7E0BCD2418C157B500FED4B3 /* arrow_upper_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0BCD2218C157B500FED4B3 /* arrow_upper_left.png */; };
+		7E0BCD2618C157C100FED4B3 /* arrows_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E0BCD2518C157C100FED4B3 /* arrows_up.png */; };
+		7E0BCD2A18C1AE7300FED4B3 /* UIViewController+Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0BCD2918C1AE7300FED4B3 /* UIViewController+Tutorial.m */; };
 		7E1DF1B31859964B0009F0C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B21859964B0009F0C3 /* Foundation.framework */; };
 		7E1DF1B51859964B0009F0C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B41859964B0009F0C3 /* CoreGraphics.framework */; };
 		7E1DF1B71859964B0009F0C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B61859964B0009F0C3 /* UIKit.framework */; };
@@ -131,6 +139,16 @@
 		7E023022185E807400BC0B37 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7E023027185EAB4900BC0B37 /* VideoRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoRecordViewController.h; path = ../VideoRecordViewController.h; sourceTree = "<group>"; };
 		7E023028185EAB4900BC0B37 /* VideoRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoRecordViewController.m; path = ../VideoRecordViewController.m; sourceTree = "<group>"; };
+		7E0BCD1618C1282C00FED4B3 /* TutorialVideoRecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialVideoRecorderViewController.h; sourceTree = "<group>"; };
+		7E0BCD1718C1282C00FED4B3 /* TutorialVideoRecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialVideoRecorderViewController.m; sourceTree = "<group>"; };
+		7E0BCD1A18C1576B00FED4B3 /* arrow_lower_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_lower_right.png; sourceTree = "<group>"; };
+		7E0BCD1D18C1579200FED4B3 /* arrow_lower_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_lower_left.png; sourceTree = "<group>"; };
+		7E0BCD1F18C157A700FED4B3 /* arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down.png; sourceTree = "<group>"; };
+		7E0BCD2118C157B500FED4B3 /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right.png; sourceTree = "<group>"; };
+		7E0BCD2218C157B500FED4B3 /* arrow_upper_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_upper_left.png; sourceTree = "<group>"; };
+		7E0BCD2518C157C100FED4B3 /* arrows_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrows_up.png; sourceTree = "<group>"; };
+		7E0BCD2818C1AE7300FED4B3 /* UIViewController+Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Tutorial.h"; sourceTree = "<group>"; };
+		7E0BCD2918C1AE7300FED4B3 /* UIViewController+Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Tutorial.m"; sourceTree = "<group>"; };
 		7E1DF1AF1859964B0009F0C3 /* WeiChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeiChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1DF1B21859964B0009F0C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7E1DF1B41859964B0009F0C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -283,6 +301,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E0BCD1918C1283500FED4B3 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				7E0BCD1618C1282C00FED4B3 /* TutorialVideoRecorderViewController.h */,
+				7E0BCD1718C1282C00FED4B3 /* TutorialVideoRecorderViewController.m */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
+		7E0BCD1C18C1577F00FED4B3 /* Arrows */ = {
+			isa = PBXGroup;
+			children = (
+				7E0BCD1F18C157A700FED4B3 /* arrow_down.png */,
+				7E0BCD1D18C1579200FED4B3 /* arrow_lower_left.png */,
+				7E0BCD1A18C1576B00FED4B3 /* arrow_lower_right.png */,
+				7E0BCD2118C157B500FED4B3 /* arrow_right.png */,
+				7E0BCD2518C157C100FED4B3 /* arrows_up.png */,
+				7E0BCD2218C157B500FED4B3 /* arrow_upper_left.png */,
+			);
+			name = Arrows;
+			sourceTree = "<group>";
+		};
+		7E0BCD2718C1ADEE00FED4B3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7E0BCD2818C1AE7300FED4B3 /* UIViewController+Tutorial.h */,
+				7E0BCD2918C1AE7300FED4B3 /* UIViewController+Tutorial.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		7E1DF1A61859964B0009F0C3 = {
 			isa = PBXGroup;
 			children = (
@@ -329,8 +378,9 @@
 		7E1DF1B81859964B0009F0C3 /* WeiChat */ = {
 			isa = PBXGroup;
 			children = (
-				0E86969718975B11009E4E72 /* Localizable.strings */,
 				7E1DF1EA185997140009F0C3 /* Views */,
+				0E86969718975B11009E4E72 /* Localizable.strings */,
+				7E0BCD2718C1ADEE00FED4B3 /* Categories */,
 				7E1DF1EB1859973B0009F0C3 /* Controllers */,
 				7EDD3CB518613081006ABAA9 /* Utility */,
 				7EA9B6EA185ECF2800438EA6 /* Resources */,
@@ -396,6 +446,7 @@
 				0E8EADA8189A27C9004FA2DF /* POITableViewController.m */,
 				0EF61A4418B8801A0033FE59 /* WeiImagePickerController.h */,
 				0EF61A4518B8801A0033FE59 /* WeiImagePickerController.m */,
+				7E0BCD1918C1283500FED4B3 /* Tutorial */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -491,6 +542,7 @@
 		7EA9B6EB185ECF3600438EA6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7E0BCD1C18C1577F00FED4B3 /* Arrows */,
 				0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */,
 				0EF61A2918AB390C0033FE59 /* ApertureDark.png */,
 				7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */,
@@ -627,16 +679,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E0BCD1B18C1576B00FED4B3 /* arrow_lower_right.png in Resources */,
 				7EA9B6ED185ED0AD00438EA6 /* Camcorder.png in Resources */,
 				0EF61A2C18AB3C3F0033FE59 /* Aperture93.png in Resources */,
 				7EDD3CC518616791006ABAA9 /* GeoOn.png in Resources */,
+				7E0BCD1E18C1579200FED4B3 /* arrow_lower_left.png in Resources */,
 				7EF1F5FA187DCCC40052FBA4 /* FlashOn.png in Resources */,
 				7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */,
 				7EBFF17D187F33E70031504B /* SinaWeibo.png in Resources */,
 				0E86969518975B11009E4E72 /* Localizable.strings in Resources */,
 				7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */,
+				7E0BCD2018C157A700FED4B3 /* arrow_down.png in Resources */,
+				7E0BCD2418C157B500FED4B3 /* arrow_upper_left.png in Resources */,
 				7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */,
 				0E8EADB8189E1F59004FA2DF /* CancelSoundGrey.png in Resources */,
+				7E0BCD2618C157C100FED4B3 /* arrows_up.png in Resources */,
 				0EF61A5218BC73D10033FE59 /* Pause.png in Resources */,
 				0EF61A4318B735B80033FE59 /* success.png in Resources */,
 				7EF1F5F8187DCC990052FBA4 /* FlashOff.png in Resources */,
@@ -646,6 +703,7 @@
 				7EA9B715185FD02700438EA6 /* Record.png in Resources */,
 				7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */,
 				7EA9B6FA185EDF2000438EA6 /* MicBarButton.png in Resources */,
+				7E0BCD2318C157B500FED4B3 /* arrow_right.png in Resources */,
 				0EF61A5618BC781D0033FE59 /* ProgressColor.png in Resources */,
 				0E8EADC018A377A7004FA2DF /* CamcorderClosed.png in Resources */,
 				7EBFF177187F301C0031504B /* WeixinMoments.png in Resources */,
@@ -685,8 +743,10 @@
 				7E1DF1BF1859964B0009F0C3 /* main.m in Sources */,
 				0EF61A3C18AF4AB20033FE59 /* IAPHelper.m in Sources */,
 				7E023029185EAB4900BC0B37 /* VideoRecordViewController.m in Sources */,
+				7E0BCD2A18C1AE7300FED4B3 /* UIViewController+Tutorial.m in Sources */,
 				7E7E67DC1863A7700039FBB8 /* iAdViewController.m in Sources */,
 				0EF61A3518ADF7550033FE59 /* KeychainItemWrapper.m in Sources */,
+				7E0BCD1818C1282C00FED4B3 /* TutorialVideoRecorderViewController.m in Sources */,
 				7EDD3CB8186130CB006ABAA9 /* UIHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,7 +906,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Qinwei Gong (K58J8M72MU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/qgong/Documents/iOS/WeiChat,
+					/Users/qinwei/Developer/iPhone/WeiChat,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiChat/WeiChat-Prefix.pch";
@@ -854,14 +914,15 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/qgong/Documents/iOS/WeiChat/WeiChat,
-					/Users/qgong/Documents/iOS/WeiChat,
+					/Users/qinwei/Developer/iPhone/WeiChat/WeiChat,
+					/Users/qinwei/Developer/iPhone/WeiChat,
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0D4F33FA-69CC-4219-9455-F4186EDCB2C9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -875,7 +936,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Qinwei Gong (K58J8M72MU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/qgong/Documents/iOS/WeiChat,
+					/Users/qinwei/Developer/iPhone/WeiChat,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiChat/WeiChat-Prefix.pch";
@@ -883,14 +944,15 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/qgong/Documents/iOS/WeiChat/WeiChat,
-					/Users/qgong/Documents/iOS/WeiChat,
+					/Users/qinwei/Developer/iPhone/WeiChat/WeiChat,
+					/Users/qinwei/Developer/iPhone/WeiChat,
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0D4F33FA-69CC-4219-9455-F4186EDCB2C9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

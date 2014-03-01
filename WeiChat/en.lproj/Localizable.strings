@@ -41,3 +41,7 @@
 
 "Edit Sound Track" = "Preview & Edit Soundtrack";
 "Pick sound track for video" = "Pick a sound track for video";
+
+// Tutorials
+"Recording tutorial" = "Press and hold anywhere to record; Repeatable until max length reached.";
+"Picking tutorial" = "Or choose video from photo album";
