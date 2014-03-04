@@ -11,6 +11,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Constants.h"
 #import "Util.h"
+#import "TutorialControl.h"
+
 
 #define TOOLBAR_ADJUST              120
 #define VIDEO_PLAYER_RECT           CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (IS_IOS7_AND_UP ? 0 : TOOLBAR_HEIGHT))
@@ -18,6 +20,14 @@
 #define ACTIVITY_INDICATOR_RECT     180
 #define PAUSE_IMAGE_SIZE            64
 #define PAUSE_IMAGE_RECT            CGRectMake((SCREEN_WIDTH - PAUSE_IMAGE_SIZE) / 2, (IS_IOS7_AND_UP ? 240 : 180), PAUSE_IMAGE_SIZE, PAUSE_IMAGE_SIZE)
+
+#define VIDEO_SOUND_TRACK_TUTORIAL  @"VideoSoundTrackTutorial"
+#define SOUND_TRACK_BEGIN_TUTORIAL  @"SoundTrackBeginningTutorial"
+#define SOUNDTRACK_TUTORIAL_RECT    CGRectMake(40, SCREEN_HEIGHT - 305, 200, 150)
+#define SOUNDTRACK_ARROW_RECT       CGRectMake(50, SCREEN_HEIGHT - 180, 80, 80)
+#define SLIDER_TUTORIAL_RECT        CGRectMake(75, SCREEN_HEIGHT - 250, 200, 100)
+#define SLIDER_ARROW_RECT           CGRectMake(160, SCREEN_HEIGHT - 160, 23, 50)
+
 
 @interface VideoSoundTrackViewController () <MPMediaPickerControllerDelegate>
 
@@ -39,6 +49,12 @@
 @property (nonatomic, strong) UIImageView *pauseImageView;
 
 @property (nonatomic, strong) SKProduct *product;
+
+@property (nonatomic, strong) TutorialControl *tutorialOverlay;
+@property (nonatomic, strong) UILabel *tutorialSoundTrackPicker;
+@property (nonatomic, strong) UILabel *tutorialSlider;
+@property (nonatomic, strong) UIImageView *tutorialSoundTrackPickerArrow;
+@property (nonatomic, strong) UIImageView *tutorialSliderArrow;
 
 @end
 
@@ -282,6 +298,17 @@
     self.pauseImageView.frame = PAUSE_IMAGE_RECT;
     self.pauseImageView.hidden = YES;
     [self.view addSubview:self.pauseImageView];
+    
+    // one time tutorial
+    BOOL tutorialValue = [[NSUserDefaults standardUserDefaults] boolForKey:VIDEO_SOUND_TRACK_TUTORIAL];
+    if (!tutorialValue) {
+        self.tutorialOverlay = [[TutorialControl alloc] init];
+        [self.tutorialOverlay addText:@"SoundTrack Picker tutorial" at:SOUNDTRACK_TUTORIAL_RECT];
+        [self.tutorialOverlay addImageNamed:@"arrow_lower_left.png" at:SOUNDTRACK_ARROW_RECT];
+        [self.view addSubview:self.tutorialOverlay];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:VIDEO_SOUND_TRACK_TUTORIAL];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -373,6 +400,17 @@
         self.soundStartTimeLabel.hidden = NO;
         self.soundStartTimeLabel.text = @"00:00";
         self.setSoundBeginningSlider.maximumValue = CMTimeGetSeconds(self.audioAsset.duration);
+        
+        // one time tutorial
+        BOOL tutorialValue = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_TRACK_BEGIN_TUTORIAL];
+        if (!tutorialValue) {
+            self.tutorialOverlay = [[TutorialControl alloc] init];
+            [self.tutorialOverlay addText:@"SoundTrack Slider tutorial" at:SLIDER_TUTORIAL_RECT];
+            [self.tutorialOverlay addImageNamed:@"arrow_down.png" at:SLIDER_ARROW_RECT];
+            [self.view addSubview:self.tutorialOverlay];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SOUND_TRACK_BEGIN_TUTORIAL];
+        }
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];

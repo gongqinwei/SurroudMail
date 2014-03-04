@@ -27,6 +27,4 @@ typedef enum {
 + (void)initializeHeaderLabel:(UILabel *)label;
 + (void)addGradientForView:(UIView *)view;
 
-+ (void)initializeTutorialLabel:(UILabel *)label text:(NSString *)text;
-
 @end

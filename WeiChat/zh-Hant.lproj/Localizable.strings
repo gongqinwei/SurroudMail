@@ -45,3 +45,6 @@
 // Tutorials
 "Recording tutorial" = "按住屏幕任何位置拍攝；\n鬆開後可再按下繼續拍攝喔！";
 "Picking tutorial" = "從相簿選視頻";
+
+"SoundTrack Picker tutorial" = "可用行動電話內的音樂作為本視訊中的音頻";
+"SoundTrack Slider tutorial" = "滑動選擇音頻的起始";

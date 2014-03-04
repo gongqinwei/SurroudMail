@@ -157,13 +157,5 @@
     [view.layer addSublayer:gradient];
 }
 
-+ (void)initializeTutorialLabel:(UILabel *)label text:(NSString *)text {
-    label.text = NSLocalizedString(text, nil);
-    label.font = [UIFont fontWithName:@"Noteworthy-Light" size:20.0];
-    label.textColor = [UIColor whiteColor];
-    label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 3;
-}
 
 @end

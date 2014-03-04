@@ -45,3 +45,6 @@
 // Tutorials
 "Recording tutorial" = "按住屏幕任何位置拍摄；\n松开后可再按下继续拍摄！";
 "Picking tutorial" = "从相簿选视频";
+
+"SoundTrack Picker tutorial" = "可用手机内的音乐替换本视频中的音频";
+"SoundTrack Slider tutorial" = "滑动选择音频的起始";
