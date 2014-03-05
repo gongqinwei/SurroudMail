@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sdt-Sb-ZOI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sdt-Sb-ZOI">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -48,6 +48,7 @@
                         <segue destination="iFo-F7-GQp" kind="push" identifier="PresentPOI" id="YJ2-al-rZp"/>
                         <segue destination="LRw-wR-KgV" kind="push" identifier="SetVideoSoundTrack" id="vg1-4n-ylS"/>
                         <segue destination="t5x-Tb-1Os" kind="modal" identifier="DisplayVideoRecorderTutorial" modalTransitionStyle="crossDissolve" id="ydC-UJ-gCK"/>
+                        <segue destination="Jp1-jb-gLq" kind="modal" id="Oda-I8-NOK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tx4-8X-V9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -165,7 +166,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kep-I3-d2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="-1109"/>
+            <point key="canvasLocation" x="1900" y="-1109"/>
+        </scene>
+        <!--Settings View Controller - Settings-->
+        <scene sceneID="AdE-Fo-Uut">
+            <objects>
+                <tableViewController id="uMJ-mx-A5F" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x7O-Pz-kV9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsItem" id="wY9-W7-AAw">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wY9-W7-AAw" id="VEB-Xd-cjw">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="uMJ-mx-A5F" id="nwN-ko-fG3"/>
+                            <outlet property="delegate" destination="uMJ-mx-A5F" id="PSH-Ab-xTx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="Gxj-F8-W4J"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2k0-fE-FKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="670" y="-1092"/>
         </scene>
         <!--Video Sound Track View Controller - Edit Sound Track-->
         <scene sceneID="gox-oi-zT5">
@@ -184,7 +215,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGU-3p-UT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="670" y="-1092"/>
+            <point key="canvasLocation" x="1135" y="-1092"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Oil-GY-uaP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jp1-jb-gLq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="anM-Ej-ep2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uMJ-mx-A5F" kind="relationship" relationship="rootViewController" id="Yxn-7s-uav"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NNY-h9-pj0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="197" y="-1092"/>
         </scene>
     </scenes>
     <resources>
