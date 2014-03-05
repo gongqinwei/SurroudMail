@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sdt-Sb-ZOI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sdt-Sb-ZOI">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -48,7 +48,7 @@
                         <segue destination="iFo-F7-GQp" kind="push" identifier="PresentPOI" id="YJ2-al-rZp"/>
                         <segue destination="LRw-wR-KgV" kind="push" identifier="SetVideoSoundTrack" id="vg1-4n-ylS"/>
                         <segue destination="t5x-Tb-1Os" kind="modal" identifier="DisplayVideoRecorderTutorial" modalTransitionStyle="crossDissolve" id="ydC-UJ-gCK"/>
-                        <segue destination="Jp1-jb-gLq" kind="modal" id="Oda-I8-NOK"/>
+                        <segue destination="Jp1-jb-gLq" kind="modal" identifier="GotoSettings" id="Oda-I8-NOK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tx4-8X-V9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -91,7 +91,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crk-hm-bR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="670" y="396"/>
+            <point key="canvasLocation" x="1521" y="518"/>
         </scene>
         <!--Audio Record View Controller - Audio-->
         <scene sceneID="BZQ-pk-EWf">
@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plr-e3-yOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135" y="-322"/>
+            <point key="canvasLocation" x="670" y="882"/>
         </scene>
         <!--Tutorial Video Recorder View Controller-->
         <scene sceneID="cs4-Qp-Dv9">
@@ -166,23 +166,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kep-I3-d2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1900" y="-1109"/>
+            <point key="canvasLocation" x="197" y="-1213"/>
         </scene>
         <!--Settings View Controller - Settings-->
         <scene sceneID="AdE-Fo-Uut">
             <objects>
                 <tableViewController id="uMJ-mx-A5F" customClass="SettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x7O-Pz-kV9">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="x7O-Pz-kV9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsItem" id="wY9-W7-AAw">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsItem" textLabel="2wF-cO-myY" detailTextLabel="i8e-Lk-KE6" style="IBUITableViewCellStyleSubtitle" id="wY9-W7-AAw">
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wY9-W7-AAw" id="VEB-Xd-cjw">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2wF-cO-myY">
+                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i8e-Lk-KE6">
+                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -192,11 +208,17 @@
                             <outlet property="delegate" destination="uMJ-mx-A5F" id="PSH-Ab-xTx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="Gxj-F8-W4J"/>
+                    <navigationItem key="navigationItem" title="Settings" id="Gxj-F8-W4J">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="vb4-pp-XpR">
+                            <connections>
+                                <action selector="onDoneButtonTapped:" destination="uMJ-mx-A5F" id="WpL-Ck-xCy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2k0-fE-FKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="670" y="-1092"/>
+            <point key="canvasLocation" x="1521" y="-1213"/>
         </scene>
         <!--Video Sound Track View Controller - Edit Sound Track-->
         <scene sceneID="gox-oi-zT5">
@@ -215,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGU-3p-UT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135" y="-1092"/>
+            <point key="canvasLocation" x="1521" y="-322"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Oil-GY-uaP">
@@ -233,7 +255,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNY-h9-pj0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="197" y="-1092"/>
+            <point key="canvasLocation" x="1048" y="-1213"/>
         </scene>
     </scenes>
     <resources>

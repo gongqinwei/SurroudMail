@@ -219,6 +219,10 @@
     self.inputModeChanged = YES;
 }
 
+- (void)gotoSettings {
+    [self performSegueWithIdentifier:@"GotoSettings" sender:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -236,9 +240,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:RGBCOLOR(0xe1, 0xe0, 0xde)];
+    [self.view setBackgroundColor:APP_BG_GRAY_COLOR];
 //    self.view.backgroundColor = UIColorFromRGB(VIEW_BG_COLOR);
 //self.view.backgroundColor = UIColorFromRGB(0xE5E4E2);
+    
+    UIButton *settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 24)];
+    [settingsButton setBackgroundImage:[UIImage imageNamed:@"Settings.png"] forState:UIControlStateNormal];
+    [settingsButton addTarget:self action:@selector(gotoSettings) forControlEvents:UIControlEventTouchUpInside];
+    [settingsButton setShowsTouchWhenHighlighted:YES];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    
     
     self.headView = [[UIView alloc]initWithFrame:HEAD_VIEW_RECT];
     self.headView.layer.shadowOffset = CGSizeMake(0, 3);

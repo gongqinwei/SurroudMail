@@ -42,6 +42,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 
+#define APP_BG_GRAY_COLOR               RGBCOLOR(0xe1, 0xe0, 0xde)
 #define APP_SYSTEM_BLUE_COLOR           [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0]
 #define APP_BUTTON_BLUE_COLOR           [UIColor colorWithRed:50.0/255.0 green:135.0/255.0 blue:225.0/255.0 alpha:1.0]
 

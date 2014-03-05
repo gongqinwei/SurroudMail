@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "Constants.h"
 
 
 enum SettingsSection {
@@ -52,10 +53,15 @@ enum Info {
 
 @implementation SettingsViewController
 
+- (IBAction)onDoneButtonTapped:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    self.view.backgroundColor = APP_BG_GRAY_COLOR;
 }
 
 
@@ -104,8 +110,14 @@ enum Info {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
+    cell.textLabel.font = [UIFont fontWithName:APP_FONT size:17];
+    
     switch (indexPath.section) {
         case kVideoCaptureMode:
+            cell.textLabel.font = [UIFont fontWithName:APP_FONT size:13];
+            cell.detailTextLabel.font = [UIFont fontWithName:APP_FONT size:13];
+            cell.detailTextLabel.textColor = [UIColor grayColor];
+            
             switch (indexPath.row) {
                 case kPressAndHold:
                     cell.textLabel.text = NSLocalizedString(@"Press and hold anywhere in screen to record", nil);
@@ -134,21 +146,25 @@ enum Info {
                 default:
                     break;
             }
+            
+            cell.detailTextLabel.text = nil;
+            
             break;
             
         case kVdisk:
             switch (indexPath.row) {
                 case kAccessVdisk:
                     cell.textLabel.text = NSLocalizedString(@"Access your Vdisk account", nil);
-//                    cell.detailTextLabel.text = NSLocalizedString(@"", nil);
                     break;
                 case kIncreasVdisk:
-                    cell.textLabel.text = NSLocalizedString(@"Increase your Vdisk space for more videos", nil);
-//                    cell.detailTextLabel.text = NSLocalizedString(@"Tap button again to pause recording", nil);
+                    cell.textLabel.text = NSLocalizedString(@"Increase Vdisk space for more videos", nil);
                     break;
                 default:
                     break;
             }
+            
+            cell.detailTextLabel.text = nil;
+            
             break;
             
         case kShare:
@@ -171,6 +187,9 @@ enum Info {
                 default:
                     break;
             }
+            
+            cell.detailTextLabel.text = nil;
+            
             break;
             
         case kInfo:
@@ -186,6 +205,9 @@ enum Info {
                 default:
                     break;
             }
+            
+            cell.detailTextLabel.text = nil;
+            
             break;
             
         default:
