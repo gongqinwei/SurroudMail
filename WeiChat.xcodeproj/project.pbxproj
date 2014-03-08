@@ -15,6 +15,7 @@
 		0E8EADBA189EEBDD004FA2DF /* SelectSound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADB9189EEBDD004FA2DF /* SelectSound.png */; };
 		0E8EADC018A377A7004FA2DF /* CamcorderClosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */; };
 		0ECC777618C69C000091DFCE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC777518C69C000091DFCE /* SettingsViewController.m */; };
+		0ECC777818C7FBA00091DFCE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECC777718C7FBA00091DFCE /* MessageUI.framework */; };
 		0EF61A2A18AB390C0033FE59 /* ApertureDark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2918AB390C0033FE59 /* ApertureDark.png */; };
 		0EF61A2C18AB3C3F0033FE59 /* Aperture93.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */; };
 		0EF61A3518ADF7550033FE59 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF61A3418ADF7550033FE59 /* KeychainItemWrapper.m */; };
@@ -116,6 +117,7 @@
 		0E8EADBF18A377A7004FA2DF /* CamcorderClosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CamcorderClosed.png; sourceTree = "<group>"; };
 		0ECC777418C69BFF0091DFCE /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		0ECC777518C69C000091DFCE /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		0ECC777718C7FBA00091DFCE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0EF61A2918AB390C0033FE59 /* ApertureDark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ApertureDark.png; sourceTree = "<group>"; };
 		0EF61A2B18AB3C3F0033FE59 /* Aperture93.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aperture93.png; sourceTree = "<group>"; };
 		0EF61A3318ADF7550033FE59 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ECC777818C7FBA00091DFCE /* MessageUI.framework in Frameworks */,
 				0EF61A3918AF4A350033FE59 /* StoreKit.framework in Frameworks */,
 				0EF61A3718ADF7720033FE59 /* Security.framework in Frameworks */,
 				0E8EADA61898E6C4004FA2DF /* MapKit.framework in Frameworks */,
@@ -345,6 +348,7 @@
 		7E1DF1B11859964B0009F0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0ECC777718C7FBA00091DFCE /* MessageUI.framework */,
 				0EF61A3818AF4A350033FE59 /* StoreKit.framework */,
 				0EF61A3618ADF7720033FE59 /* Security.framework */,
 				0E8EADA51898E6C4004FA2DF /* MapKit.framework */,
