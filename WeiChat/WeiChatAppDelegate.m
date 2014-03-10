@@ -45,7 +45,7 @@
     SinaWeibo *sinaWeibo = [[SinaWeibo alloc] initWithAppKey:kWeiboAppKey appSecret:kWeiboAppSecret appRedirectURI:kWeiboAppRedirectURI andDelegate:self];
     
     // Sina Vdisk
-    VdiskSession *session = [[VdiskSession alloc] initWithAppKey:kVdiskSDKDemoAppKey appSecret:kVdiskSDKDemoAppSecret appRoot:@"sandbox" sinaWeibo:sinaWeibo];
+    VdiskSession *session = [[VdiskSession alloc] initWithAppKey:kVdiskSDKDemoAppKey appSecret:kVdiskSDKDemoAppSecret appRoot:@"basic" sinaWeibo:sinaWeibo];
 	session.delegate = self;
     [session setRedirectURI:kVdiskSDKDemoAppRedirectURI];
     //session.udid = [[UIDevice currentDevice] uniqueIdentifier];
