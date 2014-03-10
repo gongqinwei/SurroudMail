@@ -48,3 +48,38 @@
 
 "SoundTrack Picker tutorial" = "Create your own MV - Replace the video's soundtrack with a song!";
 "SoundTrack Slider tutorial" = "Slide to pick anywhere in the song as the beginning";
+
+// Settings
+"Settings" = "Settings";
+
+"Video Recording Mode" = "Video Recording Mode";
+"Press and hold anywhere in the screen" = "Press and hold anywhere in the screen";
+"Release finger to pause recording" = "Release finger to pause recording";
+"Tap button to record" = "Tap button to record";
+"Tap button again to pause recording" = "Tap button again to pause recording";
+
+"Video Quality" = "Video Quality";
+"High" = "High";
+"Takes longer to upload and more cloud space" = "Takes longer to upload and more cloud space";
+"Medium" = "Medium";
+"Suitable for transmission via Wi-Fi" = "Suitable for transmission via Wi-Fi";
+"Low" = "Low";
+"Suitable for tranmission via cellular network" = "Suitable for tranmission via cellular network";
+
+
+"Your videos are securely stored in your own Sina Vdisk" = "Your videos are securely stored in your own Sina Vdisk";
+"Access your Vdisk account" = "Access your Vdisk account";
+"Increase Vdisk space" = "Increase Vdisk space";
+
+"Share WeiChat via" = "Share WeiChat via";
+"Email a Friend" = "Email a Friend";
+"Send us feedback" = "Send us feedback";
+"Feedback on WeiChat app" = "Feedback on WeiChat app";
+"Feedback email sent. Thank you!" = "Feedback email sent. Thank you!";
+"Failed to send the email. Please try again" = "Failed to send the email. Please try again";
+
+"Version %@" = "Version %@";
+
+"Use WeiChat to post videos to WeChat Moments! Cool!" = "Use WeiChat to post videos to WeChat Moments! Cool!";
+"Failed to share app to WeChat" = "Failed to share app to WeChat";
+

@@ -7,7 +7,6 @@
 //
 
 #import "VideoRecordViewController.h"
-#import "Constants.h"
 #import "UIHelper.h"
 #import "WXApi.h"
 #import "VideoSoundTrackViewController.h"
@@ -20,6 +19,7 @@
 #import <iAd/iAd.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TutorialControl.h"
+#import "SettingsViewController.h"
 
 
 #define VDISK_VIDEO_URL_PREFIX      @"http://vdisk.weibo.com/wap/fp/"
@@ -52,6 +52,7 @@
 #define ANIMATE_TO_REC_DURATION     0.4
 #define SWITCH_TO_AUDIO_SEGUE       @"SwitchToAudio"
 #define SET_VIDEO_SOUND_SEGUE       @"SetVideoSoundTrack"
+#define GO_TO_SETTINGS              @"GotoSettings"
 
 #define RECORD_BUTTON_SIZE          120
 
@@ -61,12 +62,12 @@
 
 #define VIDEO_RECORDER_TUTORIAL     @"VideoRecorderTutorial"
 #define VIDEO_POST_TUTORIAL         @"VideoPostTutorial"
-#define RECORDING_TUTORIAL_RECT     CGRectMake((SCREEN_WIDTH - 195) / 2, 130, 195, 100)
-#define PICKING_TUTORIAL_RECT       CGRectMake(SCREEN_WIDTH - 220, SCREEN_HEIGHT - 210, 140, 65)
+#define RECORDING_TUTORIAL_RECT     CGRectMake((SCREEN_WIDTH - 220) / 2, 130, 220, 150)
+#define PICKING_TUTORIAL_RECT       CGRectMake(SCREEN_WIDTH - 220, SCREEN_HEIGHT - 200, 140, 65)
 #define PICKING_ARROW_RECT          CGRectMake(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 150, 80, 80)
 
 
-@interface VideoRecordViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate, UIAlertViewDelegate, VideoSoundTrackDelegate>
+@interface VideoRecordViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate, UIAlertViewDelegate, VideoSoundTrackDelegate, VideoRecorderDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *recorder;
 @property (nonatomic, strong) UIImagePickerController *picker;
@@ -192,6 +193,9 @@
         [segue.destinationViewController setComposition:self.composition];
         [segue.destinationViewController setCompositionAudioTrack:self.compositionAudioTrack];
         [segue.destinationViewController setDelegate:self];
+    } else if ([segue.identifier isEqualToString:GO_TO_SETTINGS]) {
+        UINavigationController *nav = segue.destinationViewController;
+        [nav.childViewControllers[0] setVideoRecorderDelegate:self];
     }
 }
 
@@ -278,12 +282,18 @@
         [button setFrame:CGRectMake(0, 0, 32, 32)];
 //        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         
+        int captureMode = [[NSUserDefaults standardUserDefaults] integerForKey:VIDEO_CAPTURE_MODE];
+        
         // UIImagePicker Overlay
         self.overlay = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [self.overlay addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
-        [self.overlay addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
         self.overlay.opaque = NO;
         self.overlay.backgroundColor = [UIColor clearColor];
+        
+        // add target action together with recordButton below.
+        
+//        [self.overlay addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
+//        [self.overlay addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
+        
         
 //        // Audio button
 //        UIImage *audioImage = [UIImage imageNamed:@"Mic.png"];
@@ -344,11 +354,20 @@
 
         self.recordButton = [[UIButton alloc] initWithFrame:recordImgFrame];
         [self.recordButton setBackgroundImage:recordImage forState:UIControlStateNormal];
-        [self.recordButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
-        [self.recordButton addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
-//        [self.recordButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
         [self.recordButton setShowsTouchWhenHighlighted:YES];
         self.isRecording = NO;
+        
+        [self didSelectVideoCaptureMode:captureMode];
+//        [self.recordButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
+//        [self.recordButton addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
+////        [self.recordButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
+//
+//        if ([[NSUserDefaults standardUserDefaults] integerForKey:VIDEO_CAPTURE_MODE] == kTapToRecord) {
+//            self.recordButton.hidden = NO;
+//        } else {
+//            self.recordButton.hidden = YES;
+//        }
+        
         [self.overlay addSubview:self.recordButton];
         
         
@@ -420,7 +439,9 @@
         self.editor = [[UIVideoEditorController alloc] init];
         self.editor.delegate = self;
         self.editor.videoMaximumDuration = [self getMaxRecordingDuration];
-        self.editor.videoQuality = UIImagePickerControllerQualityTypeHigh;
+        
+        int videoQuality = [[NSUserDefaults standardUserDefaults] integerForKey:VIDEO_QUALITY];
+        [self didSelectVideoQuality:videoQuality];
         
         // Movie player
         self.playButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1289,6 +1310,47 @@
     [self doneTakingVideo];
     
     self.currentImagePicker = self.recorder;
+}
+
+
+#pragma mark - Video Recorder delegate
+- (void)didSelectVideoCaptureMode:(VideoCaptureMode)mode {
+    [self.overlay removeTarget:nil action:NULL forControlEvents:UIControlEventAllTouchEvents];
+    [self.recordButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllTouchEvents];
+    
+    if (mode == kPressAndHoldToRecord) {
+        self.recordButton.hidden = YES;
+        
+        [self.overlay addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
+        [self.overlay addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.recordButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchDown];
+        [self.recordButton addTarget:self action:@selector(stopRecording) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.recordButton.hidden = NO;
+        
+        [self.recordButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (void)didSelectVideoQuality:(VideoQuality)quality {
+    switch (quality) {
+        case kVideoQualityHigh:
+            self.editor.videoQuality = UIImagePickerControllerQualityTypeHigh;
+            break;
+            
+        case kVideoQualityMedium:
+            self.editor.videoQuality = UIImagePickerControllerQualityTypeMedium;
+            break;
+            
+        case kVideoQualityLow:
+            self.editor.videoQuality = UIImagePickerControllerQualityTypeLow;
+            break;
+            
+        default:
+            self.editor.videoQuality = UIImagePickerControllerQualityTypeHigh;
+            break;
+    }
 }
 
 

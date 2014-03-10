@@ -34,7 +34,7 @@
 - (void)addText:(NSString *)text at:(CGRect)frame {
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = NSLocalizedString(text, nil);
-    label.font = [UIFont fontWithName:@"Noteworthy-Light" size:20.0];
+    label.font = [UIFont fontWithName:@"Noteworthy-Light" size:19.0];
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;

@@ -570,7 +570,7 @@
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
-    [session refreshLink];
+    [session refreshToken];
 }
 
 // Log out successfully

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VideoRecordViewController.h"
+
 
 @interface SettingsViewController : UITableViewController
+
+@property (nonatomic, strong) id<VideoRecorderDelegate> videoRecorderDelegate;
 
 @end

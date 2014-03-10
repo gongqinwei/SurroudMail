@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "iAdViewController.h"
+#import "Constants.h"
+
+
+@protocol VideoRecorderDelegate <NSObject>
+
+- (void)didSelectVideoCaptureMode:(VideoCaptureMode)mode;
+- (void)didSelectVideoQuality:(VideoQuality)quality;
+
+@end
 
 @interface VideoRecordViewController : iAdViewController
 
