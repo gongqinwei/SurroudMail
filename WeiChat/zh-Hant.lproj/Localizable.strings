@@ -48,3 +48,37 @@
 
 "SoundTrack Picker tutorial" = "可用音樂作為本視訊中的音頻－創造你自己的MV!";
 "SoundTrack Slider tutorial" = "滑動選擇音樂的起始";
+
+// Settings
+"Settings" = "設置";
+
+"Video Recording Mode" = "視訊拍攝模式";
+"Press and hold anywhere in the screen" = "按住屏幕任何位置";
+"Release finger to pause recording" = "鬆開手指以暫停拍攝";
+"Tap button to record" = "按一下按鍵";
+"Tap button again to pause recording" = "再次按下以暫停拍攝";
+
+"Video Quality" = "視訊畫質";
+"High" = "超清";
+"Takes longer to upload and more cloud space" = "需要更長傳輸時間和占用更大雲空間";
+"Medium" = "高清";
+"Suitable for transmission via Wi-Fi" = "適於Wi-Fi傳輸";
+"Low" = "流暢";
+"Suitable for tranmission via cellular network" = "適於行動網路傳輸";
+
+
+"Your videos are securely stored in your own Sina Vdisk" = "您的視訊存儲在您自己的新浪微盤內";
+"Access your Vdisk account" = "前往新浪微盤查看和管理";
+"Increase Vdisk space" = "增大微盤空間以存儲更多視訊";
+
+"Share WeiChat via" = "分享圍信app";
+
+"Send us feedback" = "意見返回";
+"Feedback on WeiChat app" = "關於圍信的意見返回";
+"Feedback email sent. Thank you!" = "郵件已發送。謝謝您!";
+"Failed to send the email. Please try again" = "郵件發送失敗。請再試下";
+
+"Version %@" = "版本 %@";
+
+"Use WeiChat to post videos to WeChat Moments! Cool!" = "用圍信來po視訊到微信朋友圈吧，很棒的體驗哦！";
+"Failed to share app to WeChat" = "分享失敗";

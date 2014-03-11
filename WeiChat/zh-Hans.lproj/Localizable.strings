@@ -53,31 +53,31 @@
 "Settings" = "设置";
 
 "Video Recording Mode" = "视频拍摄方式";
-"Press and hold anywhere in the screen" = "按住屏幕任何地方";
+"Press and hold anywhere in the screen" = "按住屏幕任何部位";
 "Release finger to pause recording" = "放开手指以暂停拍摄";
 "Tap button to record" = "按一下按钮";
-"Tap button again to pause recording" = "再按一下按钮以暂停拍摄";
+"Tap button again to pause recording" = "再次按下按钮以暂停拍摄";
 
-"Video Quality" = "视频清晰度";
+"Video Quality" = "视频画质";
 "High" = "超清";
-"Takes longer to upload and more cloud space" = "需要更长传输时间并占据更大云空间";
+"Takes longer to upload and more cloud space" = "需要更长传输时间并占用更大云空间";
 "Medium" = "高清";
 "Suitable for transmission via Wi-Fi" = "适合于Wi-Fi传输";
 "Low" = "流畅";
 "Suitable for tranmission via cellular network" = "适合于移动网络传输";
 
 "Your videos are securely stored in your own Sina Vdisk" = "您的视频存储在您自己的新浪微盘内";
-"Access your Vdisk account" = "前往新浪微盘";
+"Access your Vdisk account" = "前往新浪微盘查看并管理";
 "Increase Vdisk space" = "增大微盘空间以存储更多视频";
 
 "Share WeiChat via" = "分享围信app";
-"Email a Friend" = "通过邮件";
+
 "Send us feedback" = "意见反馈";
-"Feedback on WeiChat app" = "围信意见反馈";
+"Feedback on WeiChat app" = "关于围信意见反馈";
 "Feedback email sent. Thank you!" = "邮件已发。谢谢您!";
 "Failed to send the email. Please try again" = "邮件发送失败。请再试。";
 
 "Version %@" = "版本 %@";
 
-"Use WeiChat to post videos to WeChat Moments! Cool!" = "亲们，只在朋友圈发过照片和文字没发过视频吧？现在用“围信”就可以！告诉我，我不是最后一个人知道的 ;)";
+"Use WeiChat to post videos to WeChat Moments! Cool!" = "亲们，在朋友圈发视频的功能真的来了！现在用“围信”就可以！告诉我，我不是最后一个人知道的 ;)";
 "Failed to share app to WeChat" = "分享围信至微信失败";

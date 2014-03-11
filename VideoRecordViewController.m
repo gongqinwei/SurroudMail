@@ -56,7 +56,7 @@
 
 #define RECORD_BUTTON_SIZE          120
 
-#define WEIXIN_ALERT_TAG            0
+#define APP_NOT_INSTALLED_ALERT_TAG 0
 #define ABANDON_VIDEO_ALERT_TAG     1
 #define RETAKE_VIDEO_ALERT_TAG      2
 
@@ -113,11 +113,33 @@
     }
 }
 
+- (NSString *)genVideoUrl {
+    //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropboxusercontent.com/s/83blvpg0zxmic47/IMG_0330.MOV"];
+    //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
+    //    ext.videoUrl = @"http://share.weiyun.com/7b628f051c3c3081f677bae7b8023bfc";
+    //    ext.videoUrl = self.mediaLink;
+    //    ext.videoUrl = [VDISK_VIDEO_URL_PREFIX stringByAppendingString:[self.mediaLink lastPathComponent]];
+    //    ext.videoUrl = @"http://vdisk.weibo.com/wap/fp/aIsz_qBLOinQf?skiplogin=1";
+    //    ext.videoUrl = @"http://download-vdisk.sina.com.cn/31365285/dff2516b78b89f51e0872332fa484a5c4b042560?ssig=OFqNlGWwT4&Expires=1388730326&KID=sae,l30zoo1wmz&fn=IMG_0360.MOV";
+    
+    NSMutableString *url = [NSMutableString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
+    
+    if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
+        [url appendFormat:@"&comment=%@", self.contentDescription.text];
+    }
+    
+    if (self.currentLocation) {
+        [url appendFormat:@"&POI=%@&geo=%f,%f", self.geoLabel.text, self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude];
+    }
+    
+    return url;
+}
+
 - (void)publishContentToWeixin {
     //if the Weixin app is not installed, show an error
     if (![WXApi isWXAppInstalled]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"The Wechat app is not installed", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        alert.tag = WEIXIN_ALERT_TAG;
+        alert.tag = APP_NOT_INSTALLED_ALERT_TAG;
         [alert show];
         return;
     }
@@ -129,24 +151,17 @@
     WXVideoObject *ext = [WXVideoObject object];
     Debug(@"------- media link: %@", self.mediaLink);
     
-//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropboxusercontent.com/s/83blvpg0zxmic47/IMG_0330.MOV"];
-//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
-    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
+    ext.videoUrl = [self genVideoUrl];
+//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
     
     if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
         message.description = self.contentDescription.text;
-        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&comment=%@", self.contentDescription.text];
+//        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&comment=%@", self.contentDescription.text];
     }
     
-    if (self.currentLocation) {
-        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&POI=%@&geo=%f,%f", self.geoLabel.text, self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude];
-    }
-    
-//    ext.videoUrl = @"http://share.weiyun.com/7b628f051c3c3081f677bae7b8023bfc";
-//    ext.videoUrl = self.mediaLink;
-//    ext.videoUrl = [VDISK_VIDEO_URL_PREFIX stringByAppendingString:[self.mediaLink lastPathComponent]];
-//    ext.videoUrl = @"http://vdisk.weibo.com/wap/fp/aIsz_qBLOinQf?skiplogin=1";
-//    ext.videoUrl = @"http://download-vdisk.sina.com.cn/31365285/dff2516b78b89f51e0872332fa484a5c4b042560?ssig=OFqNlGWwT4&Expires=1388730326&KID=sae,l30zoo1wmz&fn=IMG_0360.MOV";
+//    if (self.currentLocation) {
+//        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&POI=%@&geo=%f,%f", self.geoLabel.text, self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude];
+//    }
     
     message.mediaObject = ext;
     
@@ -168,6 +183,39 @@
     if (![WXApi sendReq:req]) {
         [UIHelper showInfo:NSLocalizedString(@"Failed to share video to WeChat", nil) withStatus:kFailure];
     }
+}
+
+- (void)publishContentToSinaWeibo {
+    //if the Weibo app is not installed, show an error
+    if (![WeiboSDK isWeiboAppInstalled]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Sina Weibo app is not installed", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.tag = APP_NOT_INSTALLED_ALERT_TAG;
+        [alert show];
+        return;
+    }
+    
+    WBMessageObject *message = [WBMessageObject message];
+//    message.text = @"测试通过WeiboSDK发送文字到微博!";
+    
+    WBWebpageObject *webpage = [WBWebpageObject object];
+    webpage.objectID = @"WeiboViaWeiChat";
+    webpage.title = NSLocalizedString(@"Video from WeiChat", nil);
+    
+    if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
+        webpage.description = self.contentDescription.text;
+    }
+    
+    webpage.thumbnailData = UIImagePNGRepresentation(self.thumbnail);
+    webpage.webpageUrl = [self genVideoUrl];
+    message.mediaObject = webpage;
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    
+    [WeiboSDK sendRequest:request];
 }
 
 - (void)onPlayButtonTapped:(UIButton *)sender {

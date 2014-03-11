@@ -10,6 +10,7 @@
 #import <iAd/iAd.h>
 #import <CoreLocation/CoreLocation.h>
 #import "VdiskSDK.h"
+#import "WeiboSDK.h"
 
 
 #define AD_BANNER_ADJUST_HEIGHT             20
@@ -38,7 +39,7 @@ typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError
 
 
 
-@interface iAdViewController : UIViewController <UIActionSheetDelegate, ADBannerViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, VdiskSessionDelegate, VdiskComplexUploadDelegate, VdiskRestClientDelegate>
+@interface iAdViewController : UIViewController <UIActionSheetDelegate, ADBannerViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, VdiskSessionDelegate, VdiskComplexUploadDelegate, VdiskRestClientDelegate, WBHttpRequestDelegate>
 
 @property (nonatomic, strong) UIView *headView;
 //@property (nonatomic, strong) UIView *lineView;

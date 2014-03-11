@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
 #import "VdiskSDK.h"
+#import "WeiboSDK.h"
 
 
-@interface WeiChatAppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate, VdiskSessionDelegate, VdiskNetworkRequestDelegate, SinaWeiboDelegate>
+@interface WeiChatAppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate, VdiskSessionDelegate, VdiskNetworkRequestDelegate, SinaWeiboDelegate, WeiboSDKDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

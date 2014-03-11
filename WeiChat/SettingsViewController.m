@@ -30,8 +30,7 @@ enum VdiskSettings {
 typedef enum {
     kShareAppViaWeixinMoments,
     kShareAppViaWeixinFriends,
-    kShareAppViaSinaWeibo,
-    kEmail
+    kShareAppViaSinaWeibo
 } ShareOption;
 
 enum Info {
@@ -191,10 +190,6 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
                 case kShareAppViaSinaWeibo:
                     cell.textLabel.text = NSLocalizedString(@"Sina Weibo", nil);
                     break;
-                   
-                case kEmail:
-                    cell.textLabel.text = NSLocalizedString(@"Email a Friend", nil);
-                    break;
                     
                 default:
                     break;
@@ -304,10 +299,6 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
                     break;
                     
                 case kShareAppViaSinaWeibo:
-                    
-                    break;
-                    
-                case kEmail:
                     
                     break;
                     

@@ -631,9 +631,10 @@
     
     self.destPath = nil;
     
-    //delete tmp file
+    // delete tmp file
     [[NSFileManager defaultManager] removeItemAtPath:srcPath error:nil];
     
+    // get sharable URL first
     [self.vdiskRestClient loadSharableLinkForFile:metadata.path];
 }
 
@@ -664,12 +665,12 @@
     
     NSString *videoRef = [self.mediaLink lastPathComponent];
     
-    if (self.shareAction == kWeixinMoments || self.shareAction == kWeixinFriends) {
-        // get stream url
+//    if (self.shareAction == kWeixinMoments || self.shareAction == kWeixinFriends) {
+//        // get stream URL then
         [self.vdiskRestClient loadStreamableURLFromRef:videoRef];
-    } else if (self.shareAction == kSinaWeibo) {
-        [self publishContentToSinaWeibo];
-    }
+//    } else if (self.shareAction == kSinaWeibo) {
+//        [self publishContentToSinaWeibo];
+//    }
 }
 
 - (void)restClient:(VdiskRestClient *)restClient loadSharableLinkFailedWithError:(NSError *)error {
@@ -689,8 +690,39 @@
     
     self.streamableURL = url;
     
-    [self publishContentToWeixin];
+//    [self publishContentToWeixin];
+    [self publishContent];
 }
+
+#pragma mark - Weibo HTTP Request delegate
+- (void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result
+{
+    NSString *title = nil;
+    UIAlertView *alert = nil;
+    
+    title = @"收到Weibo网络回调";
+    alert = [[UIAlertView alloc] initWithTitle:title
+                                       message:[NSString stringWithFormat:@"%@",result]
+                                      delegate:nil
+                             cancelButtonTitle:@"确定"
+                             otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)request:(WBHttpRequest *)request didFailWithError:(NSError *)error;
+{
+    NSString *title = nil;
+    UIAlertView *alert = nil;
+    
+    title = @"Weibo请求异常";
+    alert = [[UIAlertView alloc] initWithTitle:title
+                                       message:[NSString stringWithFormat:@"%@",error]
+                                      delegate:nil
+                             cancelButtonTitle:@"确定"
+                             otherButtonTitles:nil];
+    [alert show];
+}
+
 
 
 #pragma mark - Action sheet delegate
