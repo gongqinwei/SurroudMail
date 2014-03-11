@@ -299,7 +299,7 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
                     break;
                     
                 case kShareAppViaSinaWeibo:
-                    
+                    [self shareAppToWeibo];
                     break;
                     
                 default:
@@ -376,7 +376,6 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     //if the Weixin app is not installed, show an error
     if (![WXApi isWXAppInstalled]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"The Wechat app is not installed", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//        alert.tag = WEIXIN_ALERT_TAG;
         [alert show];
         return;
     }
@@ -410,7 +409,32 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     }
 }
 
-
+- (void)shareAppToWeibo {
+    //if the Weibo app is not installed, show an error
+    if (![WeiboSDK isWeiboAppInstalled]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Sina Weibo app is not installed", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    WBWebpageObject *webpage = [WBWebpageObject object];
+    webpage.objectID = @"WeiboViaWeiChat";
+    webpage.title = NSLocalizedString(@"WeiChat", nil);     //temp
+    webpage.description =NSLocalizedString(@"Use WeiChat to post videos to WeChat Moments! Cool!", nil);     //temp
+    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Aperture93" ofType:@"png"]];
+    webpage.webpageUrl = iOSAppStoreURL;
+    
+    WBMessageObject *message = [WBMessageObject message];
+    message.mediaObject = webpage;
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    
+    [WeiboSDK sendRequest:request];
+}
 
 /*
 #pragma mark - Navigation

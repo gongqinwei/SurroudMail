@@ -144,8 +144,9 @@
     [actions addButtonWithTitle:SHARE_ACTIONS[kWeixinMoments]];
     [actions addButtonWithTitle:SHARE_ACTIONS[kWeixinFriends]];
     [actions addButtonWithTitle:SHARE_ACTIONS[kSinaWeibo]];
+    //TODO: add save to vdisk only
     [actions addButtonWithTitle:SHARE_ACTIONS[kSaveToDevice]];
-    [actions addButtonWithTitle:SHARE_ACTIONS[kUnlinkVdisk]];
+    [actions addButtonWithTitle:SHARE_ACTIONS[kUnlinkVdisk]];   //temp
     [actions addButtonWithTitle:SHARE_ACTIONS[kCancelShare]];
     
     actions.cancelButtonIndex = kCancelShare;
