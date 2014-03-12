@@ -48,6 +48,8 @@
 
 #define PRESENT_POI_SEGUE                               @"PresentPOI"
 
+#define VDISK_AUTHORIZING                               @"VdiskAuthorizingForWeiChat"
+
 
 @interface iAdViewController () <POIDelegate>
 
@@ -123,14 +125,15 @@
     [self toggleUploadProgress:YES];
 }
 
+#pragma mark - Not in use!!!
 - (void)validateVdiskSessionOrUpload {
     VdiskSession *vDiskSession = [VdiskSession sharedSession];
     
     if ([vDiskSession isLinked]) {
         [self uploadContent];
     } else {
-//        [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeDefault];
-        [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
+        [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeDefault];
+//        [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
     }
 }
 
@@ -558,20 +561,20 @@
 
 // Login succeeded
 - (void)sessionLinkedSuccess:(VdiskSession *)session {
-    /*
-     VdiskRestClient *restClient = [[VdiskRestClient alloc] initWithSession:[VdiskSession sharedSession]];
-     [restClient loadAccountInfo];
-     */
-    
     Debug(@"Vdisk Session Linked Success with access token: %@, and refresh token: %@", session.accessToken, session.refreshToken);
     
-    [self validateVdiskSessionOrUpload];
+    BOOL wasVdiskAuthorizing = [[NSUserDefaults standardUserDefaults] boolForKey:VDISK_AUTHORIZING];
+    if (wasVdiskAuthorizing) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:VDISK_AUTHORIZING];
+        
+        [self uploadContent];
+    }
 }
 
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
-    [session refreshToken];
+    [session refreshLink];
 }
 
 // Log out successfully
@@ -738,11 +741,22 @@
         case kWeixinMoments:
         case kWeixinFriends:
         case kSinaWeibo:
+//            if (self.mediaLink) {
+//                [self publishContent];
+//            } else {
+//                [self validateVdiskSessionOrUpload];
+//            }
+        {
+            VdiskSession *vDiskSession = [VdiskSession sharedSession];
             if (self.mediaLink) {
                 [self publishContent];
+            } else if (![vDiskSession isLinked]){
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:VDISK_AUTHORIZING];
+                [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
             } else {
-                [self validateVdiskSessionOrUpload];
+                [self uploadContent];
             }
+        }
             break;
         case kSaveToDevice:
         {

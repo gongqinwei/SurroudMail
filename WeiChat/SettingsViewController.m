@@ -83,7 +83,7 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             break;
             
         case kShare:
-            return 4;
+            return 3;
             break;
             
         case kFeedbackAndVersion:
