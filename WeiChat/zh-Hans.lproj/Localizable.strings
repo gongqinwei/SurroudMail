@@ -39,7 +39,7 @@
 "IAPPrompt" = "您已用完%d次试用。\n\n若您想继续使用此功能，只需一次性付费%@。如果您以前已购买过，请在此登录苹果应用商店恢复即可。\n\n购买后，您的摄像时长将暴增至30秒！";
 "NoPreviousPurchase" = "未找到此用户以前购买记录！";
 
-"Edit Sound Track" = "预览并编辑音频";
+"Edit Sound Track" = "预览并制作MV";
 "Pick sound track for video" = "选首歌替换视频中的音频";
 
 // Tutorials
@@ -79,5 +79,7 @@
 
 "Version %@" = "版本 %@";
 
-"Use WeiChat to post videos to WeChat Moments! Cool!" = "亲们，在朋友圈发视频的功能真的来了！现在用“围信”就可以！告诉我，我不是最后一个人知道的 ;)";
+"Weibo + Wechat = WeiChat!" = "Weibo + Wechat = WeiChat!\n围观而信之";
+"Use WeiChat to post videos to WeChat Moments! Cool!" = "用围信在朋友圈发视频！告诉我，我不是最后一个知道的！";
+"Use WeiChat to post videos to Weibo! Super cool!" = "现在可以用“围信”同时在微博和微信发视频啦！注意是微信朋友圈哦！还可以轻松制作专属于您的个性化MV！告诉我，我不是最后一个知道的 ；）";
 "Failed to share app to WeChat" = "分享围信至微信失败";

@@ -145,7 +145,6 @@
     }
     
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = NSLocalizedString(@"Video from WeiChat", nil);
     [message setThumbImage:self.thumbnail];
     
     WXVideoObject *ext = [WXVideoObject object];
@@ -155,8 +154,11 @@
 //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
     
     if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
-        message.description = self.contentDescription.text;
+        message.title = self.contentDescription.text;
+        message.description = NSLocalizedString(@"Video from WeiChat", nil);
 //        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&comment=%@", self.contentDescription.text];
+    } else {
+        message.title = NSLocalizedString(@"Video from WeiChat", nil);
     }
     
 //    if (self.currentLocation) {
@@ -200,14 +202,15 @@
     WBWebpageObject *webpage = [WBWebpageObject object];
     webpage.objectID = @"WeiboViaWeiChat";
     webpage.title = NSLocalizedString(@"Video from WeiChat", nil);
-    
-    if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
-        webpage.description = self.contentDescription.text;
-    }
-    
     webpage.thumbnailData = UIImagePNGRepresentation(self.thumbnail);
     webpage.webpageUrl = [self genVideoUrl];
     message.mediaObject = webpage;
+    if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
+        message.text = self.contentDescription.text;
+        
+    } else {
+        message.text = NSLocalizedString(@"Video from WeiChat", nil);
+    }
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
     request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",

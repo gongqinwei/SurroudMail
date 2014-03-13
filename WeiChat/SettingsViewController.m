@@ -17,8 +17,8 @@
 enum SettingsSection {
     kVideoCaptureMode,
     kVideoQuality,
-    kVdisk,
     kShare,
+    kVdisk,
     kFeedbackAndVersion
 };
 
@@ -112,21 +112,26 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
         case kVideoCaptureMode:
             cell.textLabel.font = [UIFont fontWithName:APP_FONT size:16];
             cell.detailTextLabel.font = [UIFont fontWithName:APP_FONT size:12];
-//            cell.detailTextLabel.textColor = [UIColor grayColor];
             
             int captureMode = [[NSUserDefaults standardUserDefaults] integerForKey:VIDEO_CAPTURE_MODE];
-            if (captureMode == indexPath.row) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
+//            if (captureMode == indexPath.row) {
+//                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//            }
             
             switch (indexPath.row) {
                 case kPressAndHoldToRecord:
                     cell.textLabel.text = NSLocalizedString(@"Press and hold anywhere in the screen", nil);
-                    cell.detailTextLabel.text = NSLocalizedString(@"Release finger to pause recording", nil);
+                    if (captureMode == kPressAndHoldToRecord) {
+                        cell.detailTextLabel.text = NSLocalizedString(@"Release finger to pause recording", nil);
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
                     break;
                 case kTapToRecord:
                     cell.textLabel.text = NSLocalizedString(@"Tap button to record", nil);
-                    cell.detailTextLabel.text = NSLocalizedString(@"Tap button again to pause recording", nil);
+                    if (captureMode == kTapToRecord) {
+                        cell.detailTextLabel.text = NSLocalizedString(@"Tap button again to pause recording", nil);
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
                     break;
                 default:
                     break;
@@ -137,26 +142,35 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             cell.textLabel.font = [UIFont fontWithName:APP_FONT size:16];
             cell.detailTextLabel.font = [UIFont fontWithName:APP_FONT size:12];
             
+            int videoQuality = [[NSUserDefaults standardUserDefaults] integerForKey:VIDEO_QUALITY];
+//            if (videoQuality == indexPath.row) {
+//                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//            }
+            
             switch (indexPath.row) {
                 case kVideoQualityHigh:
                     cell.textLabel.text = NSLocalizedString(@"High", nil);
-                    cell.detailTextLabel.text = NSLocalizedString(@"Takes longer to upload and more cloud space", nil);
+                    if (videoQuality == kVideoQualityHigh) {
+                        cell.detailTextLabel.text = NSLocalizedString(@"Takes longer to upload and more cloud space", nil);
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
                     break;
                 case kVideoQualityMedium:
                     cell.textLabel.text = NSLocalizedString(@"Medium", nil);
-                    cell.detailTextLabel.text = NSLocalizedString(@"Suitable for transmission via Wi-Fi", nil);
+                    if (videoQuality == kVideoQualityMedium) {
+                        cell.detailTextLabel.text = NSLocalizedString(@"Suitable for transmission via Wi-Fi", nil);
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
                     break;
                 case kVideoQualityLow:
                     cell.textLabel.text = NSLocalizedString(@"Low", nil);
-                    cell.detailTextLabel.text = NSLocalizedString(@"Suitable for tranmission via cellular network", nil);
+                    if (videoQuality == kVideoQualityLow) {
+                        cell.detailTextLabel.text = NSLocalizedString(@"Suitable for tranmission via cellular network", nil);
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
                     break;
                 default:
                     break;
-            }
-            
-            int videoQuality = [[NSUserDefaults standardUserDefaults] integerForKey:VIDEO_QUALITY];
-            if (videoQuality == indexPath.row) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
             
             break;
@@ -261,13 +275,13 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     switch (indexPath.section) {
         case kVideoCaptureMode:
             [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:VIDEO_CAPTURE_MODE];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kVideoCaptureMode] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kVideoCaptureMode] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.videoRecorderDelegate didSelectVideoCaptureMode:indexPath.row];
             break;
             
         case kVideoQuality:
             [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:VIDEO_QUALITY];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kVideoQuality] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kVideoQuality] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.videoRecorderDelegate didSelectVideoQuality:indexPath.row];
             break;
             
@@ -335,7 +349,7 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
         
         [mailer setSubject:NSLocalizedString(@"Feedback on WeiChat app", nil)];
         
-        NSArray *toRecipients = [NSArray arrayWithObjects:@"customer.mobill@gmail.com", nil];
+        NSArray *toRecipients = [NSArray arrayWithObjects:@"customer.weichat@gmail.com", nil];
         [mailer setToRecipients:toRecipients];
         
         [self presentViewController:mailer animated:YES completion:nil];
@@ -420,11 +434,12 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     WBWebpageObject *webpage = [WBWebpageObject object];
     webpage.objectID = @"WeiboViaWeiChat";
     webpage.title = NSLocalizedString(@"WeiChat", nil);     //temp
-    webpage.description =NSLocalizedString(@"Use WeiChat to post videos to WeChat Moments! Cool!", nil);     //temp
+    webpage.description = NSLocalizedString(@"Weibo + Wechat = WeiChat!", nil);     //temp
     webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Aperture93" ofType:@"png"]];
     webpage.webpageUrl = iOSAppStoreURL;
     
     WBMessageObject *message = [WBMessageObject message];
+    message.text = NSLocalizedString(@"Use WeiChat to post videos to Weibo! Super cool!", nil);     //temp
     message.mediaObject = webpage;
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
