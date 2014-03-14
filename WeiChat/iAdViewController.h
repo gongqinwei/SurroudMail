@@ -30,16 +30,23 @@
 #define LABEL_ADD_DESCRIPTION               NSLocalizedString(@"Say something...", nil)
 
 typedef enum {
-    kWeixinMoments, kWeixinFriends, kSinaWeibo, kSaveToDevice, kUnlinkVdisk, kCancelShare
+    kWeixinMoments, kWeixinFriends, kSinaWeibo, kSaveToDevice, kCancelShare
 } ShareActionEnum;
 
 typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError *error);
 
-#define SHARE_ACTIONS     [NSArray arrayWithObjects:NSLocalizedString(@"WeChat Moments", nil), NSLocalizedString(@"WeChat Friends", nil), NSLocalizedString(@"Sina Weibo", nil), NSLocalizedString(@"Save in iPhone", nil), @"Unlink Vdisk", NSLocalizedString(@"Cancel", nil), nil]
+#define SHARE_ACTIONS     [NSArray arrayWithObjects:NSLocalizedString(@"WeChat Moments", nil), NSLocalizedString(@"WeChat Friends", nil), NSLocalizedString(@"Sina Weibo", nil), NSLocalizedString(@"Save in iPhone", nil), NSLocalizedString(@"Cancel", nil), nil]
 
 
+@protocol VdiskConnectionDelegate <NSObject>
 
-@interface iAdViewController : UIViewController <UIActionSheetDelegate, ADBannerViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, VdiskSessionDelegate, VdiskComplexUploadDelegate, VdiskRestClientDelegate, WBHttpRequestDelegate>
+- (void)didConnect;
+- (void)didDisconnect;
+
+@end
+
+
+@interface iAdViewController : UIViewController <UIActionSheetDelegate, ADBannerViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, VdiskSessionDelegate, VdiskComplexUploadDelegate, VdiskRestClientDelegate> //WBHttpRequestDelegate
 
 @property (nonatomic, strong) UIView *headView;
 //@property (nonatomic, strong) UIView *lineView;
@@ -85,6 +92,8 @@ typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError
 @property (nonatomic, assign) BOOL hasTimedUp;
 
 @property (nonatomic, assign) BOOL needSave;
+
+@property (nonatomic, strong) id<VdiskConnectionDelegate> vdiskConnectionDelegate;
 
 
 - (void)raiseADBanner;

@@ -46,6 +46,7 @@
 #define VIDEO_RECORDING_PROGRESS_BAR_RECT       CGRectMake(0, NAV_BAR_HEIGHT, SCREEN_WIDTH, 10)
 #define VIDEO_RECORDING_PROGRESS_LABEL_RECT     CGRectMake((SCREEN_WIDTH - 60) / 2, 12, 60, 20)
 
+#define VIDEO_MIN_DURATION          2
 #define VIDEO_MAX_DURATION_FREE     10  //seconds
 #define VIDEO_MAX_DURATION          30  //seconds
 #define ANIMATE_TO_POST_DURATION    0.6
@@ -114,13 +115,13 @@
 }
 
 - (NSString *)genVideoUrl {
-    //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropboxusercontent.com/s/83blvpg0zxmic47/IMG_0330.MOV"];
-    //    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
-    //    ext.videoUrl = @"http://share.weiyun.com/7b628f051c3c3081f677bae7b8023bfc";
-    //    ext.videoUrl = self.mediaLink;
-    //    ext.videoUrl = [VDISK_VIDEO_URL_PREFIX stringByAppendingString:[self.mediaLink lastPathComponent]];
-    //    ext.videoUrl = @"http://vdisk.weibo.com/wap/fp/aIsz_qBLOinQf?skiplogin=1";
-    //    ext.videoUrl = @"http://download-vdisk.sina.com.cn/31365285/dff2516b78b89f51e0872332fa484a5c4b042560?ssig=OFqNlGWwT4&Expires=1388730326&KID=sae,l30zoo1wmz&fn=IMG_0360.MOV";
+//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropboxusercontent.com/s/83blvpg0zxmic47/IMG_0330.MOV"];
+//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.63/?videoSrc=%@", @"https://dl.dropbox.com/s/p114jnwdgpi3ll1/IMG_0321.3gp"];
+//    ext.videoUrl = @"http://share.weiyun.com/7b628f051c3c3081f677bae7b8023bfc";
+//    ext.videoUrl = self.mediaLink;
+//    NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@", VDISK_VIDEO_URL_PREFIX, [self.mediaLink lastPathComponent]]; //[VDISK_VIDEO_URL_PREFIX stringByAppendingString:[self.mediaLink lastPathComponent]];
+//    ext.videoUrl = @"http://vdisk.weibo.com/wap/fp/aIsz_qBLOinQf?skiplogin=1";
+//    ext.videoUrl = @"http://download-vdisk.sina.com.cn/31365285/dff2516b78b89f51e0872332fa484a5c4b042560?ssig=OFqNlGWwT4&Expires=1388730326&KID=sae,l30zoo1wmz&fn=IMG_0360.MOV";
     
     NSMutableString *url = [NSMutableString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
     
@@ -131,6 +132,8 @@
     if (self.currentLocation) {
         [url appendFormat:@"&POI=%@&geo=%f,%f", self.geoLabel.text, self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude];
     }
+    
+    Debug(@"======= final video url: %@", url);
     
     return url;
 }
@@ -150,20 +153,15 @@
     WXVideoObject *ext = [WXVideoObject object];
     Debug(@"------- media link: %@", self.mediaLink);
     
-    ext.videoUrl = [self genVideoUrl];
-//    ext.videoUrl = [NSString stringWithFormat:@"http://192.168.1.137/?videoSrc=%@", self.streamableURL];
+    ext.videoUrl = self.mediaLink;          //temp
+//    ext.videoUrl = [self genVideoUrl];    //TODO: THIS IS THE CORRECT ONE EVENTUALLY
     
     if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
         message.title = self.contentDescription.text;
         message.description = NSLocalizedString(@"Video from WeiChat", nil);
-//        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&comment=%@", self.contentDescription.text];
     } else {
         message.title = NSLocalizedString(@"Video from WeiChat", nil);
     }
-    
-//    if (self.currentLocation) {
-//        ext.videoUrl = [ext.videoUrl stringByAppendingFormat:@"&POI=%@&geo=%f,%f", self.geoLabel.text, self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude];
-//    }
     
     message.mediaObject = ext;
     
@@ -247,6 +245,7 @@
     } else if ([segue.identifier isEqualToString:GO_TO_SETTINGS]) {
         UINavigationController *nav = segue.destinationViewController;
         [nav.childViewControllers[0] setVideoRecorderDelegate:self];
+        self.vdiskConnectionDelegate = nav.childViewControllers[0];
     }
 }
 
@@ -706,7 +705,10 @@
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        self.navItem.rightBarButtonItem = self.nextButton;
+        NSTimeInterval duration = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceDate:self.recordingStartTime];
+        if (duration >= VIDEO_MIN_DURATION) {
+            self.navItem.rightBarButtonItem = self.nextButton;
+        }
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -1094,7 +1096,10 @@
     [self pauseTimer];
     [self stopSpin];
     self.navItem.leftBarButtonItem = self.cancelButton;
-    self.navItem.rightBarButtonItem = self.nextButton;
+    NSTimeInterval duration = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceDate:self.recordingStartTime];
+    if (duration >= VIDEO_MIN_DURATION) {
+        self.navItem.rightBarButtonItem = self.nextButton;
+    }
 }
 
 - (void)toggleRecording {

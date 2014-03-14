@@ -8,6 +8,7 @@
 
 #import "iAdViewController.h"
 #import "Constants.h"
+#import "SettingsViewController.h"
 #import "POITableViewController.h"
 
 
@@ -47,6 +48,7 @@
 #define VIEW_BG_COLOR                                   0xD4F2FF
 
 #define PRESENT_POI_SEGUE                               @"PresentPOI"
+#define GO_TO_SETTINGS_SEGUE                            @"GotoSettings"
 
 #define VDISK_AUTHORIZING                               @"VdiskAuthorizingForWeiChat"
 
@@ -147,9 +149,8 @@
     [actions addButtonWithTitle:SHARE_ACTIONS[kWeixinMoments]];
     [actions addButtonWithTitle:SHARE_ACTIONS[kWeixinFriends]];
     [actions addButtonWithTitle:SHARE_ACTIONS[kSinaWeibo]];
-    //TODO: add save to vdisk only
     [actions addButtonWithTitle:SHARE_ACTIONS[kSaveToDevice]];
-    [actions addButtonWithTitle:SHARE_ACTIONS[kUnlinkVdisk]];   //temp
+//    [actions addButtonWithTitle:SHARE_ACTIONS[kUnlinkVdisk]];   //temp
     [actions addButtonWithTitle:SHARE_ACTIONS[kCancelShare]];
     
     actions.cancelButtonIndex = kCancelShare;
@@ -569,17 +570,19 @@
         
         [self uploadContent];
     }
+    
+    [self.vdiskConnectionDelegate didConnect];
 }
 
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
-    [session refreshLink];
 }
 
 // Log out successfully
 - (void)sessionUnlinkedSuccess:(VdiskSession *)session {
     Debug(@"Vdisk Session Unlinked Success");
+    [self.vdiskConnectionDelegate didDisconnect];
 }
 
 - (void)sessionNotLink:(VdiskSession *)session {
@@ -768,9 +771,9 @@
             }];
         }
             break;
-        case kUnlinkVdisk:
-            [[VdiskSession sharedSession] unlink];
-            break;
+//        case kUnlinkVdisk:
+//            [[VdiskSession sharedSession] unlink];
+//            break;
         default:
             break;
     }

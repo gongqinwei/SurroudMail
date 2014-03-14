@@ -11,18 +11,20 @@
 #import "UIHelper.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
+#import "VdiskSDK.h"
 #import <MessageUI/MessageUI.h>
 
 
 enum SettingsSection {
     kVideoCaptureMode,
     kVideoQuality,
-    kShare,
+//    kShare,
     kVdisk,
     kFeedbackAndVersion
 };
 
 enum VdiskSettings {
+    kAuthorizeToVdisk,
     kAccessVdisk,
     kIncreasVdisk
 };
@@ -41,7 +43,7 @@ enum Info {
 static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id696521463?at=10l6dK";
 
 
-@interface SettingsViewController () <MFMailComposeViewControllerDelegate>
+@interface SettingsViewController () <MFMailComposeViewControllerDelegate, VdiskConnectionDelegate>
 
 @end
 
@@ -79,12 +81,12 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             break;
             
         case kVdisk:
-            return 2;
-            break;
-            
-        case kShare:
             return 3;
             break;
+            
+//        case kShare:
+//            return 3;
+//            break;
             
         case kFeedbackAndVersion:
             return 2;
@@ -107,6 +109,7 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     
     cell.textLabel.font = [UIFont fontWithName:APP_FONT size:17];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.detailTextLabel.textColor = [UIColor grayColor];
     
     switch (indexPath.section) {
         case kVideoCaptureMode:
@@ -177,6 +180,16 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             
         case kVdisk:
             switch (indexPath.row) {
+                case kAuthorizeToVdisk:
+                {
+                    VdiskSession *vDiskSession = [VdiskSession sharedSession];
+                    if (![vDiskSession isLinked]){
+                        cell.textLabel.text = NSLocalizedString(@"Connect to Sina Vdisk", nil);
+                    } else {
+                        cell.textLabel.text = NSLocalizedString(@"Disconnect from Sina Vdisk", nil);
+                    }
+                }
+                    break;
                 case kAccessVdisk:
                     cell.textLabel.text = NSLocalizedString(@"Access your Vdisk account", nil);
                     break;
@@ -192,27 +205,27 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             
             break;
             
-        case kShare:
-            switch (indexPath.row) {
-                case kShareAppViaWeixinMoments:
-                    cell.textLabel.text = NSLocalizedString(@"WeChat Moments", nil);
-                    break;
-                case kShareAppViaWeixinFriends:
-                    cell.textLabel.text = NSLocalizedString(@"WeChat Friends", nil);
-                    break;
-                    
-                case kShareAppViaSinaWeibo:
-                    cell.textLabel.text = NSLocalizedString(@"Sina Weibo", nil);
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            cell.detailTextLabel.text = nil;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            break;
+//        case kShare:
+//            switch (indexPath.row) {
+//                case kShareAppViaWeixinMoments:
+//                    cell.textLabel.text = NSLocalizedString(@"WeChat Moments", nil);
+//                    break;
+//                case kShareAppViaWeixinFriends:
+//                    cell.textLabel.text = NSLocalizedString(@"WeChat Friends", nil);
+//                    break;
+//                    
+//                case kShareAppViaSinaWeibo:
+//                    cell.textLabel.text = NSLocalizedString(@"Sina Weibo", nil);
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
+//            
+//            cell.detailTextLabel.text = nil;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            
+//            break;
             
         case kFeedbackAndVersion:
             switch (indexPath.row) {
@@ -257,9 +270,9 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             return NSLocalizedString(@"Your videos are securely stored in your own Sina Vdisk", nil);
             break;
             
-        case kShare:
-            return NSLocalizedString(@"Share WeiChat via", nil);
-            break;
+//        case kShare:
+//            return NSLocalizedString(@"Share WeiChat via", nil);
+//            break;
             
         case kFeedbackAndVersion:
             return nil;
@@ -287,40 +300,50 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             
         case kVdisk:
         {
-            NSString *vdiskLink;
-            if (indexPath.row == kAccessVdisk) {
-                vdiskLink = @"http://vdisk.weibo.com/wap/file/list";
-            } else if (indexPath.row == kIncreasVdisk) {
-                vdiskLink = @"http://vdisk.weibo.com/zt/kongjian/";
-            }
-            
-            NSURL *vdiskURL = [NSURL URLWithString:vdiskLink];
-            if ([[UIApplication sharedApplication] canOpenURL:vdiskURL]) {
-                [[UIApplication sharedApplication] openURL:vdiskURL];
+            if (indexPath.row == kAuthorizeToVdisk) {
+                VdiskSession *vDiskSession = [VdiskSession sharedSession];
+                if (![vDiskSession isLinked]){
+                    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+                } else {
+                    [vDiskSession unlink];
+                    [self vdiskConnectionChanged];
+                }
             } else {
-                [UIHelper showInfo:@"Can't open browser on this device!" withStatus:kInfo];
+                NSString *vdiskLink;
+                if (indexPath.row == kAccessVdisk) {
+                    vdiskLink = @"http://vdisk.weibo.com/wap/file/list";
+                } else if (indexPath.row == kIncreasVdisk) {
+                    vdiskLink = @"http://vdisk.weibo.com/zt/kongjian/";
+                }
+                
+                NSURL *vdiskURL = [NSURL URLWithString:vdiskLink];
+                if ([[UIApplication sharedApplication] canOpenURL:vdiskURL]) {
+                    [[UIApplication sharedApplication] openURL:vdiskURL];
+                } else {
+                    [UIHelper showInfo:@"Can't open browser on this device!" withStatus:kInfo];
+                }
             }
         }
             break;
             
-        case kShare:
-            switch (indexPath.row) {
-                case kShareAppViaWeixinMoments:
-                    [self shareAppToWeixin:kShareAppViaWeixinMoments];
-                    break;
-                case kShareAppViaWeixinFriends:
-                    [self shareAppToWeixin:kShareAppViaWeixinFriends];
-                    break;
-                    
-                case kShareAppViaSinaWeibo:
-                    [self shareAppToWeibo];
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            break;
+//        case kShare:
+//            switch (indexPath.row) {
+//                case kShareAppViaWeixinMoments:
+//                    [self shareAppToWeixin:kShareAppViaWeixinMoments];
+//                    break;
+//                case kShareAppViaWeixinFriends:
+//                    [self shareAppToWeixin:kShareAppViaWeixinFriends];
+//                    break;
+//                    
+//                case kShareAppViaSinaWeibo:
+//                    [self shareAppToWeibo];
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
+//            
+//            break;
             
         case kFeedbackAndVersion:
             switch (indexPath.row) {
@@ -451,16 +474,18 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     [WeiboSDK sendRequest:request];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - (Weichat) vdisk connection delegate
+- (void) didConnect{
+    [self vdiskConnectionChanged];
 }
 
- */
+- (void)didDisconnect {
+    [self vdiskConnectionChanged];
+}
+
+- (void)vdiskConnectionChanged {
+    NSIndexPath *path = [NSIndexPath indexPathForRow:kAuthorizeToVdisk inSection:kVdisk];
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 @end

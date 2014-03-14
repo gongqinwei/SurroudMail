@@ -11,6 +11,7 @@
 "WeChat Moments" = "WeChat Moments";
 "WeChat Friends" = "WeChat Friends";
 "Sina Weibo" = "Sina Weibo";
+"Save to Sina Vdisk" = "Save to Sina Vdisk";
 "Save in iPhone" = "Save in iPhone";
 
 "Previous" = "Previous";
@@ -53,7 +54,7 @@
 "Settings" = "Settings";
 
 "Video Recording Mode" = "Video Recording Mode";
-"Press and hold anywhere in the screen" = "Press and hold anywhere in the screen";
+"Press and hold anywhere in the screen" = "Press and hold anywhere in screen";
 "Release finger to pause recording" = "Release finger to pause recording";
 "Tap button to record" = "Tap button to record";
 "Tap button again to pause recording" = "Tap button again to pause recording";
@@ -66,8 +67,9 @@
 "Low" = "Low";
 "Suitable for tranmission via cellular network" = "Suitable for tranmission via cellular network";
 
-
 "Your videos are securely stored in your own Sina Vdisk" = "Your videos are securely stored in your own Sina Vdisk";
+"Connect to Sina Vdisk" = "Connect to Sina Vdisk";
+"Disconnect from Sina Vdisk" = "Disconnect from Sina Vdisk";
 "Access your Vdisk account" = "Access your Vdisk account";
 "Increase Vdisk space" = "Increase Vdisk space";
 

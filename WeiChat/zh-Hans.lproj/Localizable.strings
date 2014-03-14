@@ -11,7 +11,8 @@
 "WeChat Moments" = "微信朋友圈";
 "WeChat Friends" = "微信好友";
 "Sina Weibo" = "新浪微博";
-"Save in iPhone" = "手机相簿";
+"Save to Sina Vdisk" = "保存至新浪微盘";
+"Save in iPhone" = "保存在手机相簿";
 
 "Previous" = "上一步";
 "Next" = "下一步";
@@ -67,6 +68,8 @@
 "Suitable for tranmission via cellular network" = "适合于移动网络传输";
 
 "Your videos are securely stored in your own Sina Vdisk" = "您的视频存储在您自己的新浪微盘内";
+"Connect to Sina Vdisk" = "连结新浪微盘（需要新浪帐号）";
+"Disconnect from Sina Vdisk" = "断开新浪微盘连结";
 "Access your Vdisk account" = "前往新浪微盘查看并管理";
 "Increase Vdisk space" = "增大微盘空间以存储更多视频";
 
