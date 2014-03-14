@@ -27,12 +27,11 @@
 #define SAVE_VIDEO_PROMPT           NSLocalizedString(@"Save current video to Camera Roll?", nil)
 
 
-#define CAMCORDER_IMG_NAME          @"Aperture93.png"
 //#define CAMCORDER_CLOSED_IMG_NAME   @"Aperture55.png"
 
 #define PLAY_THUMBNAIL_SIZE         55
 #define VIDEO_THUMBNAIL_SIZE_SMALL  67
-#define VIDEO_THUMBNAIL_SIZE_BIG    93
+//#define VIDEO_THUMBNAIL_SIZE_BIG    81
 #define PLAY_THUMBNAIL_RECT         CGRectMake(20, 20, PLAY_THUMBNAIL_SIZE, PLAY_THUMBNAIL_SIZE)
 #define VIDEO_THUMBNAIL_INIT_RECT   CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_BIG) / 2, (IS_IOS7_AND_UP ? 220 : 160), VIDEO_THUMBNAIL_SIZE_BIG, VIDEO_THUMBNAIL_SIZE_BIG)
 #define VIDEO_THUMBNAIL_AFTER_RECT  CGRectMake((SCREEN_WIDTH - VIDEO_THUMBNAIL_SIZE_SMALL) / 2, HEAD_VIEW_HEIGHT + 70 + (IS_IOS7_AND_UP ? 60 : 0), VIDEO_THUMBNAIL_SIZE_SMALL, VIDEO_THUMBNAIL_SIZE_SMALL)
@@ -499,7 +498,7 @@
         [self.playButton setFrame:VIDEO_THUMBNAIL_INIT_RECT];
         [self.headView addSubview:self.playButton];
         
-        UIImage *camcorderImg = [UIImage imageNamed:CAMCORDER_IMG_NAME];
+        UIImage *camcorderImg = [UIImage imageNamed:APERTURE_IMG_NAME];
         self.videoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.videoButton setImage:camcorderImg forState:UIControlStateNormal];
         [self.videoButton addTarget:self action:@selector(onVideoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -1208,7 +1207,7 @@
 //}
 
 - (void)animateToRecording {
-    [self.videoButton setImage:[UIImage imageNamed:CAMCORDER_IMG_NAME] forState:UIControlStateNormal];
+    [self.videoButton setImage:[UIImage imageNamed:APERTURE_IMG_NAME] forState:UIControlStateNormal];
     
     [UIView animateWithDuration:ANIMATE_TO_REC_DURATION
                           delay: 0.5f

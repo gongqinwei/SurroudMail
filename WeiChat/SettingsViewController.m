@@ -420,7 +420,7 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = NSLocalizedString(@"Use WeiChat to post videos to WeChat Moments! Cool!", nil);
 //    message.description = NSLocalizedString(@"I'm using WeiChat to post videos to WeChat Moments! Check it out!", nil);
-    [message setThumbImage:[UIImage imageNamed:@"Aperture93.png"]];
+    [message setThumbImage:[UIImage imageNamed:APERTURE_IMG_NAME]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
     ext.webpageUrl = iOSAppStoreURL;
@@ -458,7 +458,7 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
     webpage.objectID = @"WeiboViaWeiChat";
     webpage.title = NSLocalizedString(@"WeiChat", nil);     //temp
     webpage.description = NSLocalizedString(@"Weibo + Wechat = WeiChat!", nil);     //temp
-    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Aperture93" ofType:@"png"]];
+    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[[APERTURE_IMG_NAME lastPathComponent] stringByDeletingPathExtension] ofType:[APERTURE_IMG_NAME pathExtension]]];
     webpage.webpageUrl = iOSAppStoreURL;
     
     WBMessageObject *message = [WBMessageObject message];

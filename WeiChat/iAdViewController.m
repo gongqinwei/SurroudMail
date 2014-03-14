@@ -534,6 +534,8 @@
                                           self.placemark.thoroughfare];
                 }
                 
+//                self.geoLabel.text = @"美国，加州，南太浩湖市，Heavenly Ski Resort";
+                
                 self.POIs = self.placemark.areasOfInterest;
 //                self.POIs = [NSArray arrayWithObject:@"dummy POI"];
                 Error(@"POI: %d %@", self.POIs.count, self.POIs[0]);
