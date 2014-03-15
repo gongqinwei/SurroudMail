@@ -219,8 +219,8 @@
 
 - (void)productPurchased:(NSNotification *)notification {
     
-    NSString * productIdentifier = notification.object;
-    Debug(@"************ Purchased %@!", productIdentifier);
+//    NSString * productIdentifier = notification.object;
+    Debug(@"************ Purchased %@!", notification.object);
     
     [self.delegate didSetSoundTrack:self.mediaURL];
     [self navigateBack];

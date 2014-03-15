@@ -107,8 +107,7 @@
 
 - (void) onResp:(BaseResp*)resp {
     if([resp isKindOfClass:[SendMessageToWXResp class]]) {
-        NSString *strMsg = [NSString stringWithFormat:@"Result:%d", resp.errCode];
-        Debug(@"Response from Weixin was: %@",strMsg);
+        Debug(@"Response from Weixin was: %@", [NSString stringWithFormat:@"Result:%d", resp.errCode]);
     }
 }
 

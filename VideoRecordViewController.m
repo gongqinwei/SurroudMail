@@ -134,7 +134,8 @@
     
     Debug(@"======= final video url: %@", url);
     
-    return url;
+//    return url;
+    return self.mediaLink;  //temp
 }
 
 - (void)publishContentToWeixin {
@@ -152,8 +153,7 @@
     WXVideoObject *ext = [WXVideoObject object];
     Debug(@"------- media link: %@", self.mediaLink);
     
-    ext.videoUrl = self.mediaLink;          //temp
-//    ext.videoUrl = [self genVideoUrl];    //TODO: THIS IS THE CORRECT ONE EVENTUALLY
+    ext.videoUrl = [self genVideoUrl];    //TODO: THIS IS THE CORRECT ONE EVENTUALLY
     
     if (self.contentDescription.text.length > 0 && ![self.contentDescription.text isEqualToString:LABEL_ADD_DESCRIPTION]) {
         message.title = self.contentDescription.text;
