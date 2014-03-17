@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "SettingsViewController.h"
 #import "POITableViewController.h"
+#import "UIHelper.h"
 
 
 #define iAd_ANIMATION_DURATION                          0.25
@@ -91,10 +92,12 @@
         self.uploadProgressLabel.text = @"0.0%";
         self.view.userInteractionEnabled = NO;
         self.shareButton.enabled = NO;
+        self.settingsButton.enabled = NO;
     } else {
         self.uploadProgress.hidden = YES;
         self.view.userInteractionEnabled = YES;
         self.shareButton.enabled = YES;
+        self.settingsButton.enabled = YES;
     }
     
     [UIView animateWithDuration:UPLOAD_PROGRESS_OVERLAY_ANIMATION_DURATION
@@ -249,11 +252,11 @@
 //    self.view.backgroundColor = UIColorFromRGB(VIEW_BG_COLOR);
 //self.view.backgroundColor = UIColorFromRGB(0xE5E4E2);
     
-    UIButton *settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 24)];
-    [settingsButton setBackgroundImage:[UIImage imageNamed:@"Settings.png"] forState:UIControlStateNormal];
-    [settingsButton addTarget:self action:@selector(gotoSettings) forControlEvents:UIControlEventTouchUpInside];
-    [settingsButton setShowsTouchWhenHighlighted:YES];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 24)];
+    [self.settingsButton setBackgroundImage:[UIImage imageNamed:@"Settings.png"] forState:UIControlStateNormal];
+    [self.settingsButton addTarget:self action:@selector(gotoSettings) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingsButton setShowsTouchWhenHighlighted:YES];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.settingsButton];
     
     
     self.headView = [[UIView alloc]initWithFrame:HEAD_VIEW_RECT];
@@ -579,6 +582,8 @@
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
+//    [self relinkVdisk];         // either this
+    [session refreshLink];      // or this
 }
 
 // Log out successfully
@@ -599,6 +604,12 @@
     [session refreshLink];
 }
 
+- (void)relinkVdisk {
+    VdiskSession *vDiskSession = [VdiskSession sharedSession];
+    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+    [self.vdiskConnectionDelegate didDisconnect];
+    [UIHelper showInfo:NSLocalizedString(@"Connection to Sina Vdisk has lost. Please sign in again.", nil) withStatus:kInfo];
+}
 
 #pragma mark - VdiskComplexUploadDelegate
 
@@ -642,6 +653,7 @@
     
     // delete tmp file
     [[NSFileManager defaultManager] removeItemAtPath:srcPath error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:self.tmpPath error:nil];
     
     // get sharable URL first
     [self.vdiskRestClient loadSharableLinkForFile:metadata.path];
@@ -664,6 +676,9 @@
     
     //delete tmp file
     [[NSFileManager defaultManager] removeItemAtPath:[error.userInfo objectForKey:@"sourcePath"] error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:self.tmpPath error:nil];
+    
+    [self toggleUploadProgress:NO];
 }
 
 

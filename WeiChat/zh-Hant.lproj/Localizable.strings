@@ -52,6 +52,7 @@
 
 // Settings
 "Settings" = "設置";
+"Connection to Sina Vdisk has lost. Please sign in again." = "與新浪微盤失聯。請再次登錄。";
 
 "Video Recording Mode" = "視訊拍攝模式";
 "Press and hold anywhere in the screen" = "按住屏幕任何位置";

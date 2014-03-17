@@ -860,13 +860,14 @@
 - (void)uploadVideoToVdisk {
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *theAsset) {
         NSString *fileName = [[theAsset defaultRepresentation] filename];
-        NSString *tmpPath = [NSString stringWithFormat:@"%@/%@", [NSHomeDirectory() stringByAppendingFormat: @"/tmp"], fileName];
+        self.tmpPath = nil;
+        self.tmpPath = [NSString stringWithFormat:@"%@/%@", [NSHomeDirectory() stringByAppendingFormat: @"/tmp"], fileName];
         
         NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager createFileAtPath:tmpPath contents:emptyData attributes:nil];
+        [fileManager createFileAtPath:self.tmpPath contents:emptyData attributes:nil];
         
-        NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:tmpPath];
+        NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:self.tmpPath];
         
         unsigned long long offset = 0;
         unsigned long long length;
@@ -896,7 +897,7 @@
         free(buffer);
         [theFileHandle closeFile];
         
-        if ([fileManager fileExistsAtPath:tmpPath]) {
+        if ([fileManager fileExistsAtPath:self.tmpPath]) {
             //                _progressLabel.text = @"0.0%";
             self.uploadProgress.progress = 0.0f;
             
@@ -905,7 +906,7 @@
             [self.vdiskUploader cancel];
             self.vdiskUploader = nil;
             
-            self.vdiskUploader = [[VdiskComplexUpload alloc] initWithFile:fileName fromPath:tmpPath toPath:@"/"];
+            self.vdiskUploader = [[VdiskComplexUpload alloc] initWithFile:fileName fromPath:self.tmpPath toPath:@"/"];
             self.vdiskUploader.delegate = self;
             
             [self.vdiskUploader start:NO params:nil];

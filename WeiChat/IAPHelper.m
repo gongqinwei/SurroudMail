@@ -155,7 +155,7 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
         NSString *productID = transaction.payment.productIdentifier;
         if ([productID isEqualToString:IAP_PRODUCT_ID]) {
             [self provideContentForProductIdentifier:productID];
-            break;
+            return;
         }
     }
     

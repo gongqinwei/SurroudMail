@@ -49,7 +49,6 @@
 		7E1DF1BF1859964B0009F0C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF1BE1859964B0009F0C3 /* main.m */; };
 		7E1DF1C31859964B0009F0C3 /* WeiChatAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF1C21859964B0009F0C3 /* WeiChatAppDelegate.m */; };
 		7E1DF1C61859964B0009F0C3 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1C41859964B0009F0C3 /* Main_iPhone.storyboard */; };
-		7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1C71859964B0009F0C3 /* Main_iPad.storyboard */; };
 		7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF1CD1859964B0009F0C3 /* Images.xcassets */; };
 		7E1DF1D51859964B0009F0C3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1D41859964B0009F0C3 /* XCTest.framework */; };
 		7E1DF1D61859964B0009F0C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1DF1B21859964B0009F0C3 /* Foundation.framework */; };
@@ -97,13 +96,11 @@
 
 /* Begin PBXFileReference section */
 		0E86969118974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		0E86969218974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
 		0E86969318974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E86969418974C26009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E86969918975B84009E4E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E86969A18975E1D009E4E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E86969D18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		0E86969E18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
 		0E86969F18978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E8696A018978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E8696A118978833009E4E72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -161,7 +158,6 @@
 		7E1DF1C11859964B0009F0C3 /* WeiChatAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeiChatAppDelegate.h; sourceTree = "<group>"; };
 		7E1DF1C21859964B0009F0C3 /* WeiChatAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeiChatAppDelegate.m; sourceTree = "<group>"; };
 		7E1DF1C51859964B0009F0C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		7E1DF1C81859964B0009F0C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		7E1DF1CD1859964B0009F0C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7E1DF1D31859964B0009F0C3 /* WeiChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeiChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1DF1D41859964B0009F0C3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -421,7 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				7E1DF1C41859964B0009F0C3 /* Main_iPhone.storyboard */,
-				7E1DF1C71859964B0009F0C3 /* Main_iPad.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -684,7 +679,6 @@
 				7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */,
 				7EBFF17D187F33E70031504B /* SinaWeibo.png in Resources */,
 				0E86969518975B11009E4E72 /* Localizable.strings in Resources */,
-				7E1DF1C91859964B0009F0C3 /* Main_iPad.storyboard in Resources */,
 				7E0BCD2018C157A700FED4B3 /* arrow_down.png in Resources */,
 				7E0BCD2418C157B500FED4B3 /* arrow_upper_left.png in Resources */,
 				7E1DF1CE1859964B0009F0C3 /* Images.xcassets in Resources */,
@@ -794,16 +788,6 @@
 				0E86969D18978833009E4E72 /* zh-Hant */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		7E1DF1C71859964B0009F0C3 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7E1DF1C81859964B0009F0C3 /* Base */,
-				0E86969218974C26009E4E72 /* zh-Hans */,
-				0E86969E18978833009E4E72 /* zh-Hant */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		7E1DF1DD1859964B0009F0C3 /* InfoPlist.strings */ = {
@@ -920,6 +904,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -951,6 +936,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

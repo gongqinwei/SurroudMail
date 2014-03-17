@@ -359,7 +359,7 @@
     
     self.mediaURL = [NSURL fileURLWithPath:self.compositionPath];
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.composition
-                                                                      presetName:AVAssetExportPresetHighestQuality];
+                                                                      presetName:AVAssetExportPresetMediumQuality];
     exporter.outputURL = self.mediaURL;
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
     exporter.shouldOptimizeForNetworkUse = YES;

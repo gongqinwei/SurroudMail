@@ -52,6 +52,7 @@ typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError
 //@property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIView *semiCoverView;
 
+@property (nonatomic, strong) UIButton *settingsButton;
 @property (nonatomic, strong) UIBarButtonItem *shareButton;
 @property (strong, nonatomic) UITextView *contentDescription;
 @property (strong, nonatomic) UIButton *geoButton;
@@ -94,6 +95,7 @@ typedef void(^AssetsLibraryWriteContentCompletionBlock)(NSURL *assetURL, NSError
 @property (nonatomic, assign) BOOL needSave;
 
 @property (nonatomic, strong) id<VdiskConnectionDelegate> vdiskConnectionDelegate;
+@property (nonatomic, strong) NSString *tmpPath; //temporary file path for upload to vdisk; file should be deleted once upload is done.
 
 
 - (void)raiseADBanner;
