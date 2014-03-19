@@ -12,7 +12,7 @@
 "WeChat Friends" = "微信好友";
 "Sina Weibo" = "新浪微博";
 "Save to Sina Vdisk" = "存儲至新浪微盤";
-"Save in iPhone" = "存儲至電話相簿";
+"Save in iPhone" = "僅存儲至電話相簿";
 
 "Previous" = "上一步";
 "Next" = "下一步";
@@ -37,7 +37,7 @@
 
 "Purchase" = "購買";
 "Redeem" = "恢復之前的購買";
-"IAPPrompt" = "您已用盡%d次試用。\n\n若您想繼續使用，只需一次性付費%@。如果您以前曾購買過，請在此登錄蘋果app store恢復即可。\n\n購買後，您的攝像時長將增至30秒哦！";
+"IAPPrompt" = "您已用盡%d次試用。\n\n若您想繼續使用，只需一次性付費%@。如果您以前曾購買過，請在此登錄蘋果app store恢復即可。\n購買後，您的攝像時長將增至30秒哦！";
 "NoPreviousPurchase" = "未找到此用戶以前購買記錄！";
 
 "Edit Sound Track" = "預覽並創作NV";

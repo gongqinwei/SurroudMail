@@ -12,7 +12,7 @@
 "WeChat Friends" = "WeChat Friends";
 "Sina Weibo" = "Sina Weibo";
 "Save to Sina Vdisk" = "Save to Sina Vdisk";
-"Save in iPhone" = "Save in iPhone";
+"Save in iPhone" = "Save in iPhone only";
 
 "Previous" = "Previous";
 "Next" = "Next";
@@ -37,7 +37,7 @@
 
 "Purchase" = "Purchase";
 "Redeem" = "Redeem";
-"IAPPrompt" = "You've used up %d free trials for this advanced feature.\n\nYou can purchase this feature for %@, or if you've purchased previously, just sign in to app store here to redeem it.\n\nAfter purchase, you can record videos up to 30 seconds!";
+"IAPPrompt" = "You've used up %d free trials for this advanced feature.\n\nYou can purchase this feature for %@, or if you've purchased previously, just sign in to app store here to redeem it.\nAfter purchase, you can record videos up to 30 seconds!";
 "NoPreviousPurchase" = "Can't find previous purchase of this feature for this account!";
 
 "Edit Sound Track" = "Preview";
