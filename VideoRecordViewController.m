@@ -1300,14 +1300,16 @@
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group setAssetsFilter:[ALAssetsFilter allVideos]];
         
-        // Chooses the photo at the last index
-        [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:[group numberOfAssets] - 1] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
-            // The end of the enumeration is signaled by asset == nil.
-            if (alAsset) {
-                CGImageRef imageRef = [alAsset thumbnail];
-                [self.galleryButton setBackgroundImage:[UIImage imageWithCGImage:imageRef] forState:UIControlStateNormal];
-            }
-        }];
+        if ([group numberOfAssets]) {
+            // Chooses the photo at the last index
+            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:[group numberOfAssets] - 1] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+                // The end of the enumeration is signaled by asset == nil.
+                if (alAsset) {
+                    CGImageRef imageRef = [alAsset thumbnail];
+                    [self.galleryButton setBackgroundImage:[UIImage imageWithCGImage:imageRef] forState:UIControlStateNormal];
+                }
+            }];
+        }
     } failureBlock: ^(NSError *error) {
         Error(@"Photo album empty!");
     }];

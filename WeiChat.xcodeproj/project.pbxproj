@@ -71,6 +71,7 @@
 		7EBFF17D187F33E70031504B /* SinaWeibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF17C187F33E70031504B /* SinaWeibo.png */; };
 		7EBFF17F187F33EF0031504B /* WeixinFriends.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF17E187F33EF0031504B /* WeixinFriends.png */; };
 		7EBFF181187F368C0031504B /* PhotoAlbum.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF180187F368C0031504B /* PhotoAlbum.png */; };
+		7EC5EB6118EA9C2D0085B9E2 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC5EB6018EA9C2D0085B9E2 /* Settings.png */; };
 		7ED0D4B318D37E0B002F4396 /* Aperture81.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0D4B218D37E0B002F4396 /* Aperture81.png */; };
 		7EDD3CB118602E34006ABAA9 /* SwitchCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */; };
 		7EDD3CB418613077006ABAA9 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDD3CB318613077006ABAA9 /* Util.m */; };
@@ -244,6 +245,7 @@
 		7EBFF17C187F33E70031504B /* SinaWeibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SinaWeibo.png; sourceTree = "<group>"; };
 		7EBFF17E187F33EF0031504B /* WeixinFriends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeixinFriends.png; sourceTree = "<group>"; };
 		7EBFF180187F368C0031504B /* PhotoAlbum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoAlbum.png; sourceTree = "<group>"; };
+		7EC5EB6018EA9C2D0085B9E2 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
 		7ED0D4B218D37E0B002F4396 /* Aperture81.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aperture81.png; sourceTree = "<group>"; };
 		7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchCamera.png; sourceTree = "<group>"; };
 		7EDD3CB218613077006ABAA9 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				0EF61A5518BC781D0033FE59 /* ProgressColor.png */,
 				7EA9B713185FD02700438EA6 /* Record.png */,
 				0E8EADB9189EEBDD004FA2DF /* SelectSound.png */,
+				7EC5EB6018EA9C2D0085B9E2 /* Settings.png */,
 				7EBFF17C187F33E70031504B /* SinaWeibo.png */,
 				0EF61A4218B735B80033FE59 /* success.png */,
 				7EDD3CB018602E34006ABAA9 /* SwitchCamera.png */,
@@ -690,6 +693,7 @@
 				7EDD3CDC1862D2D5006ABAA9 /* GeoOff.png in Resources */,
 				0E8EADBA189EEBDD004FA2DF /* SelectSound.png in Resources */,
 				7EBFF181187F368C0031504B /* PhotoAlbum.png in Resources */,
+				7EC5EB6118EA9C2D0085B9E2 /* Settings.png in Resources */,
 				7EA9B715185FD02700438EA6 /* Record.png in Resources */,
 				7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */,
 				7EA9B6FA185EDF2000438EA6 /* MicBarButton.png in Resources */,
