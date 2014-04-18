@@ -77,7 +77,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[VdiskSession sharedSession] refreshLink];
+//    [[VdiskSession sharedSession] refreshLink];
     [[VdiskSession sharedSession].sinaWeibo applicationDidBecomeActive];
 }
 

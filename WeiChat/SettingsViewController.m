@@ -19,7 +19,7 @@ enum SettingsSection {
     kVideoCaptureMode,
     kVideoQuality,
 //    kShare,
-    kVdisk,
+//    kVdisk,
     kFeedbackAndVersion
 };
 
@@ -80,9 +80,9 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             return 3;
             break;
             
-        case kVdisk:
-            return 3;
-            break;
+//        case kVdisk:
+//            return 3;
+//            break;
             
 //        case kShare:
 //            return 3;
@@ -178,32 +178,32 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             
             break;
             
-        case kVdisk:
-            switch (indexPath.row) {
-                case kAuthorizeToVdisk:
-                {
-                    VdiskSession *vDiskSession = [VdiskSession sharedSession];
-                    if (![vDiskSession isLinked]){
-                        cell.textLabel.text = NSLocalizedString(@"Connect to Sina Vdisk", nil);
-                    } else {
-                        cell.textLabel.text = NSLocalizedString(@"Disconnect from Sina Vdisk", nil);
-                    }
-                }
-                    break;
-                case kAccessVdisk:
-                    cell.textLabel.text = NSLocalizedString(@"Access your Vdisk account", nil);
-                    break;
-                case kIncreasVdisk:
-                    cell.textLabel.text = NSLocalizedString(@"Increase Vdisk space", nil);
-                    break;
-                default:
-                    break;
-            }
-            
-            cell.detailTextLabel.text = nil;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            break;
+//        case kVdisk:
+//            switch (indexPath.row) {
+//                case kAuthorizeToVdisk:
+//                {
+//                    VdiskSession *vDiskSession = [VdiskSession sharedSession];
+//                    if (![vDiskSession isLinked]){
+//                        cell.textLabel.text = NSLocalizedString(@"Connect to Sina Vdisk", nil);
+//                    } else {
+//                        cell.textLabel.text = NSLocalizedString(@"Disconnect from Sina Vdisk", nil);
+//                    }
+//                }
+//                    break;
+//                case kAccessVdisk:
+//                    cell.textLabel.text = NSLocalizedString(@"Access your Vdisk account", nil);
+//                    break;
+//                case kIncreasVdisk:
+//                    cell.textLabel.text = NSLocalizedString(@"Increase Vdisk space", nil);
+//                    break;
+//                default:
+//                    break;
+//            }
+//            
+//            cell.detailTextLabel.text = nil;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            
+//            break;
             
 //        case kShare:
 //            switch (indexPath.row) {
@@ -266,9 +266,9 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             return NSLocalizedString(@"Video Quality", nil);
             break;
             
-        case kVdisk:
-            return NSLocalizedString(@"Your videos are securely stored in your own Sina Vdisk", nil);
-            break;
+//        case kVdisk:
+//            return NSLocalizedString(@"Your videos are securely stored in your own Sina Vdisk", nil);
+//            break;
             
 //        case kShare:
 //            return NSLocalizedString(@"Share WeiChat via", nil);
@@ -298,33 +298,33 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
             [self.videoRecorderDelegate didSelectVideoQuality:indexPath.row];
             break;
             
-        case kVdisk:
-        {
-            if (indexPath.row == kAuthorizeToVdisk) {
-                VdiskSession *vDiskSession = [VdiskSession sharedSession];
-                if (![vDiskSession isLinked]){
-                    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
-                } else {
-                    [vDiskSession unlink];
-                    [self vdiskConnectionChanged];
-                }
-            } else {
-                NSString *vdiskLink;
-                if (indexPath.row == kAccessVdisk) {
-                    vdiskLink = @"http://vdisk.weibo.com/wap/file/list";
-                } else if (indexPath.row == kIncreasVdisk) {
-                    vdiskLink = @"http://vdisk.weibo.com/zt/kongjian/";
-                }
-                
-                NSURL *vdiskURL = [NSURL URLWithString:vdiskLink];
-                if ([[UIApplication sharedApplication] canOpenURL:vdiskURL]) {
-                    [[UIApplication sharedApplication] openURL:vdiskURL];
-                } else {
-                    [UIHelper showInfo:@"Can't open browser on this device!" withStatus:kInfo];
-                }
-            }
-        }
-            break;
+//        case kVdisk:
+//        {
+//            if (indexPath.row == kAuthorizeToVdisk) {
+//                VdiskSession *vDiskSession = [VdiskSession sharedSession];
+//                if (![vDiskSession isLinked]){
+//                    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+//                } else {
+//                    [vDiskSession unlink];
+//                    [self vdiskConnectionChanged];
+//                }
+//            } else {
+//                NSString *vdiskLink;
+//                if (indexPath.row == kAccessVdisk) {
+//                    vdiskLink = @"http://vdisk.weibo.com/wap/file/list";
+//                } else if (indexPath.row == kIncreasVdisk) {
+//                    vdiskLink = @"http://vdisk.weibo.com/zt/kongjian/";
+//                }
+//                
+//                NSURL *vdiskURL = [NSURL URLWithString:vdiskLink];
+//                if ([[UIApplication sharedApplication] canOpenURL:vdiskURL]) {
+//                    [[UIApplication sharedApplication] openURL:vdiskURL];
+//                } else {
+//                    [UIHelper showInfo:@"Can't open browser on this device!" withStatus:kInfo];
+//                }
+//            }
+//        }
+//            break;
             
 //        case kShare:
 //            switch (indexPath.row) {
@@ -484,8 +484,8 @@ static NSString *const iOSAppStoreURL = @"http://itunes.apple.com/app/id69652146
 }
 
 - (void)vdiskConnectionChanged {
-    NSIndexPath *path = [NSIndexPath indexPathForRow:kAuthorizeToVdisk inSection:kVdisk];
-    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:kAuthorizeToVdisk inSection:kVdisk];
+//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

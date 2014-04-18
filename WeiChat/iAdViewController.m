@@ -582,8 +582,8 @@
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
-    [self relinkVdisk];         // either this
-//    [session refreshLink];      // or this
+//    [self relinkVdisk];         // either this
+    [session refreshLink];      // or this
 }
 
 // Log out successfully
@@ -606,9 +606,10 @@
 
 - (void)relinkVdisk {
     VdiskSession *vDiskSession = [VdiskSession sharedSession];
-    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+//    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+    [vDiskSession linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
     [self.vdiskConnectionDelegate didDisconnect];
-    [UIHelper showInfo:NSLocalizedString(@"Connection to Sina Vdisk has lost. Please sign in again.", nil) withStatus:kInfo];
+//    [UIHelper showInfo:NSLocalizedString(@"Connection to Sina Vdisk has lost. Please sign in again.", nil) withStatus:kInfo];
 }
 
 #pragma mark - VdiskComplexUploadDelegate
