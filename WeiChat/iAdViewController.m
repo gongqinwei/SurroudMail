@@ -582,8 +582,8 @@
 // Login failed
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     Error(@"Vdisk Session failed to Link With Error:%@", error);
-//    [self relinkVdisk];         // either this
-    [session refreshLink];      // or this
+    [self relinkVdisk];         // either this
+//    [session refreshLink];      // or this
 }
 
 // Log out successfully
@@ -605,11 +605,15 @@
 }
 
 - (void)relinkVdisk {
+//    [UIHelper showInfo:NSLocalizedString(@"Connection to Sina Vdisk has lost. Please sign in again.", nil) withStatus:kInfo];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:VDISK_AUTHORIZING];
+    
     VdiskSession *vDiskSession = [VdiskSession sharedSession];
 //    [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
     [vDiskSession linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
-    [self.vdiskConnectionDelegate didDisconnect];
-//    [UIHelper showInfo:NSLocalizedString(@"Connection to Sina Vdisk has lost. Please sign in again.", nil) withStatus:kInfo];
+    
+//    [self.vdiskConnectionDelegate didDisconnect]; //?
 }
 
 #pragma mark - VdiskComplexUploadDelegate
@@ -669,9 +673,11 @@
 
 - (void)complexUpload:(VdiskComplexUpload *)complexUpload failedWithError:(NSError *)error destPath:(NSString *)destPath srcPath:(NSString *)srcPath {
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//    
+//    [alertView show];
     
-    [alertView show];
+    Error(@"%@", [NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]]);
     
     self.destPath = nil;
     
@@ -699,15 +705,19 @@
 }
 
 - (void)restClient:(VdiskRestClient *)restClient loadSharableLinkFailedWithError:(NSError *)error {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//    
+//    [alertView show];
     
-    [alertView show];
+    Error(@"%@", [NSString stringWithFormat:@"Error!\n----------------\nerrno:%ld\n%@\%@\n----------------", (long)error.code, error.localizedDescription, [error userInfo]]);
 }
 
 - (void)restClient:(VdiskRestClient *)client loadStreamableURLFromRefFailedWithError:(NSError *)error {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%d\n%@\%@\n----------------", error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR!!" message:[NSString stringWithFormat:@"Error!\n----------------\nerrno:%d\n%@\%@\n----------------", error.code, error.localizedDescription, [error userInfo]] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//    
+//    [alertView show];
     
-    [alertView show];
+    Error(@"%@", [NSString stringWithFormat:@"Error!\n----------------\nerrno:%d\n%@\%@\n----------------", error.code, error.localizedDescription, [error userInfo]]);
 }
 
 - (void)restClient:(VdiskRestClient *)client loadedStreamableURL:(NSURL *)url fromRef:(NSString *)copyRef {
@@ -773,7 +783,8 @@
                 [self publishContent];
             } else if (![vDiskSession isLinked]){
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:VDISK_AUTHORIZING];
-                [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+//                [vDiskSession linkWithSessionType:kVdiskSessionTypeDefault];
+                [vDiskSession linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
             } else {
                 [self uploadContent];
             }
