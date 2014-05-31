@@ -61,6 +61,9 @@
 		7E7E69771872BA1A0039FBB8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E69761872BA1A0039FBB8 /* libWeiboSDK.a */; };
 		7E7E698A18737C4C0039FBB8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */; };
 		7E7E698C18737CE20039FBB8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E698B18737CE20039FBB8 /* libz.dylib */; };
+		7E9E71DD192DCE2100798C54 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9E71D8192DCC8600798C54 /* libGPUImage.a */; };
+		7E9E71DF192DCE4F00798C54 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9E71DE192DCE4F00798C54 /* CoreVideo.framework */; };
+		7E9E71E1192DCE6100798C54 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9E71E0192DCE6100798C54 /* OpenGLES.framework */; };
 		7EA9B6ED185ED0AD00438EA6 /* Camcorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */; };
 		7EA9B6EF185ED38900438EA6 /* Mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA9B6EE185ED38900438EA6 /* Mic.png */; };
 		7EA9B6F2185ED4BA00438EA6 /* AudioRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9B6F1185ED4BA00438EA6 /* AudioRecordViewController.m */; };
@@ -92,6 +95,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7E1DF1AE1859964B0009F0C3;
 			remoteInfo = WeiChat;
+		};
+		7E9E71D7192DCC8600798C54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E9E71D1192DCC8600798C54 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+		7E9E71D9192DCC8600798C54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E9E71D1192DCC8600798C54 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
+			remoteInfo = GPUImageTests;
+		};
+		7E9E71DB192DCDDE00798C54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E9E71D1192DCC8600798C54 /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
+			remoteInfo = GPUImage;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -233,6 +257,9 @@
 		7E7E69791872BAED0039FBB8 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7E7E698918737C4C0039FBB8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7E7E698B18737CE20039FBB8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7E9E71D1192DCC8600798C54 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		7E9E71DE192DCE4F00798C54 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		7E9E71E0192DCE6100798C54 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		7EA9B6EC185ED0AD00438EA6 /* Camcorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camcorder.png; sourceTree = "<group>"; };
 		7EA9B6EE185ED38900438EA6 /* Mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic.png; sourceTree = "<group>"; };
 		7EA9B6F0185ED4BA00438EA6 /* AudioRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioRecordViewController.h; path = ../AudioRecordViewController.h; sourceTree = "<group>"; };
@@ -266,6 +293,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9E71E1192DCE6100798C54 /* OpenGLES.framework in Frameworks */,
+				7E9E71DF192DCE4F00798C54 /* CoreVideo.framework in Frameworks */,
+				7E9E71DD192DCE2100798C54 /* libGPUImage.a in Frameworks */,
 				0ECC777818C7FBA00091DFCE /* MessageUI.framework in Frameworks */,
 				0EF61A3918AF4A350033FE59 /* StoreKit.framework in Frameworks */,
 				0EF61A3718ADF7720033FE59 /* Security.framework in Frameworks */,
@@ -327,6 +357,7 @@
 		7E1DF1A61859964B0009F0C3 = {
 			isa = PBXGroup;
 			children = (
+				7E9E71D1192DCC8600798C54 /* GPUImage.xcodeproj */,
 				7E1DF1B81859964B0009F0C3 /* WeiChat */,
 				7E1DF1DA1859964B0009F0C3 /* WeiChatTests */,
 				7E1DF1B11859964B0009F0C3 /* Frameworks */,
@@ -346,6 +377,8 @@
 		7E1DF1B11859964B0009F0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E9E71E0192DCE6100798C54 /* OpenGLES.framework */,
+				7E9E71DE192DCE4F00798C54 /* CoreVideo.framework */,
 				0ECC777718C7FBA00091DFCE /* MessageUI.framework */,
 				0EF61A3818AF4A350033FE59 /* StoreKit.framework */,
 				0EF61A3618ADF7720033FE59 /* Security.framework */,
@@ -522,6 +555,15 @@
 			name = VDiskSDK;
 			sourceTree = "<group>";
 		};
+		7E9E71D2192DCC8600798C54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E9E71D8192DCC8600798C54 /* libGPUImage.a */,
+				7E9E71DA192DCC8600798C54 /* GPUImageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7EA9B6EA185ECF2800438EA6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +647,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7E9E71DC192DCDDE00798C54 /* PBXTargetDependency */,
 			);
 			name = WeiChat;
 			productName = WeiChat;
@@ -660,6 +703,12 @@
 			mainGroup = 7E1DF1A61859964B0009F0C3;
 			productRefGroup = 7E1DF1B01859964B0009F0C3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7E9E71D2192DCC8600798C54 /* Products */;
+					ProjectRef = 7E9E71D1192DCC8600798C54 /* GPUImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7E1DF1AE1859964B0009F0C3 /* WeiChat */,
@@ -667,6 +716,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7E9E71D8192DCC8600798C54 /* libGPUImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGPUImage.a;
+			remoteRef = 7E9E71D7192DCC8600798C54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E9E71DA192DCC8600798C54 /* GPUImageTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests.octest;
+			remoteRef = 7E9E71D9192DCC8600798C54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7E1DF1AD1859964B0009F0C3 /* Resources */ = {
@@ -760,6 +826,11 @@
 			isa = PBXTargetDependency;
 			target = 7E1DF1AE1859964B0009F0C3 /* WeiChat */;
 			targetProxy = 7E1DF1D81859964B0009F0C3 /* PBXContainerItemProxy */;
+		};
+		7E9E71DC192DCDDE00798C54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = 7E9E71DB192DCDDE00798C54 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -895,6 +966,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiChat/WeiChat-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"../GPUImage/framework/**",
+				);
 				INFOPLIST_FILE = "WeiChat/WeiChat-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -928,6 +1003,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiChat/WeiChat-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"../GPUImage/framework/**",
+				);
 				INFOPLIST_FILE = "WeiChat/WeiChat-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (

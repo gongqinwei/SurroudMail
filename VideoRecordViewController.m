@@ -20,6 +20,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TutorialControl.h"
 #import "SettingsViewController.h"
+#import "GPUImage.h"
+
 
 
 #define VDISK_VIDEO_URL_PREFIX      @"http://vdisk.weibo.com/wap/fp/"
@@ -99,6 +101,10 @@
 
 @property (nonatomic, strong) AVMutableComposition *composition;
 @property (nonatomic, strong) AVMutableCompositionTrack *compositionAudioTrack;
+
+@property (nonatomic, strong) GPUImageMovie *movieFile;
+@property (nonatomic, strong) GPUImageiOSBlurFilter *movieFilter;
+@property (nonatomic, strong) GPUImageMovieWriter *movieWriter;
 
 @end
 
@@ -674,6 +680,8 @@
         
         if ([UIVideoEditorController canEditVideoAtPath:[[self.mediaURL absoluteURL] path]]) {
             self.editor.videoPath = [[self.mediaURL absoluteURL] path];
+            
+            [self blurVideo];  //temp!
             
             [self dismissViewControllerAnimated:YES completion:^{
 //                [self presentViewController:self.editor animated:YES completion:nil];
@@ -1540,5 +1548,157 @@
  }
  ***/
 
+
+
+
+
+
+/*******
+- (void)appendImageToVideo {
+    NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsDirectoryPath error:nil];
+//    
+//    for (NSString *tString in dirContents) {
+//        if ([tString isEqualToString:@"test.mov"]) {
+//            [[NSFileManager defaultManager]removeItemAtPath:[NSString stringWithFormat:@"%@/%@", documentsDirectoryPath, tString] error:nil];
+//            break;
+//        }
+//    }
+    
+//    NSString *nfile = [documentsDirectoryPath stringByAppendingPathComponent:@"test.mov"];
+    AVURLAsset * urlAsset = [AVURLAsset URLAssetWithURL:self.mediaURL options:nil];
+    
+    NSError *error = nil;
+    CGSize size = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath:self.compositionPath] fileType:AVFileTypeQuickTimeMovie error:&error];
+    NSParameterAssert(videoWriter);
+    
+    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   AVVideoCodecH264, AVVideoCodecKey,
+                                   [NSNumber numberWithInt:size.width], AVVideoWidthKey,
+                                   [NSNumber numberWithInt:size.height], AVVideoHeightKey,
+                                   nil];
+    
+    AVAssetWriterInput* videoWriterInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
+    
+    AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor
+                                                     assetWriterInputPixelBufferAdaptorWithAssetWriterInput:videoWriterInput
+                                                     sourcePixelBufferAttributes:nil];
+    
+    NSParameterAssert(videoWriterInput);
+    NSParameterAssert([videoWriter canAddInput:videoWriterInput]);
+    videoWriterInput.expectsMediaDataInRealTime = YES;
+    [videoWriter addInput:videoWriterInput];
+    
+    //Start a session:
+    [videoWriter startWriting];
+    [videoWriter startSessionAtSourceTime:kCMTimeZero];
+    
+    CVPixelBufferRef buffer = NULL;
+    
+    //convert uiimage to CGImage.
+    
+    int frameCount = 0;
+    
+    buffer = [self pixelBufferFromCGImage:[[UIImage imageNamed:@"Mic.png"] CGImage]];
+    
+    BOOL append_ok = NO;
+    int j = 0;
+    
+    while (!append_ok && j < 30) {
+        if (adaptor.assetWriterInput.readyForMoreMediaData) {
+            printf("appending %d attemp %d\n", frameCount, j);
+            
+            CMTime frameTime = urlAsset.duration;//CMTimeMake(frameCount,(int32_t) 10);
+            append_ok = [adaptor appendPixelBuffer:buffer withPresentationTime:frameTime];
+            
+            //if(buffer)
+            //  CVBufferRelease(buffer);
+            [NSThread sleepForTimeInterval:0.05];
+        } else {
+            printf("adaptor not ready %d, %d\n", frameCount, j);
+            [NSThread sleepForTimeInterval:0.1];
+        }
+        j++;
+    }
+    
+    if (!append_ok) {
+        printf("error appending image %d times %d\n", frameCount, j);
+    }
+    
+    frameCount++;
+    
+    [videoWriterInput markAsFinished];
+    [videoWriter finishWritingWithCompletionHandler:^{
+        self.compositionPath =  [documentsDirectoryPath stringByAppendingPathComponent:@"test.mov"];
+        
+        self.mediaURL = [NSURL fileURLWithPath:self.compositionPath];
+    }];
+    
+    //    [self CompileFilesToMakeMovie];
+}
+
+- (CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image {
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
+                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
+                             nil];
+    CVPixelBufferRef pxbuffer = NULL;
+    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, SCREEN_WIDTH,
+                                          SCREEN_HEIGHT, kCVPixelFormatType_32ARGB, (__bridge CFDictionaryRef) options,
+                                          &pxbuffer);
+    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
+    
+    CVPixelBufferLockBaseAddress(pxbuffer, 0);
+    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
+    NSParameterAssert(pxdata != NULL);
+    
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(pxdata, SCREEN_WIDTH,
+                                                 SCREEN_HEIGHT, 8, 4*SCREEN_WIDTH, rgbColorSpace,
+                                                 kCGImageAlphaNoneSkipFirst);
+    NSParameterAssert(context);
+    //    CGContextConcatCTM(context, frameTransform);
+    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
+                                           CGImageGetHeight(image)), image);
+    CGColorSpaceRelease(rgbColorSpace);
+    CGContextRelease(context);
+    
+    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
+    
+    return pxbuffer;
+}
+*******/
+
+- (void)blurVideo {
+    self.movieFile = [[GPUImageMovie alloc] initWithURL:self.mediaURL];
+    self.movieFilter = [[GPUImageiOSBlurFilter alloc] init];
+    self.movieFilter.blurRadiusInPixels = 2.0;
+
+    [self.movieFile addTarget:self.movieFilter];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    self.compositionPath =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];
+    
+    unlink([self.compositionPath UTF8String]);
+    NSURL *movieURL = [NSURL fileURLWithPath:self.compositionPath];
+
+    self.movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.movieFilter addTarget:self.movieWriter];
+
+//    self.movieWriter.shouldPassthroughAudio = YES;
+//    self.movieFile.audioEncodingTarget = self.movieWriter;
+    [self.movieFile enableSynchronizedEncodingUsingMovieWriter:self.movieWriter];
+
+    [self.movieWriter startRecording];
+    [self.movieFile startProcessing];
+    
+    self.mediaURL = movieURL;
+    
+//    [self.movieFilter removeTarget:self.movieWriter];
+//    [self.movieWriter finishRecording];
+}
 
 @end
